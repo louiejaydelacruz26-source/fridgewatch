@@ -806,13 +806,54 @@ button,.btn,.tab,.stat,[data-a]{touch-action:manipulation}
 
 /* ===================== v5: real 3D fridge + clean transition ===================== */
 .en.gl #fgl{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;display:block}
-.en.gl .rf-wrap{zoom:1!important;flex:none;width:min(320px,76vw);height:clamp(190px,calc(100vh - 430px),470px);margin:4px auto 6px;animation:none;cursor:pointer}
+.en.gl .rf-wrap{zoom:1!important;flex:none;width:min(320px,76vw);animation:none;cursor:pointer}
 .en.gl .rf-tilt{display:none}
 .en .en-wipe{background:#071c28!important;clip-path:none!important;animation:enfade .55s ease forwards!important}
 @keyframes enfade{from{opacity:0}to{opacity:1}}
 .en .en-ring,.en .en-ring.r2{display:none!important}
 .en.play .en-ov::before{display:none!important}
 .en-msg .bd{background:linear-gradient(145deg,#22d3ee,#1d4ed8)!important;box-shadow:0 0 50px rgba(34,211,238,.45)!important}
+
+/* ===================== v6: phone layout (Android / iPhone / installed app) ===================== */
+#lgApp{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+#lgApp input{-webkit-user-select:text;user-select:text}
+.en-stage{
+  padding:calc(max(18px,env(safe-area-inset-top)) + 58px) max(22px,env(safe-area-inset-right)) calc(max(18px,env(safe-area-inset-bottom)) + 16px) max(22px,env(safe-area-inset-left));
+  gap:clamp(8px,1.8dvh,18px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.en-stage>*{flex:none;max-width:100%}
+/* the fridge takes whatever height is left after the text and the button, so nothing is ever cut off or needs scrolling */
+.en.gl .rf-wrap{flex:1 1 0;min-height:140px;max-height:520px;height:auto;width:min(360px,92vw);margin:0 auto;-webkit-tap-highlight-color:transparent}
+.en.gl .rf-wrap *{-webkit-touch-callout:none}
+.en-stage .lg-logo{font-size:clamp(20px,5.6vw,24px);gap:12px}
+.en-stage .lg-logo .lb{width:clamp(40px,11vw,50px);height:clamp(40px,11vw,50px);border-radius:14px}
+.en h1{font-size:clamp(24px,7.2vw,52px)}
+.en .en-stage p{font-size:clamp(14px,3.9vw,16px);max-width:min(460px,100%)}
+.en-go{max-width:100%;margin-top:6px;padding:clamp(14px,2.2dvh,18px) clamp(30px,9vw,44px);font-size:clamp(17px,4.8vw,20px)}
+.en-hint{font-size:12px}
+@keyframes enring2{0%{transform:scale(.94);opacity:.7}100%{transform:scale(1.3,1.5);opacity:0}}
+@media (max-width:520px){.en-go .rg{animation-name:enring2}}
+/* short phones (iPhone SE, small Androids): tighter text so the fridge keeps its size */
+@media (max-height:700px) and (orientation:portrait){
+  .en .en-stage p{display:none}
+  .en-hint{display:none}
+}
+@media (max-height:600px) and (orientation:portrait){.en-stage .lg-logo{display:none}.en-stage{padding-top:calc(max(18px,env(safe-area-inset-top)) + 40px)}}
+/* phones turned sideways: fridge on the left, text on the right */
+@media (orientation:landscape) and (max-height:560px){
+  .en-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-template-rows:repeat(5,auto);align-content:center;justify-items:center;column-gap:clamp(12px,4vw,40px);row-gap:8px;
+    padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+  .en.gl .rf-wrap,.en .rf-wrap{grid-column:1;grid-row:1 / span 5;align-self:stretch;width:100%;height:100%;max-height:none;min-height:0;margin:0}
+  .en-stage>:not(.rf-wrap){grid-column:2}
+  .en .en-stage p{display:block;font-size:14px}.en-hint{display:block}
+  .en h1{font-size:clamp(20px,4.6vw,34px)}
+  .en-stage .lg-logo{display:none}
+  .en-go{padding:12px 30px;font-size:17px}
+}
+@media (orientation:landscape) and (max-height:560px) and (max-width:620px){.en .en-stage p{display:none}}
+/* phone: the sidebar is an off-canvas drawer, so the desktop slide-in must not leave it stuck open after sign-in */
+@media (max-width:900px){.app.enter .side{animation:none!important;transform:translateX(-104%)}.app.enter.menu .side{transform:none}.app:not(.menu) .side{box-shadow:none}}
+/* big tablets / desktops keep the original proportions */
+@media (min-width:900px) and (min-height:760px){.en.gl .rf-wrap{max-height:560px}}
 </style>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -2467,6 +2508,7 @@ void main(){
         app.classList.add('gl'); running = true; Object.assign(st, { L: { a: 0, v: 0 }, R: { a: 0, v: 0 }, target: 0, auto: true, dive: -1, yaw: 0, pitch: 0, yawT: 0, pitchT: 0 });
         t0 = last = performance.now();
         this._rs = () => { if (running) sizeCanvas(); }; window.addEventListener('resize', this._rs);
+        try { this._ro = new ResizeObserver(() => { if (running) sizeCanvas(); }); this._ro.observe(app); } catch (e) {}
         if (matchMedia('(pointer:fine)').matches) { this._mv = onMove; app.addEventListener('pointermove', this._mv); }
         this._click = () => { st.auto = false; st.target = st.target ? 0 : 1; }; slot.addEventListener('click', this._click);
         const go = document.getElementById('enGo');
@@ -2482,7 +2524,7 @@ void main(){
       running = false; clearTimeout(cycleT); if (raf) cancelAnimationFrame(raf); raf = 0;
       if (this._rs) window.removeEventListener('resize', this._rs); if (this._vis) document.removeEventListener('visibilitychange', this._vis);
       if (app && this._mv) app.removeEventListener('pointermove', this._mv); if (slot && this._click) slot.removeEventListener('click', this._click);
-      this._rs = this._vis = this._mv = this._click = null;
+      if (this._ro) { try { this._ro.disconnect(); } catch (e) {} } this._ro = this._rs = this._vis = this._mv = this._click = null;
       if (canvas) { try { const ext = gl && gl.getExtension('WEBGL_lose_context'); if (ext) ext.loseContext(); } catch (e) {} if (canvas.parentNode) canvas.parentNode.removeChild(canvas); }
       canvas = null; gl = null; if (app) app.classList.remove('gl');
     },
