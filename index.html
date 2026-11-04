@@ -1123,15 +1123,6 @@ input[readonly]#by{background:var(--bg);cursor:not-allowed;font-weight:700}
 .bin.in{transform:none;opacity:1}.bin.shk{animation:binshk .35s}
 .bin svg{width:34px;height:34px}
 @keyframes binshk{25%{transform:rotate(-12deg) scale(1.1)}60%{transform:rotate(10deg) scale(1.1)}}
-.doorfx{position:fixed;z-index:9990;pointer-events:none;overflow:hidden}
-.doorfx i{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(100deg,#9aa4b2,#e6eaf0 40%,#b6bfcb 70%,#8f99a7);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);transition:transform .34s cubic-bezier(.6,0,.3,1)}
-.doorfx i:first-child{left:0;transform:translateX(-101%)}.doorfx i:last-child{right:0;transform:translateX(101%)}
-.doorfx i::after{content:"";position:absolute;top:30%;height:40%;width:8px;border-radius:8px;background:linear-gradient(90deg,#5b6572,#cfd6de,#5b6572);box-shadow:0 3px 8px rgba(0,0,0,.35)}
-.doorfx i:first-child::after{right:22px}.doorfx i:last-child::after{left:22px}
-.doorfx.close i{transform:none}
-.doorfx.open i:first-child{transform:translateX(-101%);transition-duration:.5s}.doorfx.open i:last-child{transform:translateX(101%);transition-duration:.5s}
-.doorfx b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:#0b1e33;display:grid;place-items:center;color:#5ee7ff;z-index:2;box-shadow:0 0 22px rgba(34,211,238,.6)}
-.doorfx b svg{width:28px;height:28px}
 /* expired cards */
 .item.s-exp .ph,.item.s-today .ph{box-shadow:inset 0 0 46px rgba(220,38,38,.6)}
 .item.s-exp .ph{filter:saturate(.7) sepia(.25)}
@@ -3288,19 +3279,6 @@ take=function(id,reason){
   LF_PIN=null;
   _take11(id,reason);
   if(it&&S.items.length<n0&&rect){ reason==='Consumed'?celebrate(rect,it):trashFly(rect,it); }
-};
-/* ---- fridge-door page transition ---- */
-function doorFx(openFn){
-  const m=document.querySelector('.main'); if(!m) return openFn(); const r=m.getBoundingClientRect();
-  const d=document.createElement('div'); d.className='doorfx'; d.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`; d.innerHTML=`<i></i><i></i><b>${I.fridge}</b>`; document.body.appendChild(d);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('close')));
-  setTimeout(()=>{ openFn(); setTimeout(()=>{ d.classList.remove('close'); d.classList.add('open'); setTimeout(()=>d.remove(),560); },120); },330);
-}
-const _go11=go;
-go=function(tab){
-  if(tab===ui.tab||reduced()||!$('#page')||ui.navBusy) return _go11(tab);
-  ui.menu=false; ui.navBusy=true; pbar(); document.querySelectorAll('.nv').forEach(b=>b.setAttribute('aria-current',b.dataset.v===tab?'page':'false')); const ap=$('.app'); if(ap) ap.classList.remove('menu');
-  doorFx(()=>{ ui.tab=tab; ui.fx=true; ui.navBusy=false; LF_PIN=null; render(); window.scrollTo(0,0); });
 };
 </script>
 <script>
