@@ -854,6 +854,60 @@ button,.btn,.tab,.stat,[data-a]{touch-action:manipulation}
 @media (max-width:900px){.app.enter .side{animation:none!important;transform:translateX(-104%)}.app.enter.menu .side{transform:none}.app:not(.menu) .side{box-shadow:none}}
 /* big tablets / desktops keep the original proportions */
 @media (min-width:900px) and (min-height:760px){.en.gl .rf-wrap{max-height:560px}}
+
+/* ===================== v7: insights, swipe, reports, reminders ===================== */
+.page{overflow-x:clip}
+.ins{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;margin-bottom:20px}
+.ins-side{display:grid;gap:16px;align-content:start}
+.ins-k{position:relative;overflow:hidden}
+.ins-k small{display:block;color:var(--mut);font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.5px;margin-bottom:6px;padding-right:44px}
+.ins-k b{display:block;font-size:34px;line-height:1.05;font-weight:800;color:var(--ok);letter-spacing:-.02em}
+.ins-k b span{font-size:15px;font-weight:700;color:var(--mut);margin-left:4px}
+.ins-k.s b{color:var(--acc)}
+.ins-k em{display:block;font-style:normal;color:var(--mut);font-size:12.5px;margin-top:8px}
+.ins-k .si{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--oksoft);color:var(--ok)}
+.ins-k.s .si{background:var(--accsoft);color:var(--acc)}
+.ins-k .bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:12px}
+.ins-k .bar u{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#22c55e,#16a34a);animation:grow .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:left}
+@keyframes grow{from{transform:scaleX(0)}}
+@media (max-width:900px){.ins{grid-template-columns:1fr}.ins-side{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.ins-side{grid-template-columns:1fr}}
+/* swipe rows (touch) */
+.row{position:relative;touch-action:pan-y}
+.row.swp{transition:none;z-index:2;box-shadow:0 10px 26px -10px rgba(15,23,42,.4)}
+.row.swb{transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.swh{position:absolute;top:0;bottom:0;width:150px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;color:#fff;opacity:0;pointer-events:none;border-radius:14px}
+.swh .i{width:20px;height:20px}
+.swh.c{right:100%;justify-content:flex-end;padding-right:16px;background:linear-gradient(270deg,#16a34a,rgba(22,163,74,0))}
+.swh.d{left:100%;justify-content:flex-start;padding-left:16px;background:linear-gradient(90deg,#dc2626,rgba(220,38,38,0))}
+/* reports */
+.rp-top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:16px}
+.rp-top select{width:auto;min-width:160px}
+.rp-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.rp-tile{background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.rp-tile small{display:block;color:var(--mut);font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.5px}
+.rp-tile b{display:block;font-size:28px;font-weight:800;line-height:1.15;margin-top:4px}
+.rp-tile.g b{color:var(--ok)}.rp-tile.r b{color:var(--red)}.rp-tile.o b{color:var(--soon)}
+.rp-chart{display:flex;align-items:flex-end;gap:5px;height:170px;padding-top:12px}
+.rp-col{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.rp-col .st{width:100%;max-width:30px;display:flex;flex-direction:column-reverse;border-radius:6px 6px 2px 2px;overflow:hidden;min-height:3px;background:var(--line)}
+.rp-col .st i{display:block;animation:grow .7s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom}
+.rp-col .st .c{background:linear-gradient(#4ade80,#16a34a)}.rp-col .st .d{background:linear-gradient(#f87171,#dc2626)}
+.rp-col small{font-size:10px;color:var(--mut);margin-top:6px;white-space:nowrap}
+.rp-leg{display:flex;gap:16px;margin-top:10px;font-size:12.5px;color:var(--mut);flex-wrap:wrap}
+.rp-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.rp-tbl{width:100%;border-collapse:collapse;font-size:14px}
+.rp-tbl th{text-align:left;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;border-bottom:1px solid var(--line)}
+.rp-tbl td{padding:11px 10px;border-bottom:1px solid var(--line)}
+.rp-tbl tr:last-child td{border-bottom:0}
+.rp-rate{display:flex;align-items:center;gap:10px;min-width:130px}
+.rp-rate i{flex:1;height:8px;border-radius:9px;background:var(--line);overflow:hidden}.rp-rate u{display:block;height:100%;border-radius:9px}
+.rp-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;margin-top:16px}
+@media (max-width:900px){.rp-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.rp-grid{grid-template-columns:1fr}}
+.remsel{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.remsel select{width:auto}
+@media print{.rp-top .btn,.rp-top select,.ins-side .bar{display:none!important}.rp-tile,.card{break-inside:avoid;box-shadow:none}}
+@media (prefers-reduced-motion:reduce){.ins-k .bar u,.rp-col .st i{animation:none!important}.row.swb{transition:none}}
 </style>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -895,6 +949,7 @@ const I = {
   down: `<svg class="i" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
   edit: `<svg class="i" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>`,
   undo: `<svg class="i" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>`,
+  chart: `<svg class="i" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
   print: `<svg class="i" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`,
   log: `<svg class="i" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>`,
   home: `<svg class="i" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
@@ -1157,7 +1212,7 @@ function itemRow(it, withAct) {
 /* ---------- Navigation model ---------- */
 const NAV_ADMIN = [
   ['Overview', [['ov', 'home', 'Dashboard'], ['inv', 'box', 'Inventory'], ['cal', 'cal', 'Expiry Calendar'], ['shop', 'cart', 'Shopping List']]],
-  ['Monitoring', [['act', 'list', 'Activity Log'], ['hist', 'hist', 'History']]],
+  ['Monitoring', [['act', 'list', 'Activity Log'], ['hist', 'hist', 'History'], ['rep', 'chart', 'Reports']]],
   ['Administration', [['set', 'set', 'Settings']]],
   ['Account', [['acct', 'user', 'My Account']]]
 ];
@@ -1170,7 +1225,7 @@ const TITLES = {
   ov: ['Dashboard', 'Your fridge at a glance'], inv: ['Inventory', 'Everything stored in the fridge'], mine: ['My Items', 'Everything stored by every user, with their names'],
   cal: ['Expiry Calendar', 'See what expires and when'], shop: ['Shopping List', 'Plan what to buy next'], act: ['Activity Log', 'Who did what, and when'],
   hist: ['History', 'Items that were consumed or disposed'], users: ['Users', 'Manage who can sign in'], set: ['Settings', 'Shelf life, backups and system options'],
-  acct: ['My Account', 'Profile, password and preferences']
+  acct: ['My Account', 'Profile, password and preferences'], rep: ['Reports', 'Consumed, wasted and who stored what']
 };
 const initials = n => String(n || '?').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
 const reduced = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
@@ -1257,7 +1312,7 @@ function strip(due) {
   return due.length ? `<div class="strip" role="alert">${I.bell}<span>${due.length} item${due.length > 1 ? 's' : ''} in the fridge ${due.length > 1 ? 'are' : 'is'} spoiled or spoil${due.length > 1 ? '' : 's'} today.</span><button class="btn sm" data-a="showann">View alert</button></div>` : '';
 }
 function pageBody(due) {
-  const v = { inv: () => viewInv('all'), mine: () => viewInv('mine'), cal: viewCal, shop: viewShop, act: viewAct, hist: viewHist, users: viewUsers, set: viewSet, acct: viewAcct }[ui.tab];
+  const v = { inv: () => viewInv('all'), mine: () => viewInv('mine'), cal: viewCal, shop: viewShop, act: viewAct, hist: viewHist, rep: viewReport, users: viewUsers, set: viewSet, acct: viewAcct }[ui.tab];
   return pageHead('') + strip(due) + v();
 }
 
@@ -1289,7 +1344,7 @@ function viewDash(due, soon, all, todayN, expN) {
       <div class="stat r ${todayN ? 'pulse' : ''}" data-a="fst" data-v="today"><span class="si">${I.alert}</span><small>${sc[2]}</small><b>${todayN}</b></div>
       <div class="stat r ${expN ? 'pulse' : ''}" data-a="fst" data-v="exp"><span class="si">${I.trash}</span><small>${sc[3]}</small><b>${expN}</b></div>
     </div>`;
-  return h + viewOv();
+  return h + insightsHTML(all) + viewOv();
 }
 
 /* ---------- Login ---------- */
@@ -1363,7 +1418,7 @@ function enterSeq(user, from, greet) {
     ui.tab = 'ov'; ui.st = ''; ui.q = ''; ui.cat = ''; ui.fx = true; ui.enter = true; lastIds = new Set(); lastAnnAt = 0;
     logAct('Signed in'); save(); render(); softReveal();
     setTimeout(() => { try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (x) {} }, 2500);
-    setTimeout(() => announce(true), 450);
+    setTimeout(() => announce(true), 450); setTimeout(checkReminders, 4200);
   }, reduced() ? 200 : 4600);
 }
 function guestUser() {
@@ -1696,7 +1751,8 @@ function viewAcct() {
     <div class="card" style="margin-top:16px"><h3>${I.set} Preferences</h3><p class="sub">Saved on this device.</p><div class="swrow">
       <button class="btn ghost" data-a="theme">${I.theme} Switch dark / light</button>
       <button class="btn ghost" data-a="snd">${S.sound !== false ? I.vol + ' Sound and voice: On' : I.mute + ' Sound and voice: Off'}</button>
-      <button class="btn ghost" data-a="notif">${I.bell} Desktop notifications</button></div></div>`;
+      <button class="btn ghost" data-a="notif">${I.bell} Desktop notifications</button></div></div>
+    <div class="card" style="margin-top:16px"><h3>${I.bell} Expiry reminders</h3><p class="sub">Get a heads-up before something spoils. Saved on this device.</p><div class="swrow"><label class="remsel">Remind me <select id="rem_d">${[[0, 'never'], [1, '1 day'], [2, '2 days'], [3, '3 days'], [5, '5 days']].map(o => `<option value="${o[0]}"${o[0] === remDays() ? ' selected' : ''}>${o[1]}</option>`).join('')}</select> before expiry</label><button class="btn ghost" data-a="remtest">${I.bell} Send test reminder</button></div></div>`;
 }
 
 /* ---------- admin bulk action ---------- */
@@ -1883,6 +1939,8 @@ document.addEventListener('click', e => {
     case 'logout': try { speechSynthesis.cancel(); } catch (x) {} ui.menu = false; ui.currentUser = null; sessionStorage.removeItem('fw_session'); closeModal(); render(); break;
     case 'close': closeModal(); break;
     case 'opencmd': openCmd(); break;
+    case 'rpcsv': csvReport(); break;
+    case 'remtest': checkReminders(true); break;
     case 'cmd': runCmd(+t.dataset.k); break;
     case 'a2hsx': try { localStorage.setItem('fw_a2hs', '1'); } catch (x) {} render(); break;
     case 'theme': { const t = curTheme() === 'dark' ? 'light' : 'dark'; applyTheme(t); try { localStorage.setItem(THEME_KEY, t); } catch (x) {} break; }
@@ -1973,6 +2031,8 @@ document.addEventListener('change', async e => {
       catch (x) { toast('Error processing image.'); }
     } t.value = '';
   }
+  else if (t.id === 'rp_w') { ui.rw = +t.value; render(); }
+  else if (t.id === 'rem_d') { try { localStorage.setItem(REM_KEY, t.value); localStorage.removeItem(REM_SENT); } catch (x) {} toast(+t.value ? 'You will be reminded ' + t.value + ' day' + (+t.value > 1 ? 's' : '') + ' before expiry.' : 'Reminders are off.'); setTimeout(checkReminders, 400); }
   else if (t.id === 'fc') { ui.cat = t.value; render(); }
   else if (t.id === 'fs') { ui.st = t.value; render(); }
   else if (t.id === 'actw') { ui.aw = t.value; render(); }
@@ -2165,13 +2225,132 @@ if (db) {
   }, err => { toast('Cannot reach the live database. Check Firestore rules and your internet.'); });
 }
 
+/* ===================== v7: insights, swipe actions, reports, reminders ===================== */
+const REM_KEY = 'fw_remind_days', REM_SENT = 'fw_remind_sent';
+const remDays = () => { try { const v = localStorage.getItem(REM_KEY); return v === null ? 2 : Math.max(0, +v || 0); } catch (e) { return 2; } };
+const myHist = () => S.history.filter(x => isAdmin() || x.owner === me().name || x.who === me().name);
+function streakDays() {
+  if (dueList().length) return 0;
+  const sp = S.history.filter(x => x.spoiled).map(x => new Date(x.at).getTime()).filter(n => n > 0);
+  let start = sp.length ? Math.max.apply(null, sp) : Infinity;
+  if (!isFinite(start)) {
+    const pool = S.history.map(x => new Date(x.at).getTime()).concat(S.items.map(i => parse(i.added).getTime())).filter(n => n > 0);
+    start = pool.length ? Math.min.apply(null, pool) : Date.now();
+  }
+  return Math.max(0, Math.floor((today().getTime() - new Date(new Date(start).getFullYear(), new Date(start).getMonth(), new Date(start).getDate()).getTime()) / DAY));
+}
+function insightsHTML(all) {
+  const first = all.filter(i => daysLeft(i.expiry) > 0).sort((a, b) => a.expiry.localeCompare(b.expiry)).slice(0, 4);
+  const hs = myHist(), cons = hs.filter(x => x.reason === 'Consumed').length, waste = hs.filter(x => x.reason === 'Disposed').length, tot = cons + waste, rate = tot ? Math.round(cons / tot * 100) : 100;
+  const st = streakDays(); let touch = false; try { touch = matchMedia('(pointer:coarse)').matches; } catch (e) {}
+  return `<div class="ins"><div class="card"><h3>${I.clock} Use first</h3><p class="sub">${touch ? 'Swipe a row right to consume it, left to dispose it.' : 'The items that run out next. Use these before the others.'}</p>` +
+    (first.length ? `<div class="list">${first.map(i => itemRow(i, true)).join('')}</div>` : `<div class="mini-empty"><b>Nothing to rush</b>Add items to see what to use first.</div>`) + `</div>
+    <div class="ins-side"><div class="card ins-k"><span class="si">${I.check}</span><small>Waste saved</small><b>${cons}<span>used in time</span></b><div class="bar"><u style="width:${rate}%"></u></div><em>${tot ? rate + '% of finished items were used before spoiling.' : 'Finished items will be counted here.'}</em></div>
+    <div class="card ins-k s"><span class="si">${I.snow}</span><small>Streak</small><b>${st}<span>day${st === 1 ? '' : 's'}</span></b><em>${dueList().length ? 'Remove the overdue items to start a new streak.' : st ? 'Without any spoiled item. Keep it going!' : 'Starts today. Keep everything fresh.'}</em></div></div></div>`;
+}
+/* --- reports (admin) --- */
+function reportBuckets(w) {
+  const out = [], t = today();
+  if (w === 7 || w === 30) for (let k = w - 1; k >= 0; k--) { const s = new Date(t.getTime() - k * DAY); out.push({ s: s.getTime(), e: s.getTime() + DAY, l: w === 7 ? s.toLocaleDateString('en-US', { weekday: 'short' }) : (k % 5 === 0 ? s.getDate() + '' : ''), c: 0, d: 0 }); }
+  else if (w === 90) for (let k = 12; k >= 0; k--) { const s = t.getTime() - (k * 7 + 6) * DAY; out.push({ s: s, e: s + 7 * DAY, l: new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), c: 0, d: 0 }); }
+  else for (let k = 11; k >= 0; k--) { const s = new Date(t.getFullYear(), t.getMonth() - k, 1), e = new Date(t.getFullYear(), t.getMonth() - k + 1, 1); out.push({ s: s.getTime(), e: e.getTime(), l: s.toLocaleDateString('en-US', { month: 'short' }), c: 0, d: 0 }); }
+  return out;
+}
+function reportRows() {
+  const w = ui.rw === undefined ? 30 : ui.rw, from = w ? today().getTime() - (w - 1) * DAY : 0;
+  return S.history.filter(x => !w || new Date(x.at).getTime() >= from);
+}
+function viewReport() {
+  if (!isAdmin()) return '<div class="card"><div class="mini-empty"><b>Admin only</b>Reports are available to the administrator.</div></div>';
+  const w = ui.rw === undefined ? 30 : ui.rw, hs = reportRows();
+  const cons = hs.filter(x => x.reason === 'Consumed'), dis = hs.filter(x => x.reason === 'Disposed'), tot = hs.length, wr = tot ? Math.round(dis.length / tot * 100) : 0;
+  const bk = reportBuckets(w); hs.forEach(x => { const t = new Date(x.at).getTime(); const b = bk.find(q => t >= q.s && t < q.e); if (b) { if (x.reason === 'Consumed') b.c++; else b.d++; } });
+  const mx = Math.max(1, ...bk.map(b => b.c + b.d));
+  const users = {}; hs.forEach(x => { const k = x.owner || 'Unknown'; (users[k] = users[k] || { c: 0, d: 0 })[x.reason === 'Consumed' ? 'c' : 'd']++; });
+  const rows = Object.keys(users).sort((a, b) => users[b].d - users[a].d || users[b].c - users[a].c);
+  const cat = {}; dis.forEach(x => cat[x.cat] = (cat[x.cat] || 0) + 1);
+  const ck = Object.keys(cat).sort((a, b) => cat[b] - cat[a]).slice(0, 6), cm = Math.max(1, ...ck.map(k => cat[k]));
+  const lbl = { 7: 'Last 7 days', 30: 'Last 30 days', 90: 'Last 90 days', 0: 'All time' }[w];
+  return `<div class="rp-top"><label class="remsel">Period <select id="rp_w">${[[7, 'Last 7 days'], [30, 'Last 30 days'], [90, 'Last 90 days'], [0, 'All time (12 months chart)']].map(o => `<option value="${o[0]}"${o[0] === w ? ' selected' : ''}>${o[1]}</option>`).join('')}</select></label>
+      <div class="swrow"><button class="btn ghost" data-a="rpcsv">${I.down} CSV</button><button class="btn ghost" data-a="print">${I.print} Print / Save PDF</button></div></div>
+    <div class="rp-tiles"><div class="rp-tile"><small>Items finished</small><b>${tot}</b></div><div class="rp-tile g"><small>Consumed</small><b>${cons.length}</b></div><div class="rp-tile r"><small>Disposed</small><b>${dis.length}</b></div><div class="rp-tile ${wr > 30 ? 'r' : wr > 15 ? 'o' : 'g'}"><small>Waste rate</small><b>${wr}%</b></div></div>
+    <div class="card"><h3>${I.chart} Consumed vs disposed</h3><p class="sub">${lbl}. Green is food used in time, red is food thrown away.</p>
+      <div class="rp-chart">${bk.map((b, i) => `<div class="rp-col" title="${b.c} consumed, ${b.d} disposed"><div class="st" style="height:${(b.c + b.d) ? Math.max(8, (b.c + b.d) / mx * 130) : 3}px"><i class="c" style="flex:${b.c};animation-delay:${i * 25}ms"></i><i class="d" style="flex:${b.d};animation-delay:${i * 25}ms"></i></div><small>${b.l}</small></div>`).join('')}</div>
+      <div class="rp-leg"><span><i style="background:#16a34a"></i>Consumed</span><span><i style="background:#dc2626"></i>Disposed</span></div></div>
+    <div class="rp-grid"><div class="card"><h3>${I.usr} By person</h3><p class="sub">Who stored the items, and how many were wasted.</p>` +
+    (rows.length ? `<div style="overflow:auto"><table class="rp-tbl"><thead><tr><th>Person</th><th>Used</th><th>Wasted</th><th>Waste rate</th></tr></thead><tbody>${rows.map(n => { const u = users[n], t = u.c + u.d, r = Math.round(u.d / t * 100); return `<tr><td><b>${esc(n)}</b></td><td>${u.c}</td><td>${u.d}</td><td><div class="rp-rate"><i><u style="width:${r}%;background:${r > 30 ? 'var(--red)' : r > 15 ? 'var(--soon)' : 'var(--ok)'}"></u></i><b>${r}%</b></div></td></tr>`; }).join('')}</tbody></table></div>` : `<div class="mini-empty">No finished items in this period.</div>`) +
+    `</div><div class="card"><h3>${I.trash} Most wasted</h3><p class="sub">Categories that were thrown away.</p>` +
+    (ck.length ? `<div class="hbars">${ck.map(k => { const c = CATS[k] || CATS.other; return `<div class="hb"><span>${esc(c.label)}</span><i><u style="width:${cat[k] / cm * 100}%;background:${c.color}"></u></i><b>${cat[k]}</b></div>`; }).join('')}</div>` : `<div class="mini-empty"><b>Nothing wasted</b>Great job.</div>`) + `</div></div>`;
+}
+function csvReport() {
+  downloadCSV('fridgewatch-report-' + ymd(today()) + '.csv', [['Item', 'Category', 'Result', 'Spoiled', 'Entered by', 'Action by', 'When']].concat(reportRows().map(h => [h.name, (CATS[h.cat] || CATS.other).label, h.reason, h.spoiled ? 'Yes' : 'No', h.owner || '', h.who || '', h.at])));
+  toast('Report saved as CSV.');
+}
+/* --- reminders before expiry --- */
+function remind(list, isTest) {
+  const txt = list.slice(0, 3).map(i => i.name + ' (' + (i.d === 1 ? 'tomorrow' : 'in ' + i.d + ' days') + ')').join(', ') + (list.length > 3 ? ' and ' + (list.length - 3) + ' more' : '');
+  toast((isTest ? 'Test reminder: ' : 'Reminder: ') + txt + '.');
+  if (gesture && S.sound !== false) chime();
+  try { if (navigator.vibrate) navigator.vibrate([120, 80, 120]); } catch (e) {}
+  try { if ('Notification' in window && Notification.permission === 'granted' && S.sound !== false) new Notification('FridgeWatch reminder', { body: txt, tag: 'fw-remind' }); } catch (e) {}
+}
+function checkReminders(test) {
+  if (!me()) return;
+  if (test === true) return remind([{ name: 'Sample item', d: 1 }], true);
+  const N = remDays(); if (!N) return;
+  let sent = {}; try { sent = JSON.parse(localStorage.getItem(REM_SENT) || '{}'); } catch (e) {}
+  const t = ymd(today()); Object.keys(sent).forEach(k => { if (!k.endsWith('|' + t)) delete sent[k]; });
+  const list = scope().filter(i => { const d = daysLeft(i.expiry); return d > 0 && d <= N && !sent[i.id + '|' + t]; }).sort((a, b) => a.expiry.localeCompare(b.expiry)).map(i => ({ id: i.id, name: i.name, d: daysLeft(i.expiry) }));
+  if (!list.length) return;
+  list.forEach(i => sent[i.id + '|' + t] = 1); try { localStorage.setItem(REM_SENT, JSON.stringify(sent)); } catch (e) {}
+  remind(list);
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(checkReminders, 800); });
+setInterval(checkReminders, 10 * 60 * 1000);
+/* --- swipe a row: right = consume, left = dispose (touch only) --- */
+(function () {
+  let s = null; const THR = 88;
+  const btn = (row, r) => row.querySelector('[data-a="take"][data-r="' + r + '"]');
+  const reset = (row, anim) => { if (anim) { row.classList.add('swb'); setTimeout(() => row.classList.remove('swb'), 320); } row.classList.remove('swp'); row.style.transform = ''; const h = row.querySelectorAll('.swh'); h.forEach(x => x.remove()); };
+  document.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' || !me()) return;
+    const row = e.target.closest('.row'); if (!row || e.target.closest('button,a,input,select,textarea,.th')) return;
+    const c = btn(row, 'Consumed'), d = btn(row, 'Disposed'); if (!c && !d) return;
+    s = { row, x: e.clientX, y: e.clientY, id: e.pointerId, on: false, c, d, hc: null, hd: null };
+  }, { passive: true });
+  document.addEventListener('pointermove', e => {
+    if (!s || e.pointerId !== s.id) return;
+    let dx = e.clientX - s.x; const dy = e.clientY - s.y;
+    if (!s.on) {
+      if (Math.abs(dy) > 14 && Math.abs(dy) > Math.abs(dx)) { s = null; return; }
+      if (Math.abs(dx) < 12) return;
+      s.on = true; s.row.classList.add('swp'); s.row.classList.remove('swb'); try { s.row.setPointerCapture(e.pointerId); } catch (x) {}
+      s.hc = document.createElement('span'); s.hc.className = 'swh c'; s.hc.innerHTML = I.check + 'Consume';
+      s.hd = document.createElement('span'); s.hd.className = 'swh d'; s.hd.innerHTML = I.trash + 'Dispose';
+      s.row.appendChild(s.hc); s.row.appendChild(s.hd);
+    }
+    if (dx > 0 && !s.c) dx *= .15; if (dx < 0 && !s.d) dx *= .15;
+    dx = Math.max(-170, Math.min(170, dx)); s.dx = dx;
+    s.row.style.transform = 'translateX(' + dx + 'px)';
+    s.hc.style.opacity = dx > 0 && s.c ? Math.min(1, dx / THR) : 0; s.hd.style.opacity = dx < 0 && s.d ? Math.min(1, -dx / THR) : 0;
+    if (Math.abs(dx) >= THR && ((dx > 0 && s.c) || (dx < 0 && s.d)) && !s.buzz) { s.buzz = 1; try { if (navigator.vibrate) navigator.vibrate(12); } catch (x) {} } else if (Math.abs(dx) < THR) s.buzz = 0;
+  }, { passive: true });
+  const end = e => {
+    if (!s || e.pointerId !== s.id) return; const q = s; s = null; if (!q.on) return;
+    const go = e.type === 'pointerup' && Math.abs(q.dx || 0) >= THR ? ((q.dx > 0 && q.c) ? q.c : (q.dx < 0 && q.d) ? q.d : null) : null;
+    reset(q.row, true);
+    if (go) setTimeout(() => go.click(), 60);
+  };
+  document.addEventListener('pointerup', end); document.addEventListener('pointercancel', end);
+})();
+
 function init() {
   setManifest();
   document.body.insertAdjacentHTML('beforeend', '<div id="pbar" aria-hidden="true"></div>');
   const sid = sessionStorage.getItem('fw_session');
   if (sid) { const u = S.users.find(x => x.id === sid); if (u) ui.currentUser = withName(u); }
   render();
-  if (me()) setTimeout(() => announce(true), 500);
+  if (me()) { setTimeout(() => announce(true), 500); setTimeout(checkReminders, 3500); }
 }
 init();
 let lastDay = ymd(today());
