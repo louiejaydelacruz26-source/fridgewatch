@@ -908,6 +908,35 @@ button,.btn,.tab,.stat,[data-a]{touch-action:manipulation}
 .remsel select{width:auto}
 @media print{.rp-top .btn,.rp-top select,.ins-side .bar{display:none!important}.rp-tile,.card{break-inside:avoid;box-shadow:none}}
 @media (prefers-reduced-motion:reduce){.ins-k .bar u,.rp-col .st i{animation:none!important}.row.swb{transition:none}}
+
+/* ===== v8: clean transitions + hi-tech polish ===== */
+.en-msg .bd{box-shadow:none!important;background:linear-gradient(145deg,#0ea5e9,#2563eb)!important;border:1px solid rgba(255,255,255,.25)}
+.rf-halo,.rf.open~.rf-halo,.rf-wrap.hot .rf-halo{display:none!important}
+.rf-in::before{display:none!important}
+.en-ov::before,.en-ov::after,.en-wipe::before,.en-wipe::after{display:none!important}
+.en-msg .pg i{background:linear-gradient(90deg,#38bdf8,#818cf8)!important}
+.md{backdrop-filter:blur(14px);border:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.ov{backdrop-filter:blur(6px)}
+.stat,.card,.panel{transition:transform .25s,box-shadow .25s,border-color .25s}
+.btn{letter-spacing:.01em}
+#sugBox{display:flex;flex-wrap:wrap;gap:6px;margin-top:-2px}
+#sugBox button{border:1px solid var(--line);background:var(--surf);color:var(--fg);border-radius:99px;padding:4px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
+#sugBox button:hover{border-color:var(--acc);background:var(--accsoft);transform:translateY(-1px)}
+.xp{display:grid;gap:10px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:linear-gradient(135deg,var(--accsoft),transparent 70%);font-weight:500;color:var(--fg)}
+.xp .r1{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.xp .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:6px}
+.xp .tag i{width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:xpb 1.6s infinite}
+@keyframes xpb{50%{opacity:.25}}
+.xp .dt{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.xp .dl{font-size:12px;font-weight:800;border-radius:99px;padding:4px 11px;color:#fff;background:#16a34a}
+.xp .dl.w{background:#d97706}.xp .dl.b{background:#dc2626}
+.xp .bar{height:6px;border-radius:9px;background:var(--line);overflow:hidden}
+.xp .bar b{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#22c55e,#38bdf8);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.xp .why{font-size:12px;color:var(--mut);font-weight:500}
+.xp .why b{color:var(--fg)}
+.xp .adj{display:flex;gap:6px;flex-wrap:wrap}
+.xp .adj button{border:1px solid var(--line);background:var(--surf);color:var(--fg);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700;cursor:pointer}
+.xp .adj button:hover{border-color:var(--acc)}
 </style>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -2725,6 +2754,79 @@ function softReveal() {
   const c = document.createElement('div'); c.style.cssText = 'position:fixed;inset:0;z-index:2000;background:#071c28;opacity:1;transition:opacity .7s ease;pointer-events:none';
   document.body.appendChild(c); requestAnimationFrame(() => requestAnimationFrame(() => { c.style.opacity = '0'; })); setTimeout(() => c.remove(), 950);
 }
+</script>
+<script>
+/* ===== v8: dynamic expiry by food ===== */
+const FOODS = {
+ // name: [cat, fridgeDays, freezerDays]
+ 'fresh milk':['dairy',5,90],'milk':['dairy',5,90],'yogurt':['dairy',10,60],'cheese':['dairy',21,180],'butter':['dairy',60,270],'cream':['dairy',5,60],
+ 'egg':['eggs',28,365],'eggs':['eggs',28,365],
+ 'chicken':['poultry',2,270],'chicken breast':['poultry',2,270],'chicken wings':['poultry',2,270],'turkey':['poultry',2,270],'duck':['poultry',2,270],
+ 'pork':['meat',3,150],'pork belly':['meat',3,150],'beef':['meat',3,180],'ground beef':['meat',2,120],'steak':['meat',4,180],'lamb':['meat',3,180],
+ 'bacon':['proc',7,30],'hotdog':['proc',7,60],'hot dog':['proc',7,60],'sausage':['proc',7,60],'ham':['proc',5,60],'longganisa':['proc',14,60],'tocino':['proc',14,60],'tapa':['proc',7,60],'spam':['proc',5,60],
+ 'fish':['seafood',2,150],'tilapia':['seafood',2,150],'bangus':['seafood',2,150],'salmon':['seafood',2,150],'tuna':['seafood',2,150],'shrimp':['seafood',2,150],'squid':['seafood',2,150],'crab':['seafood',2,120],
+ 'tomato':['veg',7,60],'carrot':['veg',21,300],'cabbage':['veg',14,300],'lettuce':['veg',5,0],'spinach':['veg',4,300],'kangkong':['veg',3,0],'broccoli':['veg',5,300],'cucumber':['veg',7,0],'eggplant':['veg',5,240],'onion':['veg',30,240],'garlic':['veg',30,240],'potato':['veg',30,300],'pechay':['veg',4,0],'ampalaya':['veg',5,240],'pepper':['veg',7,240],'corn':['veg',5,240],'mushroom':['veg',5,240],
+ 'apple':['fruit',28,240],'banana':['fruit',5,90],'mango':['fruit',5,180],'orange':['fruit',21,240],'grapes':['fruit',7,300],'strawberry':['fruit',4,300],'watermelon':['fruit',7,0],'pineapple':['fruit',5,180],'papaya':['fruit',5,180],'lemon':['fruit',21,240],'avocado':['fruit',4,120],
+ 'cooked rice':['cooked',4,30],'leftovers':['cooked',3,90],'adobo':['cooked',4,90],'sinigang':['cooked',3,90],'soup':['cooked',4,90],'pasta':['cooked',4,60],'pizza':['cooked',4,60],'fried chicken':['cooked',3,90],
+ 'ketchup':['sauce',180,0],'mayonnaise':['sauce',60,0],'mayo':['sauce',60,0],'soy sauce':['sauce',180,0],'vinegar':['sauce',365,0],'jam':['sauce',180,0],'mustard':['sauce',365,0],'gravy':['sauce',4,90],
+ 'juice':['bev',7,0],'soda':['bev',30,0],'beer':['bev',180,0],'water':['bev',365,0],'coffee':['bev',7,0],'tea':['bev',7,0]
+};
+const FOOD_KEYS = Object.keys(FOODS).sort((a,b)=>b.length-a.length);
+function matchFood(txt){
+  const t=(txt||'').toLowerCase().trim(); if(t.length<2) return null;
+  if(FOODS[t]) return {k:t,v:FOODS[t]};
+  const k=FOOD_KEYS.find(k=>t.includes(k)); return k?{k:k,v:FOODS[k]}:null;
+}
+function suggestFoods(txt){
+  const t=(txt||'').toLowerCase().trim(); if(!t) return ['chicken','milk','tomato','pork','egg','fish','apple','cooked rice'];
+  return FOOD_KEYS.filter(k=>k.startsWith(t)||k.includes(t)).slice(0,6);
+}
+function sugHTML(txt){
+  const l=suggestFoods(txt); return l.map(k=>`<button type="button" data-food="${k}">${k.replace(/\b\w/g,c=>c.toUpperCase())}</button>`).join('');
+}
+function foodDays(c,fz,name){
+  const m=matchFood(name);
+  if(m){ const d=fz?m.v[2]:m.v[1]; if(d>0) return {days:d,src:m.k,food:true}; }
+  return {days:S.shelf[c][fz?'freezer':'fridge'],src:CATS[c].label,food:false};
+}
+function calcExp(force){
+  const nm=$('#n')?$('#n').value:'', c=$('#c').value, fz=$('#fz').value==='1', ad=$('#ad').value||ymd(today());
+  const r=foodDays(c,fz,nm), ex=$('#ex');
+  if(force||ex.dataset.auto!=='0'){ ex.value=addD(ad,r.days); ex.dataset.auto='1'; }
+  const d=daysLeft(ex.value), total=Math.max(1,Math.round((parse(ex.value)-parse(ad))/DAY)), pct=Math.max(0,Math.min(100,Math.round(d/total*100)));
+  const cls=d<=0?'b':d<=2?'w':'';
+  const manual=ex.dataset.auto==='0';
+  $('#pv').className='xp';
+  $('#pv').innerHTML=`<div class="r1"><span class="tag"><i></i>${manual?'Custom expiry':'Auto expiry'}</span><span class="dl ${cls}">${d>0?d+' day'+(d>1?'s':'')+' left':d===0?'Spoils today':'Already spoiled'}</span></div>
+   <div class="dt">${fmtDate(ex.value)}</div><div class="bar"><b style="width:${pct}%"></b></div>
+   <div class="why">${manual?'You set this date manually.':`Based on <b>${esc(r.src)}</b> · <b>${r.days} days</b> in the ${fz?'freezer':'chiller'}${r.food?' (food-specific)':' (category average)'}.`}</div>
+   ${manual?'<div class="adj"><button type="button" data-a="autoexp">Reset to automatic</button></div>':''}`;
+}
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='n'){
+    const m=matchFood(t.value);
+    if(m && $('#c') && !$('#c').dataset.manual){ $('#c').value=m.v[0]; }
+    const sb=$('#sugBox'); if(sb) sb.innerHTML=sugHTML(t.value);
+    calcExp($('#ex')&&$('#ex').dataset.auto!=='0');
+  }
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-food]'); if(b){
+    const n=$('#n'); n.value=b.dataset.food.replace(/\b\w/g,c=>c.toUpperCase());
+    n.dispatchEvent(new Event('input',{bubbles:true})); const m=matchFood(n.value); if(m){$('#c').value=m.v[0];} $('#ex').dataset.auto='1'; calcExp(true); return;
+  }
+  const a=e.target.closest('[data-a="autoexp"]'); if(a){ e.stopPropagation(); $('#ex').dataset.auto='1'; calcExp(true); }
+},true);
+document.addEventListener('change',e=>{ if(e.target.id==='c'){ e.target.dataset.manual='1'; } },true);
+const _openAdd=openAdd;
+openAdd=function(){
+  _openAdd();
+  const n=$('#n'); if(!n) return;
+  n.placeholder='Type or pick a food, e.g. Chicken'; n.setAttribute('autocomplete','off');
+  const box=document.createElement('div'); box.id='sugBox'; box.innerHTML=sugHTML(''); n.closest('.two').after(box);
+  const c=$('#c'); delete c.dataset.manual; calcExp(true);
+};
 </script>
 </body>
 </html>
