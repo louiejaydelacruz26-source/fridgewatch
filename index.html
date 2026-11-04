@@ -937,6 +937,63 @@ button,.btn,.tab,.stat,[data-a]{touch-action:manipulation}
 .xp .adj{display:flex;gap:6px;flex-wrap:wrap}
 .xp .adj button{border:1px solid var(--line);background:var(--surf);color:var(--fg);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700;cursor:pointer}
 .xp .adj button:hover{border-color:var(--acc)}
+
+/* ===== v9: command center dashboard ===== */
+.cc{display:grid;gap:16px;margin:0 0 20px}
+.cc-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;border:1px solid var(--line);border-radius:18px;padding:14px 18px;background:linear-gradient(120deg,var(--surf),color-mix(in srgb,var(--surf) 85%,#38bdf8 15%));position:relative;overflow:hidden}
+.cc-bar::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;opacity:.28;mask-image:linear-gradient(90deg,transparent,#000 70%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 70%);pointer-events:none}
+.cc-clk{position:relative;font-variant-numeric:tabular-nums}
+.cc-clk b{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.cc-clk small{color:var(--mut);font-weight:600;font-size:12px}
+.cc-sys{position:relative;display:flex;gap:8px;align-items:center;font-size:12px;font-weight:700;color:var(--mut);padding:6px 12px;border:1px solid var(--line);border-radius:99px;background:var(--surf)}
+.cc-sys i{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:xpb 1.6s infinite}
+.cc-sys.bad i{background:#ef4444}
+.cc-q{position:relative;margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.cc-q button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surf);color:var(--fg);border-radius:11px;padding:8px 13px;font-weight:700;font-size:13px;cursor:pointer;transition:.2s}
+.cc-q button svg{width:16px;height:16px}
+.cc-q button:hover{transform:translateY(-2px);border-color:var(--acc);box-shadow:0 8px 18px -8px rgba(220,38,38,.4)}
+.cc-q button.p{background:linear-gradient(135deg,#ef4444,#be123c);color:#fff;border-color:transparent}
+.cc-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cc-c{border:1px solid var(--line);border-radius:18px;padding:18px;background:var(--surf);box-shadow:var(--sh);min-width:0;animation:ccin .6s cubic-bezier(.2,.8,.2,1) both}
+.cc-c:nth-child(2){animation-delay:.08s}.cc-c:nth-child(3){animation-delay:.16s}
+@keyframes ccin{from{opacity:0;transform:translateY(14px)}}
+.cc-c h3{margin:0 0 2px;font-size:15px;display:flex;align-items:center;gap:8px}
+.cc-c h3 svg{width:17px;height:17px;color:var(--acc)}
+.cc-c .sub{margin:0 0 14px;font-size:12px;color:var(--mut)}
+.dn{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.dn svg{width:132px;height:132px;flex:none;transform:rotate(-90deg)}
+.dn circle{fill:none;stroke-width:14;stroke-linecap:round;transition:stroke-dasharray 1s cubic-bezier(.2,.8,.2,1)}
+.dn .ctr{position:relative;width:132px;height:132px;flex:none}
+.dn .ctr svg{position:absolute;inset:0}
+.dn .ctr div{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.dn .ctr b{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.dn .ctr small{font-size:11px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.lg{display:grid;gap:8px;flex:1;min-width:120px}
+.lg div{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.lg i{width:10px;height:10px;border-radius:3px;flex:none}
+.lg b{margin-left:auto;font-variant-numeric:tabular-nums}
+.fc{display:flex;align-items:flex-end;gap:8px;height:140px}
+.fc div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;font-size:11px;color:var(--mut);font-weight:700}
+.fc u{display:block;width:100%;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#38bdf8,#6366f1);min-height:4px;text-decoration:none;transition:height .8s cubic-bezier(.2,.8,.2,1);position:relative}
+.fc u.hot{background:linear-gradient(180deg,#f97316,#dc2626)}
+.fc u.nil{background:var(--line)}
+.fc em{font-style:normal;color:var(--fg);font-size:12px}
+.fc div.td span{color:var(--acc)}
+.cb{display:grid;gap:9px}
+.cb div{display:grid;grid-template-columns:96px 1fr 26px;gap:10px;align-items:center;font-size:12px;font-weight:700}
+.cb span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb .t{height:8px;border-radius:9px;background:var(--line);overflow:hidden}
+.cb .t u{display:block;height:100%;border-radius:9px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.cb b{text-align:right}
+.sp2{display:flex;gap:10px;margin-top:14px}
+.sp2 div{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:12px;color:var(--mut);font-weight:700}
+.sp2 b{display:block;font-size:20px;color:var(--fg)}
+.lb{display:grid;gap:8px}
+.lb div{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
+.lb .av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ef4444,#be123c);color:#fff;font-size:11px}
+.lb b{margin-left:auto}
+@media(max-width:1100px){.cc-g{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.cc-g{grid-template-columns:1fr}.cc-q{margin-left:0;width:100%}.cc-q button{flex:1;justify-content:center}.cc-clk b{font-size:24px}}
 </style>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -2826,6 +2883,60 @@ openAdd=function(){
   n.placeholder='Type or pick a food, e.g. Chicken'; n.setAttribute('autocomplete','off');
   const box=document.createElement('div'); box.id='sugBox'; box.innerHTML=sugHTML(''); n.closest('.two').after(box);
   const c=$('#c'); delete c.dataset.manual; calcExp(true);
+};
+</script>
+<script>
+/* ===== v9: command center ===== */
+function ccHTML(all, due){
+  const admin=isAdmin(), n=all.length;
+  const cnt={ok:0,soon:0,today:0,exp:0}; all.forEach(i=>cnt[status(i).k]++);
+  const R=52, C=2*Math.PI*R; let off=0;
+  const segs=[['ok','#22c55e','Fresh'],['soon','#f59e0b','Expiring soon'],['today','#f97316','Spoils today'],['exp','#dc2626','Spoiled']];
+  const arcs=n?segs.map(s=>{const l=cnt[s[0]]/n*C; const o=off; off+=l; return l?`<circle cx="66" cy="66" r="${R}" stroke="${s[1]}" stroke-dasharray="${Math.max(0,l-3)} ${C}" stroke-dashoffset="${-o}"/>`:''}).join(''):'';
+  const score=heroScore(all);
+  // 7-day forecast
+  const days=[]; for(let k=0;k<7;k++){const d=new Date(today().getTime()+k*DAY); days.push({n:all.filter(i=>daysLeft(i.expiry)===k).length,l:k===0?'Today':k===1?'Tmrw':d.toLocaleDateString('en-US',{weekday:'short'}),k});}
+  const mx=Math.max(1,...days.map(d=>d.n));
+  // categories
+  const cats={}; all.forEach(i=>cats[i.cat]=(cats[i.cat]||0)+1);
+  const cl=Object.keys(cats).sort((a,b)=>cats[b]-cats[a]).slice(0,5), cmx=Math.max(1,...cl.map(k=>cats[k]));
+  const fz=all.filter(i=>i.frozen).length;
+  // contributors
+  const by={}; all.forEach(i=>{const k=i.by||'Unknown'; by[k]=(by[k]||0)+1;});
+  const top=Object.keys(by).sort((a,b)=>by[b]-by[a]).slice(0,4);
+  const ini=s=>s.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const bad=due.length>0;
+  return `<section class="cc"><div class="cc-bar">
+    <div class="cc-clk"><b id="ccClk">--:--:--</b><small id="ccDate"></small></div>
+    <span class="cc-sys ${bad?'bad':''}"><i></i>${bad?due.length+' item'+(due.length>1?'s':'')+' need action':'All systems fresh'}</span>
+    <div class="cc-q"><button class="p" data-a="add">${I.plus} Add item</button><button data-a="tab" data-v="shop">${I.cart} Shopping</button><button data-a="tab" data-v="cal">${I.cal} Calendar</button><button data-a="opencmd">${I.search} Quick actions</button></div></div>
+  <div class="cc-g">
+   <div class="cc-c"><h3>${I.snow} Freshness</h3><p class="sub">Live status of ${admin?'every':'your'} item${n===1?'':'s'}.</p>
+    <div class="dn"><div class="ctr"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="${R}" stroke="var(--line)"/>${arcs}</svg><div><b>${score}%</b><small>Fresh</small></div></div>
+    <div class="lg">${segs.map(s=>`<div><i style="background:${s[1]}"></i>${s[2]}<b>${cnt[s[0]]}</b></div>`).join('')}</div></div></div>
+   <div class="cc-c"><h3>${I.clock} 7-day forecast</h3><p class="sub">Items reaching their expiry each day.</p>
+    <div class="fc">${days.map(d=>`<div class="${d.k===0?'td':''}"><em>${d.n||''}</em><u class="${!d.n?'nil':d.k<=1?'hot':''}" style="height:${d.n?Math.max(10,d.n/mx*100):4}%"></u><span>${d.l}</span></div>`).join('')}</div></div>
+   <div class="cc-c"><h3>${I.box} Storage mix</h3><p class="sub">Top categories in the fridge.</p>
+    ${cl.length?`<div class="cb">${cl.map(k=>`<div><span>${esc(CATS[k]?CATS[k].label:k)}</span><div class="t"><u style="width:${cats[k]/cmx*100}%;background:${CATS[k]?CATS[k].color:'#94a3b8'}"></u></div><b>${cats[k]}</b></div>`).join('')}</div>`:'<div class="mini-empty"><b>No data yet</b>Add items to see the mix.</div>'}
+    <div class="sp2"><div>Chiller<b>${n-fz}</b></div><div>Freezer<b>${fz}</b></div></div></div>
+   ${admin&&top.length?`<div class="cc-c" style="grid-column:1/-1"><h3>${I.usr} Top contributors</h3><p class="sub">Who stores the most items right now.</p><div class="lb">${top.map(k=>`<div><span class="av">${esc(ini(k))}</span>${esc(k)}<b>${by[k]} item${by[k]>1?'s':''}</b></div>`).join('')}</div></div>`:''}
+  </div></section>`;
+}
+const _viewDash=viewDash;
+viewDash=function(due,soon,all,todayN,expN){
+  const h=_viewDash(due,soon,all,todayN,expN), k='<div class="ins">', i=h.indexOf(k);
+  return i<0?h:h.slice(0,i)+ccHTML(all,due)+h.slice(i);
+};
+setInterval(()=>{const c=document.getElementById('ccClk'); if(!c) return; const d=new Date(); c.textContent=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); const e=document.getElementById('ccDate'); if(e) e.textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});},1000);
+</script>
+<script>
+/* v9b: command center replaces the duplicate chart cards */
+const _snap=snapshotHTML;
+snapshotHTML=function(){
+  const d=document.createElement('div'); d.innerHTML=_snap();
+  d.querySelectorAll('.card').forEach(c=>{const t=(c.querySelector('h3')||{}).textContent||''; if(/Fridge health|Expiry timeline|What is in the fridge/.test(t)) c.remove();});
+  d.querySelectorAll('.snap').forEach(s=>{ if(!s.querySelector('.card')) s.remove(); else s.style.gridTemplateColumns='1fr'; });
+  return d.innerHTML;
 };
 </script>
 </body>
