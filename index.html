@@ -1002,147 +1002,97 @@ button,.btn,.tab,.stat,[data-a]{touch-action:manipulation}
 .item.locked .ph{filter:saturate(.7)}
 input[readonly]#by{background:var(--bg);cursor:not-allowed;font-weight:700}
 .chn{font-size:12px;font-weight:700;color:var(--acc);background:none;border:0;cursor:pointer;padding:0;margin-top:4px;text-align:left}
+/* ===== v11: Live fridge card + motion effects ===== */
+.cc>.lv{margin:0}
+.lv{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr);padding:0;overflow:hidden;margin:0 0 16px;border-radius:20px}
+.lv-stage{position:relative;min-height:430px;background:radial-gradient(120% 90% at 30% 20%,#12304a 0%,#0b2236 45%,#071622 100%);overflow:hidden;isolation:isolate}
+.lv-stage::after{content:"";position:absolute;left:8%;right:8%;bottom:0;height:22%;background:radial-gradient(60% 100% at 50% 100%,rgba(56,189,248,.16),transparent 70%);pointer-events:none;z-index:0}
+.lvc{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;z-index:1;outline:none}
+.lv-hint{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:12px;color:rgba(203,230,255,.72);letter-spacing:.2px;pointer-events:none;z-index:3;padding:0 14px}
+.lv-tip{position:absolute;left:0;top:0;z-index:4;pointer-events:none;background:rgba(7,22,34,.94);color:#f1f8ff;border:1px solid rgba(125,190,255,.35);border-radius:12px;padding:9px 12px;min-width:150px;max-width:230px;display:flex;flex-direction:column;gap:3px;box-shadow:0 14px 30px -10px rgba(0,0,0,.6);backdrop-filter:blur(6px);will-change:transform}
+.lv-tip[hidden]{display:none}
+.lv-tip b{font-size:14px;font-weight:700}.lv-tip b small{font-weight:600;color:#9fc3e6}
+.lv-tip span{font-size:12px;color:#9fc3e6}
+.lv-tip em{font-style:normal;font-size:11.5px;font-weight:700;align-self:flex-start;padding:2px 9px;border-radius:99px;background:rgba(34,197,94,.2);color:#86efac;margin-top:3px}
+.lv-tip em.soon{background:rgba(245,158,11,.22);color:#fcd34d}
+.lv-tip em.exp,.lv-tip em.today{background:rgba(239,68,68,.25);color:#fca5a5}
+.lv-fb{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;text-align:center;color:#cfe6ff;padding:24px;z-index:2}
+.lv-fb span{font-size:13px;color:#8fb3d6;max-width:300px}
+.lv-side{padding:22px 22px 18px;display:flex;flex-direction:column;min-width:0}
+.lv-side h3{margin:0 0 4px;font-size:20px}
+.lv-side .sub{margin:0 0 14px}
+.lv-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.lv-chips span{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:99px;font-weight:700;font-size:13px;background:var(--oksoft);color:var(--ok)}
+.lv-chips span i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.lv-chips .soon{background:var(--soonsoft);color:var(--soon)}
+.lv-chips .bad{background:var(--redsoft);color:var(--red)}
+.lv-h{font-size:11.5px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:var(--mut);margin:0 0 8px}
+.lv-list{display:flex;flex-direction:column;gap:7px;min-height:0;overflow:auto}
+.lv-i{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:1px solid var(--line);background:var(--surf);border-radius:12px;padding:9px 12px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}
+.lv-i:hover,.lv-i.on{border-color:#38bdf8;transform:translateX(2px)}
+.lv-i.on{background:rgba(56,189,248,.08)}
+.lv-i.bad{background:var(--redsoft);border-color:rgba(239,68,68,.35)}
+.lv-i .dot{width:10px;height:10px;border-radius:50%;flex:none}
+.lv-i .nm{flex:1;min-width:0;display:flex;flex-direction:column}
+.lv-i .nm b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-i .nm small{color:var(--mut);font-size:12px}
+.lv-i .st{font-size:12.5px;font-weight:700;color:var(--mut);white-space:nowrap}
+.lv-i.bad .st{color:var(--red)}
+.lv-empty{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:14px;border:1px dashed var(--line);border-radius:12px;color:var(--mut)}
+.lv-empty b{color:var(--fg);font-size:15px}
+@media (max-width:900px){
+  .lv{grid-template-columns:1fr}
+  .lv-stage{min-height:0;height:min(96vw,400px)}
+  .lv-side{padding:18px 16px 16px}
+}
 
-/* ===== v11: live 3D fridge + motion system ===== */
-.lf{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surf);box-shadow:var(--sh);margin:0 0 20px}
-.lf-stage{position:relative;min-height:400px;background:radial-gradient(ellipse at 50% 30%,#12345a 0,#0a1a2e 55%,#060e1b 100%);perspective:1100px;perspective-origin:50% 38%;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.lf-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(125,211,252,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.07) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(ellipse at 50% 60%,#000,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 60%,#000,transparent 70%)}
-.lf-scene{position:absolute;left:50%;top:50%;width:300px;height:340px;margin:-170px 0 0 -150px;transform:scale(var(--s,1));transform-style:preserve-3d;animation:lfbob 6s ease-in-out infinite}
-@keyframes lfbob{50%{margin-top:-176px}}
-.lf-shake{position:absolute;inset:0;transform-style:preserve-3d}
-.lf.alert .lf-shake{animation:lfshake 4.5s infinite}
-@keyframes lfshake{0%,16%,100%{transform:none}2%{transform:translateX(-5px) rotate(-1.2deg)}4%{transform:translateX(5px) rotate(1.2deg)}6%{transform:translateX(-4px) rotate(-.9deg)}8%{transform:translateX(4px) rotate(.9deg)}10%{transform:translateX(-2px)}12%{transform:translateX(2px)}}
-.lf-fridge{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--px,3deg)) rotateY(var(--py,-14deg));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.lf-fridge.thump{animation:lfthump .5s}
-@keyframes lfthump{30%{transform:rotateX(var(--px,3deg)) rotateY(var(--py,-14deg)) translateZ(-14px) scale(.985)}}
-.lf-fridge>*{position:absolute;transform-style:preserve-3d}
-.lf-back{left:0;top:0;width:300px;height:340px;transform:translateZ(-110px);background:linear-gradient(180deg,#eaf3fb,#c4d6e6);border-radius:3px}
-.lf.alert .lf-back::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 8%,rgba(239,68,68,.75),rgba(239,68,68,.18) 70%);animation:lfred 1.2s ease-in-out infinite alternate}
-@keyframes lfred{from{opacity:.25}to{opacity:1}}
-.lf-wl,.lf-wr,.lf-wm{top:0;width:110px;height:340px;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#9db2c6,#d7e4ef 50%,#b5c7d8)}
-.lf-wl{left:0}.lf-wr{left:300px;background:linear-gradient(90deg,#b5c7d8,#8da3b8)}.lf-wm{left:150px;background:linear-gradient(90deg,#8ea6bc,#c8d8e6 50%,#8ea6bc)}
-.lf-top,.lf-bot{left:0;width:300px;height:110px;transform-origin:50% 0;transform:rotateX(-90deg)}
-.lf-top{top:0;background:linear-gradient(#f4fbff,#cfe0ee)}.lf-bot{top:340px;background:#8398ad}
-.lf-lt{left:8px;top:6px;width:284px;height:4px;transform:translateZ(-30px);background:#fff;border-radius:4px;box-shadow:0 0 22px 7px rgba(186,230,253,.85)}
-.lf.alert .lf-lt{background:#fecaca;box-shadow:0 0 22px 7px rgba(239,68,68,.9)}
-.lf-sh{width:146px;height:110px;transform-origin:50% 0;transform:rotateX(-90deg);background:linear-gradient(rgba(190,235,255,.5),rgba(190,235,255,.18));border:1px solid rgba(255,255,255,.6);border-radius:3px;box-shadow:0 0 0 1px rgba(100,160,200,.25) inset}
-.lf-sh.fz{background:linear-gradient(rgba(150,200,255,.55),rgba(150,200,255,.2))}
-.lf-dr{width:140px;height:50px;transform:translateZ(-6px);background:linear-gradient(rgba(110,231,183,.38),rgba(110,231,183,.16));border:1px solid rgba(255,255,255,.55);border-radius:6px 6px 3px 3px}
-.lf-dr::after{content:"";position:absolute;left:30%;right:30%;top:8px;height:5px;border-radius:5px;background:rgba(255,255,255,.7)}
-.lf-lab{font:800 9px/1 inherit;letter-spacing:.14em;text-transform:uppercase;color:#1e3a52;width:140px;text-align:center;transform:translateZ(-8px)}
-.lf-floor{left:-60px;top:340px;width:420px;height:320px;transform-origin:50% 0;transform:translate3d(0,0,200px) rotateX(-90deg);background:radial-gradient(ellipse at 50% 50%,rgba(56,189,248,.28),rgba(0,0,0,.45) 35%,transparent 68%)}
-.lf-door{top:0;width:150px;height:340px;transition:transform 1.05s cubic-bezier(.3,.9,.25,1)}
-.lf-door.l{left:0;transform-origin:0 50%;transform:rotateY(var(--dl,0deg))}
-.lf-door.r{left:150px;transform-origin:100% 50%;transform:rotateY(var(--dr,0deg))}
-.lf.open .lf-door.l{--dl:-112deg}.lf.open .lf-door.r{--dr:112deg}
-.lf-door>div{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px}
-.df{background:linear-gradient(100deg,#aeb6c1,#e9edf2 38%,#c0c8d2 62%,#9aa3af);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);cursor:pointer}
-.df::before{content:"";position:absolute;top:18%;bottom:18%;width:6px;border-radius:6px;background:linear-gradient(90deg,#6b7480,#d3d9e0 50%,#6b7480);box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.l .df::before{right:12px}.r .df::before{left:12px}
-.df i{position:absolute;top:14px;left:50%;transform:translateX(-50%);font:800 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;color:#5ee7ff;background:#04121c;border-radius:5px;padding:5px 8px;box-shadow:0 0 10px rgba(34,211,238,.45) inset}
-.lf.alert .df i{color:#fecaca;background:#2a0505;box-shadow:0 0 10px rgba(239,68,68,.7) inset;animation:lfred .8s infinite alternate}
-.db{transform:rotateY(180deg);background:linear-gradient(#f1f5f9,#d3dce6);box-shadow:inset 0 0 0 5px #b8c4d1}
-.db .dsh{position:absolute;left:8px;right:8px;height:6px;background:linear-gradient(#fff,#b7c4d2);border-radius:3px;box-shadow:0 3px 4px rgba(0,0,0,.2)}
-.db .dsh u{position:absolute;bottom:6px;width:15px;border-radius:5px 5px 2px 2px;text-decoration:none;background:linear-gradient(90deg,rgba(0,0,0,.25),rgba(255,255,255,.35),rgba(0,0,0,.25)),var(--c)}
-.db .dsh u::before{content:"";position:absolute;left:30%;right:30%;top:-7px;height:8px;background:var(--c);border-radius:3px 3px 0 0}
-.lf-siren{left:128px;top:-18px;width:44px;height:18px;transform:translateZ(0);border-radius:22px 22px 0 0;background:#7f1d1d;opacity:0}
-.lf.alert .lf-siren{opacity:1;background:#ef4444;box-shadow:0 0 28px 12px rgba(239,68,68,.8);animation:lfred .6s infinite alternate}
-/* items */
-.lfi{left:0;top:0;width:var(--w);height:var(--h);transform-origin:50% 100%;cursor:pointer;transition:filter .2s,opacity .35s}
-.lfi::before{content:"";position:absolute;inset:0;border-radius:var(--r,6px);background:linear-gradient(90deg,rgba(0,0,0,.3),rgba(255,255,255,.34) 32%,rgba(255,255,255,0) 55%,rgba(0,0,0,.32)),var(--c);box-shadow:0 3px 7px rgba(0,0,0,.38)}
-.lfi .lfn{position:absolute;left:50%;top:-11px;width:44%;height:13px;margin-left:-22%;border-radius:4px 4px 0 0;background:var(--c);box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
-.lfi .lfn::after{content:"";position:absolute;left:-2px;right:-2px;top:-3px;height:5px;border-radius:3px;background:#f8fafc}
-.lfi .lfl{position:absolute;left:0;right:0;top:36%;height:30%;background:rgba(255,255,255,.78);mix-blend-mode:normal}
-.lfi.k-round,.lfi.k-round::before{--r:50%}
-.lfi.k-flat::before{--r:3px;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.1) 40%,rgba(0,0,0,.18)),var(--c)}
-.lfi.k-carton::before{clip-path:polygon(0 16%,50% 0,100% 16%,100% 100%,0 100%)}
-.lfi.k-egg::before{border-radius:50% 50% 46% 46%/62% 62% 38% 38%}
-.lfi::after{content:"";position:absolute;left:50%;top:-20px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e}
-.lfi.k-bottle::after,.lfi.k-jar::after{top:-28px}
-.lfi.st-soon::after{background:#f59e0b;box-shadow:0 0 8px #f59e0b}
-.lfi.st-today::after,.lfi.st-exp::after{background:#ef4444;box-shadow:0 0 10px #ef4444;animation:lfblink .8s infinite alternate}
-@keyframes lfblink{to{transform:scale(1.6);opacity:.55}}
-.lfi.st-exp{animation:lfpulse 1.6s ease-in-out infinite}
-.lfi.st-exp::before{filter:saturate(.55) brightness(.85) sepia(.35)}
-@keyframes lfpulse{0%,100%{filter:drop-shadow(0 0 2px rgba(239,68,68,.9))}50%{filter:drop-shadow(0 0 12px rgba(239,68,68,1))}}
-.lfi s{position:absolute;top:-6px;width:6px;height:6px;border-radius:50%;background:rgba(254,202,202,.85);box-shadow:0 0 6px rgba(239,68,68,.9);opacity:0;animation:lfb 2.4s ease-in infinite}
-.lfi s:nth-of-type(1){left:15%}.lfi s:nth-of-type(2){left:48%;animation-delay:.8s;width:5px;height:5px}.lfi s:nth-of-type(3){left:78%;animation-delay:1.5s;width:4px;height:4px}
-@keyframes lfb{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:.95}100%{opacity:0;transform:translateY(-46px) translateX(6px) scale(1.5)}}
-.lfi:hover,.lfi.hl{filter:brightness(1.3) drop-shadow(0 0 8px #fff)}
-.lfi.wait{opacity:0}
-.lfi.drop{animation:lfdrop .7s cubic-bezier(.3,1.4,.5,1) both}
-@keyframes lfdrop{from{opacity:0;margin-top:-120px}60%{opacity:1}to{opacity:1;margin-top:0}}
-.lf-stage[data-f="ok"] .lfi:not(.st-ok),.lf-stage[data-f="soon"] .lfi:not(.st-soon):not(.st-today),.lf-stage[data-f="exp"] .lfi:not(.st-exp){opacity:.15}
-.lf-more{font:800 11px/1 inherit;color:#fff;background:#ef4444;border-radius:99px;padding:4px 8px;transform:translateZ(-4px)}
-.lf-hint{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:11px;color:rgba(186,230,253,.75);font-weight:600;pointer-events:none}
-.lf-tip{position:absolute;z-index:6;min-width:180px;max-width:240px;background:rgba(7,18,32,.96);color:#e8f4ff;border:1px solid rgba(125,211,252,.35);border-radius:12px;padding:10px 12px;font-size:12px;box-shadow:0 14px 34px rgba(0,0,0,.5);display:none;pointer-events:none}
-.lf-tip.pin{pointer-events:auto}
-.lf-tip.show{display:block;animation:rise .25s both}
-.lf-tip b{display:block;font-size:14px;margin-bottom:2px}
-.lf-tip small{display:block;color:#9ec3df;margin-bottom:6px}
-.lf-tip .tb{display:inline-block;font-weight:800;font-size:11px;border-radius:99px;padding:3px 9px;background:#166534;color:#dcfce7}
-.lf-tip .tb.soon{background:#92400e;color:#fef3c7}.lf-tip .tb.exp,.lf-tip .tb.today{background:#991b1b;color:#fee2e2}
-.lf-tip .ph2{width:100%;height:64px;border-radius:8px;background:#1e293b center/cover;margin-bottom:8px}
-.lf-tip .acts{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
-.lf-tip .lockn{color:#9ec3df;border-color:rgba(125,211,252,.3);background:transparent}
-.lf-tip .btn.ghost{color:#e8f4ff;border-color:rgba(125,211,252,.4)}
-/* mascot */
-.lf-mas{position:absolute;right:12px;bottom:26px;width:112px;z-index:4;pointer-events:none}
-.lf-mas svg{width:74px;display:block;margin:0 auto;animation:masbob 2.2s ease-in-out infinite;filter:drop-shadow(0 8px 10px rgba(0,0,0,.4))}
-.lf-mas .arm{transform-origin:6px 6px;animation:waveA 1.1s ease-in-out infinite}
-@keyframes masbob{50%{transform:translateY(-6px)}}
-@keyframes waveA{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(38deg)}}
-.lf-say{position:absolute;right:6px;bottom:100px;width:150px;background:#fff;color:#0f172a;border-radius:12px 12px 2px 12px;padding:8px 10px;font-size:11.5px;font-weight:700;line-height:1.3;box-shadow:0 10px 24px rgba(0,0,0,.35);animation:rise .5s both}
-.lf-say.bad{background:#fee2e2;color:#7f1d1d}
-/* side panel */
-.lf-side{padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.lf-side h3{margin:0;font-size:18px;display:flex;align-items:center;gap:9px}
-.lf-side h3 svg{width:18px;height:18px}
-.lf-side p{margin:-8px 0 0;color:var(--mut);font-size:13px}
-.lf-chips{display:flex;gap:8px;flex-wrap:wrap}
-.lf-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surf);color:var(--fg);border-radius:99px;padding:5px 12px;font-size:12.5px;font-weight:800;cursor:pointer;transition:.2s}
-.lf-chip i{width:8px;height:8px;border-radius:50%}
-.lf-chip.ok i{background:#22c55e}.lf-chip.soon i{background:#f59e0b}.lf-chip.exp i{background:#ef4444}
-.lf-chip.on{background:var(--fg);color:var(--surf);border-color:var(--fg)}
-.lf-h{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
-.lf-list{display:grid;gap:8px}
-.lf-row{display:flex;align-items:center;gap:11px;text-align:left;border:1px solid var(--line);background:var(--surf);color:var(--fg);border-radius:12px;padding:9px 12px;cursor:pointer;transition:.2s;font:inherit}
-.lf-row:hover,.lf-row.hl{transform:translateX(4px);border-color:var(--acc)}
-.lf-row .dot{width:10px;height:10px;border-radius:50%;background:#22c55e;flex:none}
-.lf-row.soon .dot{background:#f59e0b}.lf-row.today .dot,.lf-row.exp .dot{background:#ef4444}
-.lf-row.exp{background:var(--redsoft);border-color:#ef4444}
-.lf-row span{display:grid;min-width:0}.lf-row b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lf-row small{color:var(--mut);font-size:12px}
-.lf-row em{margin-left:auto;font-style:normal;font-weight:800;font-size:12px;white-space:nowrap}
-.lf-empty{border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--mut);font-size:13px}
-@media(max-width:900px){.lf{grid-template-columns:1fr}.lf-stage{min-height:360px}}
-/* fx layer */
-.fly{position:fixed;z-index:9999;border-radius:14px;background:#334155 center/cover;box-shadow:0 12px 30px rgba(0,0,0,.4);pointer-events:none;border:2px solid #fff}
-.gh{position:fixed;z-index:9999;pointer-events:none;border-radius:12px;background:var(--surf);border:1px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.3);padding:10px 14px;font-weight:800;display:flex;align-items:center;gap:8px;overflow:hidden}
-.cf{position:fixed;z-index:9999;width:9px;height:14px;border-radius:2px;pointer-events:none}
-.bin{position:fixed;z-index:9998;right:28px;bottom:28px;width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#ef4444,#9f1239);display:grid;place-items:center;color:#fff;box-shadow:0 14px 34px rgba(220,38,38,.5);pointer-events:none;transform:translateY(120px) scale(.7);opacity:0;transition:.4s cubic-bezier(.3,1.5,.5,1)}
-.bin.in{transform:none;opacity:1}.bin.shk{animation:binshk .35s}
-.bin svg{width:34px;height:34px}
-@keyframes binshk{25%{transform:rotate(-12deg) scale(1.1)}60%{transform:rotate(10deg) scale(1.1)}}
-/* expired cards */
-.item.s-exp .ph,.item.s-today .ph{box-shadow:inset 0 0 46px rgba(220,38,38,.6)}
-.item.s-exp .ph{filter:saturate(.7) sepia(.25)}
-.item.s-exp .ph::after,.item.s-today .ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,rgba(254,202,202,.9) 0 2px,transparent 3px) 18% 110%/22px 38px no-repeat,radial-gradient(circle,rgba(254,202,202,.85) 0 3px,transparent 4px) 52% 110%/30px 46px no-repeat,radial-gradient(circle,rgba(254,202,202,.8) 0 2px,transparent 3px) 82% 110%/26px 40px no-repeat;animation:cbub 2.8s linear infinite}
-@keyframes cbub{from{background-position:18% 110%,52% 130%,82% 120%}to{background-position:22% -30%,48% -40%,86% -35%}}
-.row.due{position:relative;animation:rowwarn 2.2s ease-in-out infinite}
-@keyframes rowwarn{50%{box-shadow:0 0 0 3px rgba(239,68,68,.22),0 0 22px rgba(239,68,68,.25)}}
-.mm{width:54px;display:block;margin:0 auto 8px;animation:masbob 2.2s ease-in-out infinite}
-.mm .arm{transform-origin:6px 6px;animation:waveA 1.4s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.lf-scene,.lf-mas svg,.mm,.lf.alert .lf-shake,.row.due,.lfi.st-exp,.lfi s{animation:none!important}.lf-door{transition:none}}
+/* effects layer */
+#fxLayer{position:fixed;inset:0;pointer-events:none;z-index:3000;overflow:hidden}
+.fx-ph{position:fixed;border-radius:14px;background:#e2e8f0 center/cover no-repeat;box-shadow:0 18px 40px -8px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.85);will-change:transform,opacity;transform-origin:center}
+.fx-cf{position:fixed;display:block;will-change:transform,opacity}
+.fx-ring{position:fixed;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:3px solid rgba(34,197,94,.8);animation:fxring .65s ease-out forwards}
+@keyframes fxring{to{transform:scale(7);opacity:0}}
+.fx-pop{position:fixed;transform:translate(-50%,-100%);background:#16a34a;color:#fff;font-weight:800;font-size:13px;padding:6px 14px;border-radius:99px;box-shadow:0 10px 24px -8px rgba(22,163,74,.7);animation:fxpop 1.2s ease-out forwards;white-space:nowrap}
+.fx-pop .i{width:15px;height:15px;vertical-align:-3px}
+@keyframes fxpop{0%{opacity:0;transform:translate(-50%,-60%) scale(.6)}18%{opacity:1;transform:translate(-50%,-110%) scale(1.08)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-190%) scale(1)}}
+.fx-bin{position:fixed;left:50%;bottom:18px;width:64px;height:72px;margin-left:-32px;opacity:0;transform:translateY(90px) scale(.8);transition:transform .35s cubic-bezier(.3,1.4,.5,1),opacity .25s;filter:drop-shadow(0 12px 18px rgba(0,0,0,.45))}
+.fx-bin.in{opacity:1;transform:none}
+.fx-bin .lid{transform-origin:6px 14px;transition:transform .25s}
+.fx-bin.open .lid{transform:rotate(-38deg) translateY(-3px)}
+.fx-bin.shake{animation:fxshake .4s}
+@keyframes fxshake{20%{transform:rotate(-7deg)}45%{transform:rotate(6deg)}70%{transform:rotate(-3deg)}100%{transform:none}}
+.fx-dust{position:fixed;width:14px;height:14px;margin:-7px;border-radius:50%;background:radial-gradient(circle,rgba(203,213,225,.9),rgba(148,163,184,0));}
 
-/* ===== v12: WebGL live fridge ===== */
-.dgl-c{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
-.dgl-c.thump{animation:cvthump .5s}
-@keyframes cvthump{30%{transform:scale(.985) translateY(4px)}}
-.lf-stage.gl .lf-scene{display:none}
-.lf-stage.gl{min-height:420px}
-.lf-stage.gl .lf-hint,.lf-stage.gl .lf-mas,.lf-stage.gl .lf-tip{z-index:5}
-.lf-over{position:absolute;left:12px;bottom:34px;z-index:5;background:rgba(239,68,68,.92);color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:4px 10px}
-.lf-tip .btn.ghost{background:transparent!important;color:#e8f4ff!important}
+/* fridge-door page wipe */
+.dw{position:fixed;z-index:2500;pointer-events:none;overflow:hidden}
+.dw i{position:absolute;top:0;bottom:0;width:50.4%;background:linear-gradient(100deg,#e5eaf0,#cdd5de 55%,#b9c3ce);transition:transform .26s cubic-bezier(.6,.05,.3,1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 0 40px rgba(0,0,0,.35)}
+.dw .dw-l{left:0;transform:translateX(-101%)}
+.dw .dw-r{right:0;transform:translateX(101%)}
+.dw.shut .dw-l,.dw.shut .dw-r{transform:none}
+.dw.opening i{transition:transform .5s cubic-bezier(.5,0,.2,1)}
+.dw.opening .dw-l{transform:translateX(-101%)}.dw.opening .dw-r{transform:translateX(101%)}
+.dw i b{position:absolute;top:50%;width:7px;height:32%;margin-top:-16%;border-radius:6px;background:linear-gradient(90deg,#f8fafc,#94a3b8)}
+.dw .dw-l b{right:16px}.dw .dw-r b{left:16px}
+.dw u{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,rgba(125,211,252,.5),transparent 70%);opacity:0;transition:opacity .2s}
+.dw.glow u{opacity:1}.dw.opening u{opacity:0;transition:opacity .5s}
+
+/* spoiled items: red glow, rising bubbles and smoke */
+.item.s-exp,.row.due{position:relative}
+.item.s-exp{animation:redglow 2.2s ease-in-out infinite}
+@keyframes redglow{0%,100%{box-shadow:0 0 0 1px rgba(239,68,68,.45),0 0 10px rgba(239,68,68,.2)}50%{box-shadow:0 0 0 1px rgba(239,68,68,.8),0 0 28px rgba(239,68,68,.5)}}
+.item.s-exp .ph::before,.item.s-exp .ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:80%;pointer-events:none;z-index:1}
+.item.s-exp .ph::before{background:radial-gradient(circle at 14% 92%,rgba(254,202,202,.85) 0 3px,transparent 4px),radial-gradient(circle at 38% 96%,rgba(252,165,165,.8) 0 4px,transparent 5px),radial-gradient(circle at 63% 90%,rgba(254,202,202,.85) 0 3px,transparent 4px),radial-gradient(circle at 86% 95%,rgba(252,165,165,.8) 0 5px,transparent 6px);animation:bub 2.6s linear infinite}
+.item.s-exp .ph::after{background:radial-gradient(40% 55% at 30% 100%,rgba(120,160,90,.4),transparent 70%),radial-gradient(40% 55% at 72% 100%,rgba(120,160,90,.34),transparent 70%);filter:blur(5px);animation:smoke 3.4s ease-in infinite}
+@keyframes bub{0%{transform:translateY(25%);opacity:0}15%{opacity:1}100%{transform:translateY(-70%);opacity:0}}
+@keyframes smoke{0%{transform:translateY(30%) scale(.8);opacity:0}30%{opacity:1}100%{transform:translateY(-60%) scale(1.5);opacity:0}}
+.row.due{animation:redrow 2.2s ease-in-out infinite}
+@keyframes redrow{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}50%{box-shadow:0 0 0 2px rgba(239,68,68,.45),0 0 18px rgba(239,68,68,.3)}}
+
+/* empty state mascot */
+.card.empty::before{content:"";display:block;width:132px;height:132px;margin:0 auto 6px;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20120%20120%22%3E%3Cdefs%3E%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%220%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%23e0f2fe%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%237dd3fc%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse%20cx=%2258%22%20cy=%22114%22%20rx=%2244%22%20ry=%225%22%20fill=%22%230f172a%22%20opacity=%22.18%22/%3E%3Crect%20x=%2216%22%20y=%228%22%20width=%2266%22%20height=%22102%22%20rx=%229%22%20fill=%22%23cbd5e1%22/%3E%3Crect%20x=%2223%22%20y=%2215%22%20width=%2252%22%20height=%2288%22%20rx=%225%22%20fill=%22url%28%23g%29%22/%3E%3Cpath%20d=%22M23%2044h52M23%2074h52%22%20stroke=%22%23fff%22%20stroke-width=%223%22/%3E%3Cpath%20d=%22M82%208l30%2012v72L82%20110z%22%20fill=%22%2394a3b8%22/%3E%3Cpath%20d=%22M82%208l30%2012v72L82%20110z%22%20fill=%22none%22%20stroke=%22%2364748b%22%20stroke-width=%222%22/%3E%3Crect%20x=%22104%22%20y=%2246%22%20width=%223%22%20height=%2226%22%20rx=%221.5%22%20fill=%22%23e2e8f0%22%20transform=%22skewY%2814%29%22/%3E%3Ccircle%20cx=%2249%22%20cy=%2226%22%20r=%223%22%20fill=%22%23fff%22%3E%3Canimate%20attributeName=%22opacity%22%20values=%221;.3;1%22%20dur=%222s%22%20repeatCount=%22indefinite%22/%3E%3C/circle%3E%3Cg%3E%3CanimateTransform%20attributeName=%22transform%22%20type=%22translate%22%20values=%220%200;0%20-3;0%200%22%20dur=%221.4s%22%20repeatCount=%22indefinite%22/%3E%3Cellipse%20cx=%2249%22%20cy=%2284%22%20rx=%2214%22%20ry=%2218%22%20fill=%22%231e293b%22/%3E%3Cellipse%20cx=%2249%22%20cy=%2288%22%20rx=%228.5%22%20ry=%2213%22%20fill=%22%23fff%22/%3E%3Ccircle%20cx=%2249%22%20cy=%2262%22%20r=%2211%22%20fill=%22%231e293b%22/%3E%3Ccircle%20cx=%2245%22%20cy=%2260%22%20r=%223%22%20fill=%22%23fff%22/%3E%3Ccircle%20cx=%2253%22%20cy=%2260%22%20r=%223%22%20fill=%22%23fff%22/%3E%3Ccircle%20cx=%2245.5%22%20cy=%2260.5%22%20r=%221.4%22%20fill=%22%230f172a%22/%3E%3Ccircle%20cx=%2253.5%22%20cy=%2260.5%22%20r=%221.4%22%20fill=%22%230f172a%22/%3E%3Cpath%20d=%22M45%2066l4%205%204-5z%22%20fill=%22%23fb923c%22/%3E%3Cpath%20d=%22M40%2072q9%204%2018%200%22%20stroke=%22%23ef4444%22%20stroke-width=%223.5%22%20fill=%22none%22%20stroke-linecap=%22round%22/%3E%3Cellipse%20cx=%2234%22%20cy=%2282%22%20rx=%224%22%20ry=%2211%22%20fill=%22%231e293b%22%20transform=%22rotate%2814%2034%2076%29%22/%3E%3Cg%20transform=%22translate%2864%2074%29%22%3E%3Cellipse%20cx=%220%22%20cy=%228%22%20rx=%224%22%20ry=%2211%22%20fill=%22%231e293b%22%3E%3CanimateTransform%20attributeName=%22transform%22%20type=%22rotate%22%20values=%22-8%200%200;-58%200%200;-8%200%200%22%20dur=%221s%22%20repeatCount=%22indefinite%22/%3E%3C/ellipse%3E%3C/g%3E%3Cellipse%20cx=%2243%22%20cy=%22102%22%20rx=%226%22%20ry=%222.6%22%20fill=%22%23fb923c%22/%3E%3Cellipse%20cx=%2256%22%20cy=%22102%22%20rx=%226%22%20ry=%222.6%22%20fill=%22%23fb923c%22/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;animation:bobm 3s ease-in-out infinite}
+@keyframes bobm{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.item.s-exp,.row.due,.card.empty::before,.item.s-exp .ph::before,.item.s-exp .ph::after{animation:none}.dw i{transition:none}}
+
 </style>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -1435,12 +1385,22 @@ function actFor(it) {
   return `<div class="acts"><button class="btn sm" data-a="take" data-id="${it.id}" data-r="Consumed">${I.check} Consume</button><button class="btn sm ghost" data-a="take" data-id="${it.id}" data-r="Disposed">${I.trash} Dispose</button>${ed}</div>`;
 }
 function who(it) { return isMine(it) ? 'you' : esc(it.by || 'staff'); }
+/* ---------- shelf zones ---------- */
+const ZONES = ['Top shelf', 'Middle shelf', 'Bottom shelf', 'Door', 'Crisper drawer', 'Freezer'];
+const SUG_LOC = { veg: 'Crisper drawer', fruit: 'Crisper drawer', meat: 'Bottom shelf', poultry: 'Bottom shelf', seafood: 'Bottom shelf', proc: 'Bottom shelf', dairy: 'Middle shelf', eggs: 'Door', sauce: 'Door', bev: 'Door', cooked: 'Top shelf', other: 'Top shelf' };
+function suggestLoc(cat, frozen) { return frozen ? 'Freezer' : (SUG_LOC[cat] || 'Middle shelf'); }
+function locOf(it) { return it.frozen ? 'Freezer' : (ZONES.includes(it.loc) && it.loc !== 'Freezer' ? it.loc : suggestLoc(it.cat, false)); }
+function locOpts(sel) { return ZONES.filter(z => z !== 'Freezer').map(z => `<option value="${z}"${z === sel ? ' selected' : ''}>${z}</option>`).join(''); }
+function syncLoc() {
+  const l = $('#lc'), c = $('#c'), f = $('#fz'); if (!l || !c || !f) return;
+  if (f.value === '1') { l.disabled = true; } else { l.disabled = false; if (l.dataset.u !== '1') l.value = suggestLoc(c.value, false); }
+}
 function itemRow(it, withAct) {
   const s = status(it), c = CATS[it.cat] || CATS.other, due = s.k === 'today' || s.k === 'exp';
   return `<div class="row ${due ? 'due' : ''}">
     <div class="th" data-a="zoom" data-src="${it.id}" style="background-image:url(${it.photo})"></div>
     <div class="t"><b><span class="color-dot" style="background:${c.color}"></span>${esc(it.name)}${it.qty ? ` <small class="meta">× ${esc(it.qty)}</small>` : ''} <span class="badge ${s.cls}">${esc(s.label)}</span></b>
-      <div class="meta">${esc(c.label)}${it.frozen ? ' · ' + I.snow + ' Freezer' : ''} · Added ${fmtDate(it.added)} by ${who(it)} · Expires ${fmtDate(it.expiry)}</div></div>
+      <div class="meta">${esc(c.label)}${it.frozen ? ' · ' + I.snow + ' Freezer' : ' · ' + esc(locOf(it))} · Added ${fmtDate(it.added)} by ${who(it)} · Expires ${fmtDate(it.expiry)}</div></div>
     ${withAct ? actFor(it) : ''}</div>`;
 }
 
@@ -1824,7 +1784,7 @@ function viewInv(mode) {
       ${due ? '<span class="ribbon">REMOVE NOW</span>' : ''}
       <div class="b">
         <h3><span class="color-dot" style="background:${c.color}"></span> ${esc(it.name)} ${it.qty ? `<small class="meta">× ${esc(it.qty)}</small>` : ''}${isMine(it) ? '<span class="own">You</span>' : ''}</h3>
-        <div class="meta">${esc(c.label)} ${it.frozen ? '· ' + I.snow + ' Freezer' : ''}</div>
+        <div class="meta">${esc(c.label)} ${it.frozen ? '· ' + I.snow + ' Freezer' : '· ' + esc(locOf(it))}</div>
         <div class="meta">Added: ${fmtDate(it.added)} by ${who(it)}</div>
         <div class="meta" style="color:var(--fg)"><b>Expires: ${fmtDate(it.expiry)}</b></div>
         <div class="bar"><i style="width:${pct(it)}%;animation:bar-in .8s both"></i></div>
@@ -2037,11 +1997,12 @@ function openAdd() {
     <label>Quantity (Optional)<input id="qy" placeholder="e.g. 2 liters" maxlength="20"></label></div>
     <div class="two"><label>Category<select id="c">${Object.keys(CATS).map(k => `<option value="${k}">${CATS[k].label}</option>`).join('')}</select></label>
     <label>Storage Location<select id="fz"><option value="0">Chiller (Fridge)</option><option value="1">Freezer</option></select></label></div>
+    <label>Shelf Position<select id="lc">${locOpts('')}</select></label>
     <div class="two"><label>Date Added<input type="date" id="ad" value="${t}" max="${t}"></label>
     <label>Expiry Date<input type="date" id="ex"></label></div>
     <div class="preview" id="pv"></div></div>
     <div class="mfoot"><button class="btn ghost" data-a="close">Cancel</button><button class="btn" id="saveItem" data-a="saveitem" disabled>Save Record</button></div>`);
-  calcExp(true);
+  calcExp(true); syncLoc();
 }
 function calcExp(force) {
   const c = $('#c').value, fz = $('#fz').value === '1', ad = $('#ad').value || ymd(today()), days = S.shelf[c][fz ? 'freezer' : 'fridge'];
@@ -2055,6 +2016,7 @@ function saveItem() {
   if (!ui.draft.photo) return toast('Item photo is required.');
   if (!name) { toast('Item name is required.'); return $('#n').focus(); }
   const it = { id: uid(), name: name, qty: $('#qy').value.trim(), cat: $('#c').value, frozen: $('#fz').value === '1', photo: ui.draft.photo, added: $('#ad').value || ymd(today()), expiry: $('#ex').value, by: who, byId: me().id };
+  it.loc = it.frozen ? 'Freezer' : ($('#lc') ? $('#lc').value : suggestLoc(it.cat, false));
   if (!it.expiry) return toast('Expiry date is required.');
   if (!isAdmin()) { try { localStorage.setItem('fw_myname', who); } catch (e) {} ui.currentUser = withName(me()); }
   S = mergeLatest();
@@ -2114,6 +2076,7 @@ function openEdit(id) {
     <label>Quantity<input id="e_q" value="${esc(it.qty || '')}" maxlength="20"></label></div>
     <div class="two"><label>Category<select id="e_c">${Object.keys(CATS).map(k => `<option value="${k}"${it.cat === k ? ' selected' : ''}>${CATS[k].label}</option>`).join('')}</select></label>
     <label>Storage<select id="e_f"><option value="0"${it.frozen ? '' : ' selected'}>Chiller (Fridge)</option><option value="1"${it.frozen ? ' selected' : ''}>Freezer</option></select></label></div>
+    <label>Shelf Position<select id="e_l">${locOpts(locOf(it))}</select></label>
     <label>Expiry Date<input type="date" id="e_x" value="${it.expiry}"></label></div>
     <div class="mfoot"><button class="btn ghost" data-a="close">Cancel</button><button class="btn" data-a="saveedit">Save changes</button></div>`);
 }
@@ -2125,7 +2088,7 @@ function saveEdit() {
   const changes = [];
   if (name !== it.name) changes.push('name to ' + name);
   if (ex !== it.expiry) changes.push('expiry to ' + fmtDate(ex));
-  it.name = name; it.qty = $('#e_q').value.trim(); it.cat = $('#e_c').value; it.frozen = $('#e_f').value === '1'; it.expiry = ex;
+  it.name = name; it.qty = $('#e_q').value.trim(); it.cat = $('#e_c').value; it.frozen = $('#e_f').value === '1'; it.expiry = ex; it.loc = it.frozen ? 'Freezer' : ($('#e_l') ? $('#e_l').value : it.loc);
   logAct('Edited ' + it.name + (changes.length ? ' (' + changes.join(', ') + ')' : ''));
   save(); closeModal(); render(); toast('Item updated.');
   if (daysLeft(ex) <= 0) setTimeout(() => announce(true), 350);
@@ -2135,7 +2098,7 @@ function saveEdit() {
 function readd(hid) {
   const h = S.history.find(x => x.id === hid); if (!h) return;
   openAdd();
-  $('#n').value = h.name; $('#qy').value = h.qty || ''; $('#c').value = CATS[h.cat] ? h.cat : 'other'; $('#fz').value = h.frozen ? '1' : '0'; calcExp(true);
+  $('#n').value = h.name; $('#qy').value = h.qty || ''; $('#c').value = CATS[h.cat] ? h.cat : 'other'; $('#fz').value = h.frozen ? '1' : '0'; calcExp(true); syncLoc();
   if (h.photo) { ui.draft.photo = h.photo; const box = $('#shot'); box.style.backgroundImage = `url(${h.photo})`; box.classList.add('has'); $('#saveItem').disabled = false; }
   else toast('Take a new photo to finish recording ' + h.name + '.');
 }
@@ -2271,7 +2234,8 @@ document.addEventListener('change', async e => {
   else if (t.id === 'fc') { ui.cat = t.value; render(); }
   else if (t.id === 'fs') { ui.st = t.value; render(); }
   else if (t.id === 'actw') { ui.aw = t.value; render(); }
-  else if (t.id === 'c' || t.id === 'fz' || t.id === 'ad') calcExp(true);
+  else if (t.id === 'lc') { t.dataset.u = '1'; }
+  else if (t.id === 'c' || t.id === 'fz' || t.id === 'ad') { calcExp(true); if (t.id !== 'ad') syncLoc(); }
   else if (t.id === 'ex') { t.dataset.auto = '0'; calcExp(false); }
   else if (t.dataset && t.dataset.sh) { const v = Math.max(1, parseInt(t.value, 10) || 1); S.shelf[t.dataset.sh][t.dataset.f] = v; t.value = v; save(); toast('Saved.'); }
   else if (t.id === 'imp') {
@@ -2600,12 +2564,13 @@ setInterval(() => {
 <script>
 /* ===================== Real 3D refrigerator (own WebGL, no libraries) ===================== */
 /* ===================== Real 3D refrigerator (own WebGL, no libraries) ===================== */
-const FGL = (() => {
+function makeFGL(cfg) {
+  cfg = cfg || {};
   const W = 1.0, H = 1.9, D = 0.8, FRONT = 0.4;                     /* metres: width, height, depth, front plane z */
   let gl, prog, U = {}, canvas, app, slot, raf = 0, running = false, parts = [], glass = [], meshes = {}, tex = null;
   let w = 0, h = 0, dpr = 1, last = 0, t0 = 0;
   const st = { L: { a: 0, v: 0 }, R: { a: 0, v: 0 }, target: 0, auto: true, hot: false, yaw: 0, pitch: 0, yawT: 0, pitchT: 0, dive: -1, glow: 0, fade: 0 };
-  const mist = [];
+  const mist = [], cur = {};
   let cycleT = 0, openedAt = 0;
 
   /* ---------- tiny matrix helpers (column-major) ---------- */
@@ -2753,10 +2718,10 @@ void main(){
       addGlass('body', 'box', [s * .215, .33, .05], 0, [.41, .34, .66], mat(hex(0x9fe3c4), { a: .38, r: .1, i: 1 }));
       add('body', 'box', [s * .215, .30, zf - .012], 0, [.41, .1, .03], mat(hex(0xf0f5f8), { r: .4, i: 1 }));
       add('body', 'cyl', [s * .215, .46, zf + .004], [0, 0, Math.PI / 2], [.012, .26, .012], mat(hex(0xc3c9d1), { m: .9, r: .3, i: .5 }));
-      add('body', 'sph', [s * .215 - .08, .27, .08], 0, [.05, .035, .05], mat(hex(0x2f9e44), { r: .6, i: 1 }));
-      add('body', 'sph', [s * .215 + .06, .26, -.05], 0, [.05, .04, .05], mat(hex(0x37b24d), { r: .6, i: 1 }));
+      if (!cfg.live) add('body', 'sph', [s * .215 - .08, .27, .08], 0, [.05, .035, .05], mat(hex(0x2f9e44), { r: .6, i: 1 }));
+      if (!cfg.live) add('body', 'sph', [s * .215 + .06, .26, -.05], 0, [.05, .04, .05], mat(hex(0x37b24d), { r: .6, i: 1 }));
     });
-    food();
+    if (!cfg.live) food();
     /* feet */
     add('body', 'box', [-.4, .02, .32], 0, [.1, .04, .08], DARK());
     add('body', 'box', [.4, .02, .32], 0, [.1, .04, .08], DARK());
@@ -2774,7 +2739,7 @@ void main(){
       [.55, 1.0, 1.45].forEach((by, k) => {
         add(g, 'box', [X(dw / 2), by, -.03], 0, [dw - .06, .014, .075], mat(hex(0xd7e9f5), { r: .2, i: .6 }));
         add(g, 'box', [X(dw / 2), by + .028, -.066], 0, [dw - .06, .056, .008], mat(hex(0xeaf3f9), { r: .3, i: .6 }));
-        for (let n = 0; n < 4; n++) {
+        for (let n = 0; n < (cfg.live ? 0 : 4); n++) {
           const px = X(.08 + n * .1), c = hex([0x2f9e44, 0xe8590c, 0xf1c40f, 0x1c7ed6][(n + k + (s > 0 ? 2 : 0)) % 4]);
           add(g, 'cyl', [px, by + .1, -.03], 0, [.026, .16, .026], mat(c, { r: .25, m: .05, i: .6 }));
           add(g, 'cone', [px, by + .2, -.03], 0, [.026, .05, .026], mat(c, { r: .25, i: .6 }));
@@ -2852,10 +2817,10 @@ void main(){
     /* idle camera motion and mouse parallax */
     st.yaw += (st.yawT - st.yaw) * (1 - Math.exp(-dt * 4)); st.pitch += (st.pitchT - st.pitch) * (1 - Math.exp(-dt * 4));
     const tt = (now - t0) / 1000;
-    let yaw = -.3 + st.yaw + Math.sin(tt * .45) * .07, pitch = st.pitch;
+    let yaw = (cfg.yaw0 !== undefined ? cfg.yaw0 : -.3) + st.yaw + Math.sin(tt * .45) * (cfg.live ? .035 : .07), pitch = st.pitch;
     /* camera */
     const fov = 30 * Math.PI / 180, r = slot.getBoundingClientRect(), ar = app.getBoundingClientRect();
-    const sh = Math.max(120, r.height), dist = H * ar.height / (2 * Math.tan(fov / 2) * sh) * 1.12;
+    const sh = Math.max(120, r.height), dist = H * ar.height / (2 * Math.tan(fov / 2) * sh) * (cfg.fit || 1.12);
     let dp = 0, fade = 0, plI = lerp(.55, 1.75, open) + Math.sin(tt * 9) * .0;
     if (st.dive >= 0) { const k = (now - st.dive) / 1000; dp = ease((k - .5) / 1.75); fade = Math.max(0, Math.min(1, (k - 1.7) / .6)); fade = fade * fade * (3 - 2 * fade); plI = lerp(plI, 2.6, dp); }
     const cz = lerp(dist, -.05, dp), cyv = lerp(1.22, .97, dp), look = [0, lerp(.92, .96, dp), lerp(0, -.4, dp)];
@@ -2867,10 +2832,10 @@ void main(){
     P[8] -= sx; P[9] -= sy;
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.uniformMatrix4fv(U.uV, false, V); gl.uniformMatrix4fv(U.uPj, false, P); gl.uniform3fv(U.uCam, eye);
-    gl.uniform3fv(U.uPLc, [.72, .9, 1.0]); gl.uniform1f(U.uPL, plI); gl.uniform1f(U.uPLR, 2.2); gl.uniform1f(U.uFade, fade); gl.uniform3fv(U.uFadeCol, [.027, .11, .157]);
-    const yawK = 1 - dp, root = mul(Tm(0, 0, 0), mul(Ry(yaw * yawK), Rx(pitch * .15 * yawK)));
+    const lc = cfg.light ? cfg.light(now, open) : null; gl.uniform3fv(U.uPLc, lc ? lc.c : [.72, .9, 1.0]); gl.uniform1f(U.uPL, plI * (lc ? lc.k : 1)); gl.uniform1f(U.uPLR, 2.2); gl.uniform1f(U.uFade, fade); gl.uniform3fv(U.uFadeCol, [.027, .11, .157]);
+    const yawK = 1 - dp, sk = cfg.shake ? cfg.shake(now) : null, root = mul(Tm(sk ? sk.x : 0, 0, 0), mul(Ry(yaw * yawK), mul(Rx(pitch * .15 * yawK), Rz(sk ? sk.z : 0))));
     const GM = groupM(root); const pl = [0, 1.62, .1, 1]; const plw = [root[0] * pl[0] + root[4] * pl[1] + root[8] * pl[2] + root[12], root[1] * pl[0] + root[5] * pl[1] + root[9] * pl[2] + root[13], root[2] * pl[0] + root[6] * pl[1] + root[10] * pl[2] + root[14]];
-    gl.uniform3fv(U.uPLp, plw);
+    gl.uniform3fv(U.uPLp, plw); cur.V = V; cur.P = P;
     gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE); gl.enable(gl.BLEND);
     gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     /* contact shadow on the floor */
@@ -2883,13 +2848,15 @@ void main(){
       const M = mul(GM[p.g], p.l);
       if (p.mesh.led) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(U.uTex, 0); drawMesh(p.mesh.mesh, M, p.mat); } else drawMesh(p.mesh, M, p.mat);
     });
+    if (cfg.onFrame) cfg.onFrame(lib, dt, now, GM, root, open, tt);
     /* glass */
     gl.depthMask(false);
     glass.forEach(p => drawMesh(p.mesh, mul(GM[p.g], p.l), p.mat));
+    if (cfg.onFrame2) cfg.onFrame2(lib, dt, now, GM, root, open, tt);
     /* light spill on the floor + mist */
     if (open > .02) {
       gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-      drawMesh(meshes.floor, mul(mul(root, Tm(0, .004, .75)), Sm(1.7 + open * 1.1, 1, 1.35 + open * .9)), mat([.28, .6, .9], { mode: 2, a: .55 * open }));
+      drawMesh(meshes.floor, mul(mul(root, Tm(0, .004, .75)), Sm(1.7 + open * 1.1, 1, 1.35 + open * .9)), mat((cfg.spill && cfg.spill()) || [.28, .6, .9], { mode: 2, a: .55 * open }));
       gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
       if (!reduced() && Math.random() < dt * 14 * open) mist.push({ x: (Math.random() - .5) * .7, y: 1.2 + Math.random() * .5, z: FRONT + .08, vy: -.08 - Math.random() * .12, vx: (Math.random() - .5) * .05, s: .2 + Math.random() * .2, life: 0, max: 2.2 + Math.random() * 1.6 });
     }
@@ -2908,28 +2875,35 @@ void main(){
     clearTimeout(cycleT); if (!st.auto || !running || reduced()) return;
     cycleT = setTimeout(() => { if (!st.auto) return; st.target = st.target ? 0 : 1; cycle(); }, st.target ? 5200 : 2600);
   }
+  const lib = { hex: hex, mat: mat, trs: trs, mul: mul, ease: ease, add: add, addGlass: addGlass, st: st, cur: cur,
+    get w() { return w; }, get h() { return h; },
+    draw(mesh, M, m) { drawMesh(typeof mesh === 'string' ? meshes[mesh] : mesh, M, m); } };
   return {
     get on() { return running; },
     init(slotEl) {
       this.stop();
       try {
-        app = slotEl.closest('#lgApp'); slot = slotEl; if (!app) return false;
-        canvas = document.createElement('canvas'); canvas.id = 'fgl'; canvas.setAttribute('aria-hidden', 'true');
+        if (cfg.live) { app = slot = slotEl; } else { app = slotEl.closest('#lgApp'); slot = slotEl; if (!app) return false; }
+        canvas = document.createElement('canvas'); if (cfg.live) canvas.className = 'lvc'; else canvas.id = 'fgl'; canvas.setAttribute('aria-hidden', 'true');
         gl = canvas.getContext('webgl', { alpha: true, antialias: true, premultipliedAlpha: true, powerPreference: 'default' });
         if (!gl) return false;
-        app.insertBefore(canvas, app.querySelector('.en-stage')); parts = []; glass = []; mist.length = 0;
+        if (cfg.live) app.insertBefore(canvas, app.firstChild); else app.insertBefore(canvas, app.querySelector('.en-stage')); parts = []; glass = []; mist.length = 0;
         compile(); build(); sizeCanvas();
-        app.classList.add('gl'); running = true; Object.assign(st, { L: { a: 0, v: 0 }, R: { a: 0, v: 0 }, target: 0, auto: true, dive: -1, yaw: 0, pitch: 0, yawT: 0, pitchT: 0 });
+        if (!cfg.live) app.classList.add('gl'); running = true; Object.assign(st, { L: { a: 0, v: 0 }, R: { a: 0, v: 0 }, target: 0, auto: !cfg.live, dive: -1, yaw: 0, pitch: 0, yawT: 0, pitchT: 0 });
         t0 = last = performance.now();
         this._rs = () => { if (running) sizeCanvas(); }; window.addEventListener('resize', this._rs);
         try { this._ro = new ResizeObserver(() => { if (running) sizeCanvas(); }); this._ro.observe(app); } catch (e) {}
+        if (cfg.live) {
+          canvas.addEventListener('pointermove', e => cfg.onMove && cfg.onMove(e, lib)); canvas.addEventListener('pointerleave', e => cfg.onLeave && cfg.onLeave(e, lib)); canvas.addEventListener('click', e => cfg.onClick && cfg.onClick(e, lib));
+        } else {
         if (matchMedia('(pointer:fine)').matches) { this._mv = onMove; app.addEventListener('pointermove', this._mv); }
         this._click = () => { st.auto = false; st.target = st.target ? 0 : 1; }; slot.addEventListener('click', this._click);
-        const go = document.getElementById('enGo');
+        }
+        const go = cfg.live ? null : document.getElementById('enGo');
         if (go) { this._gi = () => { st.auto = false; st.target = 1; }; go.addEventListener('pointerenter', this._gi); go.addEventListener('focus', this._gi); }
         this._vis = () => { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else if (running && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }; document.addEventListener('visibilitychange', this._vis);
         if (reduced()) { st.target = 1; st.L.a = st.R.a = 1.5; }
-        else { setTimeout(() => { if (running && st.auto) { st.target = 1; cycle(); } }, 700); }
+        else { setTimeout(() => { if (running && (st.auto || cfg.live)) { st.target = 1; if (st.auto) cycle(); } }, 700); }
         raf = requestAnimationFrame(frame);
         return true;
       } catch (e) { try { console.warn('3D fridge unavailable:', e); } catch (x) {} this.stop(); return false; }
@@ -2943,9 +2917,14 @@ void main(){
       canvas = null; gl = null; if (app) app.classList.remove('gl');
     },
     dive() { if (!running || reduced()) return false; st.auto = false; clearTimeout(cycleT); st.dive = performance.now(); st.yawT = 0; st.pitchT = 0; return true; },
-    state: st
+    state: st, lib: lib,
+    retarget(el) {
+      app = slot = el; if (!canvas) return; el.insertBefore(canvas, el.firstChild); sizeCanvas();
+      if (this._ro) { try { this._ro.disconnect(); this._ro.observe(app); } catch (e) {} }
+    }
   };
-})();
+}
+const FGL = makeFGL();
 
 /* use the 3D fridge when WebGL works, otherwise keep the CSS fridge */
 (function () {
@@ -3120,622 +3099,320 @@ document.addEventListener('click',e=>{
 },true);
 </script>
 <script>
-/* ===== v11: live 3D fridge + motion system ===== */
-const MASCOT=cls=>`<svg class="${cls||''}" viewBox="0 0 80 96" aria-hidden="true"><defs><linearGradient id="mg${cls||'x'}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f7ff"/><stop offset="1" stop-color="#7cc8f2"/></linearGradient></defs>
- <rect x="22" y="80" width="12" height="12" rx="5" fill="#4aa3d6"/><rect x="46" y="80" width="12" height="12" rx="5" fill="#4aa3d6"/>
- <rect x="4" y="46" width="14" height="8" rx="4" fill="#7cc8f2"/>
- <g class="arm" transform="translate(62 46)"><rect x="0" y="0" width="16" height="8" rx="4" fill="#7cc8f2"/></g>
- <rect x="12" y="10" width="56" height="74" rx="16" fill="url(#mg${cls||'x'})" stroke="#fff" stroke-opacity=".8" stroke-width="2"/>
- <path d="M20 20 q8 -6 18 -6" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".85"/>
- <circle cx="30" cy="44" r="6" fill="#0b2a44"/><circle cx="50" cy="44" r="6" fill="#0b2a44"/><circle cx="32" cy="42" r="2" fill="#fff"/><circle cx="52" cy="42" r="2" fill="#fff"/>
- <ellipse cx="22" cy="55" rx="5" ry="3" fill="#fda4af" opacity=".7"/><ellipse cx="58" cy="55" rx="5" ry="3" fill="#fda4af" opacity=".7"/>
- <path d="M32 58 q8 9 16 0" stroke="#0b2a44" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`;
-const LF_TIPS=['Tip: store raw meat on the lowest shelf so it never drips on other food.','Tip: tap a status chip to filter the fridge.','Tip: first in, first out. Use the oldest items first.','Tip: tap any item to see who stored it.','Tip: cooked food should be chilled within 2 hours.'];
-const LFK={bev:['bottle',22,56],sauce:['jar',22,28],dairy:['carton',26,40],eggs:['egg',30,16],cooked:['flat',30,20],proc:['flat',30,14],meat:['flat',32,13],poultry:['flat',32,14],seafood:['flat',32,13],veg:['round',25,25],fruit:['round',23,23],other:['carton',26,26]};
-const LFSH={dairy:0,eggs:0,bev:0,sauce:0,other:0,cooked:1,proc:1,meat:1,poultry:1,seafood:1,veg:2,fruit:2};
-const LFY=[112,192,272], LFX=[26,58,90,122], LFZ=[-22,-62];
-let LFF='', LF_PIN=null, LF_TMR=0;
-function lfSlots(list){
-  const shelves=[[],[],[]], over=[]; const cap=8;
-  list.forEach(it=>{
-    const p=LFSH[it.cat]!=null?LFSH[it.cat]:0, order=[p,...[0,1,2].filter(x=>x!==p)];
-    const s=order.find(x=>shelves[x].length<cap); if(s==null) over.push(it); else shelves[s].push(it);
-  });
-  return {shelves,over};
-}
-function lfItemHTML(it,compX,k,s){
-  const kd=LFK[it.cat]||LFK.other, st=status(it), c=(CATS[it.cat]||CATS.other).color;
-  const col=k%4,row=Math.floor(k/4), w=kd[1],h=kd[2];
-  const x=compX+LFX[col]-w/2, y=LFY[s]-h-1, z=LFZ[row];
-  const neck=(kd[0]==='bottle'||kd[0]==='jar')?'<b class="lfn"></b>':'', lab=(kd[0]==='bottle'||kd[0]==='carton'||kd[0]==='jar')?'<b class="lfl"></b>':'';
-  const bub=st.k==='exp'||st.k==='today'?'<s></s><s></s><s></s>':'';
-  return `<i class="lfi k-${kd[0]} st-${st.k}" data-lfid="${it.id}" style="--w:${w}px;--h:${h}px;--c:${c};transform:translate3d(${x}px,${y}px,${z}px)">${neck}${lab}${bub}</i>`;
-}
-function lfHTML(all,due){
-  const admin=isAdmin(), n=all.length, sorted=all.slice().sort((a,b)=>a.expiry.localeCompare(b.expiry));
-  const cnt={ok:0,soon:0,exp:0}; all.forEach(i=>{const k=status(i).k; cnt[k==='ok'?'ok':k==='exp'?'exp':'soon']++;});
-  const comps=[['fz',0,sorted.filter(i=>i.frozen)],['ch',152,sorted.filter(i=>!i.frozen)]];
-  let items='',more='',shelves='';
-  comps.forEach(c=>{
-    const L=lfSlots(c[2]);
-    L.shelves.forEach((sh,s)=>sh.forEach((it,k)=>{items+=lfItemHTML(it,c[1],k,s);}));
-    if(L.over.length) more+=`<div class="lf-more" style="left:${c[1]+58}px;top:20px">+${L.over.length}</div>`;
-    LFY.forEach(y=>{shelves+=`<div class="lf-sh ${c[0]}" style="left:${c[1]+2}px;top:${y}px"></div>`;});
-    shelves+=`<div class="lf-dr" style="left:${c[1]+4}px;top:284px"></div><div class="lf-lab" style="left:${c[1]+4}px;top:318px">${c[0]==='fz'?'Freezer':'Chiller'}</div>`;
-  });
-  const decor=(c1)=>[34,104,174,244].map((y,i)=>`<div class="dsh" style="top:${y+36}px">${[0,1,2,3,4].map(j=>`<u style="left:${8+j*25}px;height:${28+((i+j)%3)*9}px;--c:${c1[(i+j)%c1.length]}"></u>`).join('')}</div>`).join('');
-  const bad=due.length>0, first=sorted.find(i=>status(i).k!=='exp'&&status(i).k!=='today');
-  const msg=!n?'It is empty in here! Tap Add Item to stock me up.':bad?`Hey! ${due.length} item${due.length>1?'s need':' needs'} to go. Please remove ${due.length>1?'them':'it'}!`:(first&&status(first).d<=2?`Use the ${first.name} soon.`:LF_TIPS[0]);
-  const list=sorted.slice(0,5);
-  return `<section class="lf ${bad?'alert':''} open" id="lfSec" data-n="${n}">
-   <div class="lf-stage" id="lf" data-f="${LFF}"><div class="lf-scene" id="lfScene"><div class="lf-shake"><div class="lf-fridge" id="lfFridge">
-      <div class="lf-floor"></div><div class="lf-back"></div><div class="lf-wl"></div><div class="lf-wm"></div><div class="lf-wr"></div><div class="lf-top"></div><div class="lf-bot"></div><div class="lf-lt"></div>
-      ${shelves}${items}${more}
-      <div class="lf-door l"><div class="df" data-lfdoor><i>FZ</i></div><div class="db">${decor(['#ef4444','#22c55e','#f59e0b','#3b82f6','#a855f7'])}</div></div>
-      <div class="lf-door r"><div class="df" data-lfdoor><i>CH</i></div><div class="db">${decor(['#06b6d4','#f59e0b','#ef4444','#22c55e','#8b5cf6'])}</div></div>
-      <div class="lf-siren"></div></div></div></div>
-    <div class="lf-mas">${n&&!bad?'':''}<div class="lf-say ${bad?'bad':''}" id="lfSay">${esc(msg)}</div>${MASCOT('fm')}</div>
-    <div class="lf-tip" id="lfTip"></div><div class="lf-hint">Tap the doors to open or close · hover or tap an item</div></div>
-   <aside class="lf-side"><h3>${I.fridge} Live fridge</h3><p>Every item in the fridge, in 3D, exactly as it is right now.</p>
-    <div class="lf-chips"><button class="lf-chip ok ${LFF==='ok'?'on':''}" data-lff="ok"><i></i>Fresh ${cnt.ok}</button><button class="lf-chip soon ${LFF==='soon'?'on':''}" data-lff="soon"><i></i>Soon ${cnt.soon}</button><button class="lf-chip exp ${LFF==='exp'?'on':''}" data-lff="exp"><i></i>Spoiled ${cnt.exp}</button></div>
-    <div class="lf-h">Use these first</div>
-    ${list.length?`<div class="lf-list">${list.map(i=>{const s=status(i);return `<button class="lf-row ${s.k}" data-lfrow="${i.id}"><i class="dot"></i><span><b>${esc(i.name)}</b><small>${esc(i.by||'staff')}</small></span><em>${esc(s.label)}</em></button>`;}).join('')}</div>`:`<div class="lf-empty">${MASCOT('mm').replace('class="mm"','class="mm"')}<b>The fridge is empty</b><br>Add food and it will appear here in 3D.</div>`}
-   </aside></section>`;
-}
-/* dashboard hook */
-const _vd11=viewDash;
-viewDash=function(due,soon,all,todayN,expN){
-  const h=_vd11(due,soon,all,todayN,expN), k='<div class="ins">', i=h.indexOf(k);
-  return i<0?h:h.slice(0,i)+lfHTML(all,due)+h.slice(i);
-};
-/* init after every render */
-const _fancy11=fancy;
-fancy=function(a){ _fancy11(a); try{lfInit();}catch(e){console.error(e);} try{miniMascots();}catch(e){} };
-function miniMascots(){ document.querySelectorAll('.mini-empty:not(.hm),.empty:not(.hm)').forEach(el=>{ if(el.closest('.lf')) return; el.classList.add('hm'); el.insertAdjacentHTML('afterbegin',MASCOT('mm')); }); }
-function lfInit(){
-  const stage=$('#lf'); clearInterval(LF_TMR); if(!stage) return;
-  const sec=$('#lfSec'), fr=$('#lfFridge'), sc=$('#lfScene');
-  const fit=()=>{const w=stage.clientWidth, s=Math.max(.55,Math.min(.92,(w-24)/510)); sc.style.setProperty('--s',s); if(!stage.classList.contains('gl')) stage.style.minHeight=Math.round(470*Math.min(1,s+.1))+'px';};
-  fit(); try{new ResizeObserver(fit).observe(stage);}catch(e){}
-  /* open the doors on first paint */
-  if(!window.__lfSeen){ window.__lfSeen=1; sec.classList.remove('open'); setTimeout(()=>sec.classList.add('open'),500); }
-  else if(window.__lfClosed) sec.classList.remove('open');
-  /* tilt */
-  const tilt=e=>{const r=stage.getBoundingClientRect(), nx=((e.clientX-r.left)/r.width-.5)*2, ny=((e.clientY-r.top)/r.height-.5)*2; fr.style.setProperty('--py',(-14+nx*16)+'deg'); fr.style.setProperty('--px',(3-ny*7)+'deg');};
-  stage.addEventListener('pointermove',e=>{tilt(e); if(LF_PIN||e.pointerType==='touch') return; const p=lfPick(e); if(p.item) lfShowTip(p.item.dataset.lfid,false); else if(!p.glMode){const tp=lfTip(); if(tp) tp.classList.remove('show');}}); stage.addEventListener('pointerleave',()=>{fr.style.setProperty('--py','-14deg');fr.style.setProperty('--px','3deg');});
-  /* mascot tips */
-  let ti=0; const say=$('#lfSay'); if(say&&!sec.classList.contains('alert')&&+sec.dataset.n>0) LF_TMR=setInterval(()=>{ti=(ti+1)%LF_TIPS.length; say.textContent=LF_TIPS[ti]; say.style.animation='none'; void say.offsetWidth; say.style.animation='';},7000);
-  if(LF_PIN) lfShowTip(LF_PIN,true);
-}
-function lfTip(){return $('#lfTip');}
-function lfShowTip(id,pin){
-  const tip=lfTip(), el=document.querySelector('.lfi[data-lfid="'+id+'"]'), it=S.items.find(x=>x.id===id); if(!tip||!el||!it){ if(tip) tip.classList.remove('show'); return; }
-  const st=status(it), stage=$('#lf'), sr=stage.getBoundingClientRect(), r=el.getBoundingClientRect();
-  tip.innerHTML=`${it.photo?`<div class="ph2" style="background-image:url(${it.photo})"></div>`:''}<b>${esc(it.name)}${it.qty?' × '+esc(it.qty):''}</b><small>Stored by ${esc(it.by||'staff')} · ${it.frozen?'Freezer':'Chiller'} · expires ${fmtDate(it.expiry)}</small><span class="tb ${st.k}">${esc(st.label)}</span>${pin?actFor(it):''}`;
-  tip.classList.toggle('pin',!!pin); tip.classList.add('show');
-  const tw=tip.offsetWidth, th=tip.offsetHeight; let x=r.left-sr.left+r.width/2-tw/2, y=r.top-sr.top-th-14;
-  if(y<8) y=r.bottom-sr.top+14; x=Math.max(8,Math.min(sr.width-tw-8,x)); tip.style.left=x+'px'; tip.style.top=y+'px';
-}
-function lfPick(e){
-  const sec=$('#lfSec'); if(!sec) return {}; if($('#lf').classList.contains('gl')) return {glMode:1};
-  const els=document.elementsFromPoint(e.clientX,e.clientY), open=sec.classList.contains('open');
-  return {door:els.some(x=>x.hasAttribute&&x.hasAttribute('data-lfdoor'))&&!open?1:0, doorAny:els.some(x=>x.hasAttribute&&x.hasAttribute('data-lfdoor')), item:open?els.find(x=>x.classList&&x.classList.contains('lfi')):null};
-}
-document.addEventListener('click',e=>{
-  const t=e.target;
-  if(t.closest&&t.closest('.lf-stage')&&!t.closest('.lf-tip')){
-    const p=lfPick(e), s=$('#lfSec');
-    if(p.item){ LF_PIN=p.item.dataset.lfid; lfShowTip(LF_PIN,true); return; }
-    if(p.doorAny||(!s.classList.contains('open')&&t.closest('.lf-fridge'))){ s.classList.toggle('open'); window.__lfClosed=!s.classList.contains('open'); LF_PIN=null; const tp=lfTip(); if(tp) tp.classList.remove('show'); return; }
-  }
-  const chip=t.closest('[data-lff]'); if(chip){ e.stopPropagation(); LFF=LFF===chip.dataset.lff?'':chip.dataset.lff; $('#lf').dataset.f=LFF; document.querySelectorAll('.lf-chip').forEach(c=>c.classList.toggle('on',c.dataset.lff===LFF)); if((typeof DGL!=='undefined')&&DGL.on) DGL.setFilter(LFF); return; }
-  const row=t.closest('[data-lfrow]'); if(row){ e.stopPropagation(); const s=$('#lfSec'); s.classList.add('open'); window.__lfClosed=false; LF_PIN=row.dataset.lfrow; if((typeof DGL!=='undefined')&&DGL.on&&!DGL.isOpen) DGL.toggle(); setTimeout(()=>lfShowTip(LF_PIN,true),s.classList.contains('open')?0:600); const el=document.querySelector('.lfi[data-lfid="'+LF_PIN+'"]'); if(el){el.classList.add('hl'); setTimeout(()=>el.classList.remove('hl'),1600);} return; }
-  if(LF_PIN && !t.closest('.lf-tip')){ window.__lfDis=Date.now(); LF_PIN=null; const tp=lfTip(); if(tp) tp.classList.remove('show'); }
-},true);
-document.addEventListener('pointerover',e=>{ const r=e.target.closest&&e.target.closest('[data-lfrow]'); document.querySelectorAll('.lfi.hl').forEach(x=>x.classList.remove('hl')); if(r){ const el=document.querySelector('.lfi[data-lfid="'+r.dataset.lfrow+'"]'); if(el) el.classList.add('hl'); } });
-/* ---- fx ---- */
-function centerOf(r){return {x:r.left+r.width/2,y:r.top+r.height/2};}
-function flyToFridge(photo,from){
-  if(reduced()) return;
-  const sc=$('#lf'); let to=null; if(sc){ const r=sc.getBoundingClientRect(); if(r.bottom>0&&r.top<innerHeight) to=centerOf(r); }
-  if(!to){ const b=document.querySelector('.brand .logo-box'); to=b?centerOf(b.getBoundingClientRect()):{x:40,y:40}; }
-  const f=centerOf(from), el=document.createElement('div'); el.className='fly';
-  el.style.cssText=`left:${from.left}px;top:${from.top}px;width:${Math.min(from.width,220)}px;height:${Math.min(from.height,150)}px;background-image:url(${photo})`; document.body.appendChild(el);
-  const dx=to.x-f.x, dy=to.y-f.y;
-  const a=el.animate([{transform:'translate(0,0) scale(1) rotate(0deg)',opacity:1},{transform:`translate(${dx*.45}px,${dy*.45-140}px) scale(.55) rotate(-10deg)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(.08) rotate(16deg)`,opacity:.3}],{duration:950,easing:'cubic-bezier(.55,0,.3,1)'});
-  a.onfinish=()=>{ el.remove(); const fr=$('#lfFridge'); if(fr){fr.classList.remove('thump'); void fr.offsetWidth; fr.classList.add('thump'); setTimeout(()=>fr.classList.remove('thump'),550);} const cv=document.querySelector('.dgl-c'); if(cv){cv.classList.remove('thump'); void cv.offsetWidth; cv.classList.add('thump');} if(window.__lfNewId&&(typeof DGL!=='undefined')&&DGL.on) DGL.release(window.__lfNewId); document.querySelectorAll('.lfi.wait').forEach(x=>{x.classList.remove('wait'); x.classList.add('drop');}); };
-}
-const _save11=saveItem;
-saveItem=function(){
-  const sh=$('#shot'), rect=sh?sh.getBoundingClientRect():null, photo=ui.draft&&ui.draft.photo, n0=S.items.length;
-  _save11();
-  if(S.items.length>n0&&rect&&photo){ const it=S.items[S.items.length-1]; const el=document.querySelector('.lfi[data-lfid="'+it.id+'"]'); if(el) el.classList.add('wait'); window.__lfNewId=it.id; if((typeof DGL!=='undefined')&&DGL.on) DGL.hold(it.id); flyToFridge(photo,rect); if(reduced()){ if((typeof DGL!=='undefined')&&DGL.on) DGL.release(it.id); document.querySelectorAll('.lfi.wait').forEach(x=>x.classList.remove('wait')); } }
-};
-function confetti(x,y){
-  if(reduced()) return; const cols=['#22c55e','#f59e0b','#ef4444','#3b82f6','#a855f7','#06b6d4','#fde047'];
-  for(let i=0;i<44;i++){ const p=document.createElement('i'); p.className='cf'; p.style.left=x+'px'; p.style.top=y+'px'; p.style.background=cols[i%cols.length]; document.body.appendChild(p);
-    const ang=Math.random()*Math.PI*2, v=120+Math.random()*220, dx=Math.cos(ang)*v, dy=Math.sin(ang)*v-160;
-    const a=p.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${Math.random()*540}deg)`,opacity:1,offset:.55},{transform:`translate(${dx*1.15}px,${dy+320}px) rotate(${Math.random()*900}deg)`,opacity:0}],{duration:1300+Math.random()*500,easing:'cubic-bezier(.2,.7,.3,1)'}); a.onfinish=()=>p.remove(); }
-}
-function trashFly(rect,it){
-  if(reduced()) return;
-  const bin=document.createElement('div'); bin.className='bin'; bin.innerHTML=I.trash; document.body.appendChild(bin); requestAnimationFrame(()=>bin.classList.add('in'));
-  const g=document.createElement('div'); g.className='gh'; g.style.cssText=`left:${rect.left}px;top:${rect.top}px;width:${Math.min(rect.width,320)}px;height:${Math.min(rect.height,64)}px`; g.innerHTML=`<span class="color-dot" style="background:${(CATS[it.cat]||CATS.other).color}"></span>${esc(it.name)}`; document.body.appendChild(g);
-  const br=bin.getBoundingClientRect(), dx=innerWidth-28-36-rect.left-rect.width/2+Math.min(rect.width,320)/2-Math.min(rect.width,320)/2, dy=innerHeight-28-36-rect.top-g.offsetHeight/2;
-  const tx=(innerWidth-64)-rect.left-Math.min(rect.width,320)/2, ty=(innerHeight-64)-rect.top-g.offsetHeight/2;
-  setTimeout(()=>{ const a=g.animate([{transform:'translate(0,0) scale(1) rotate(0)',opacity:1},{transform:`translate(${tx*.5}px,${ty*.4-60}px) scale(.6) rotate(-12deg)`,opacity:1,offset:.55},{transform:`translate(${tx}px,${ty}px) scale(.1) rotate(25deg)`,opacity:0}],{duration:800,easing:'cubic-bezier(.6,0,.4,1)'});
-    a.onfinish=()=>{ g.remove(); bin.classList.add('shk'); setTimeout(()=>{bin.classList.remove('in'); setTimeout(()=>bin.remove(),450);},500); }; },250);
-}
-function celebrate(rect,it){
-  if(reduced()) return; const c=centerOf(rect); confetti(c.x,c.y);
-  const g=document.createElement('div'); g.className='gh'; g.style.cssText=`left:${c.x-70}px;top:${c.y-22}px;color:#16a34a`; g.innerHTML=I.check+' Yum! '+esc(it.name); document.body.appendChild(g);
-  const a=g.animate([{transform:'scale(.6)',opacity:0},{transform:'scale(1.05)',opacity:1,offset:.25},{transform:'translateY(-40px) scale(1)',opacity:0}],{duration:1400}); a.onfinish=()=>g.remove();
-}
-const _take11=take;
-take=function(id,reason){
-  const n0=S.items.length, it=S.items.find(x=>x.id===id);
-  const btn=document.querySelector('[data-a="take"][data-id="'+id+'"]'), box=btn?(btn.closest('.row,.item,.lf-tip')||btn):null; let rect=box?box.getBoundingClientRect():null;
-  if(box&&box.classList.contains('lf-tip')){ const el=document.querySelector('.lfi[data-lfid="'+id+'"]'); if(el) rect=el.getBoundingClientRect(); }
-  LF_PIN=null;
-  _take11(id,reason);
-  if(it&&S.items.length<n0&&rect){ reason==='Consumed'?celebrate(rect,it):trashFly(rect,it); }
-};
-</script>
-<script>
-/* ===== v12: live fridge in real WebGL (same renderer as the entrance) ===== */
-const DGL = (() => {
-  const W = 1.0, H = 1.9, D = 0.8, FRONT = 0.4;                     /* metres: width, height, depth, front plane z */
-  let gl, prog, U = {}, canvas, app, slot, raf = 0, running = false, parts = [], glass = [], meshes = {}, tex = null;
-  let w = 0, h = 0, dpr = 1, last = 0, t0 = 0;
-  const st = { L: { a: 0, v: 0 }, R: { a: 0, v: 0 }, target: 0, auto: true, hot: false, yaw: 0, pitch: 0, yawT: 0, pitchT: 0, dive: -1, glow: 0, fade: 0 };
-  const mist = [];
-  let cycleT = 0, openedAt = 0;
-  let items = [], picks = [], alertOn = false, filt = '', keep = null, hoverId = null, pickCb = null;
+/* ===== v11: live 3D fridge on the dashboard + motion effects ===== */
+(function () {
+  'use strict';
+  const LS = { items: [], sig: '', hover: null, pin: null, puffs: [], ghosts: [], tip: null, prev: {}, alert: false, dropOpen: 0, closeAt: 0, autoClosed: false };
+  const hash = s => { let h = 7; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; };
+  const gOn = () => typeof gesture !== 'undefined' ? gesture : true;
+  const snd = fn => { try { if (S.sound !== false && gOn()) fn(); } catch (e) {} };
+  const thunk = () => snd(() => { tone(120, 0, .14, 'sine', .5); tone(72, .03, .2, 'triangle', .45); tone(1900, 0, .02, 'square', .06); });
+  const trashSnd = () => snd(() => { tone(240, 0, .07, 'square', .16); tone(150, .07, .12, 'square', .16); tone(90, .16, .16, 'sine', .35); });
+  const whoosh = () => snd(() => { tone(420, 0, .22, 'sine', .08); tone(260, .05, .25, 'sine', .08); });
 
-  /* ---------- tiny matrix helpers (column-major) ---------- */
-  const I4 = () => [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
-  const mul = (a, b) => { const o = new Array(16); for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k * 4 + r] * b[c * 4 + k]; o[c * 4 + r] = s; } return o; };
-  const Tm = (x, y, z) => [1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1];
-  const Sm = (x, y, z) => [x,0,0,0, 0,y,0,0, 0,0,z,0, 0,0,0,1];
-  const Ry = a => { const c = Math.cos(a), s = Math.sin(a); return [c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1]; };
-  const Rx = a => { const c = Math.cos(a), s = Math.sin(a); return [1,0,0,0, 0,c,s,0, 0,-s,c,0, 0,0,0,1]; };
-  const Rz = a => { const c = Math.cos(a), s = Math.sin(a); return [c,s,0,0, -s,c,0,0, 0,0,1,0, 0,0,0,1]; };
-  const trs = (p, r, s) => { let m = Tm(p[0], p[1], p[2]); if (r) { if (r[1]) m = mul(m, Ry(r[1])); if (r[0]) m = mul(m, Rx(r[0])); if (r[2]) m = mul(m, Rz(r[2])); } if (s) m = mul(m, Sm(s[0], s[1], s[2])); return m; };
-  function persp(fovy, asp, n, f) { const t = 1 / Math.tan(fovy / 2); return [t / asp,0,0,0, 0,t,0,0, 0,0,(f + n) / (n - f),-1, 0,0,2 * f * n / (n - f),0]; }
-  function lookAt(e, c, up) {
-    let zx = e[0] - c[0], zy = e[1] - c[1], zz = e[2] - c[2], l = Math.hypot(zx, zy, zz); zx /= l; zy /= l; zz /= l;
-    let xx = up[1] * zz - up[2] * zy, xy = up[2] * zx - up[0] * zz, xz = up[0] * zy - up[1] * zx; l = Math.hypot(xx, xy, xz); xx /= l; xy /= l; xz /= l;
-    const yx = zy * xz - zz * xy, yy = zz * xx - zx * xz, yz = zx * xy - zy * xx;
-    return [xx,yx,zx,0, xy,yy,zy,0, xz,yz,zz,0, -(xx * e[0] + xy * e[1] + xz * e[2]), -(yx * e[0] + yy * e[1] + yz * e[2]), -(zx * e[0] + zy * e[1] + zz * e[2]), 1];
-  }
-  function nmat(m) {            /* inverse transpose of the upper 3x3 */
-    const a = m[0], b = m[1], c = m[2], d = m[4], e = m[5], f = m[6], g = m[8], hh = m[9], i = m[10];
-    const A = e * i - f * hh, B = f * g - d * i, C = d * hh - e * g, det = a * A + b * B + c * C || 1;
-    return [A / det, (c * hh - b * i) / det, (b * f - c * e) / det,  B / det, (a * i - c * g) / det, (c * d - a * f) / det,  C / det, (b * g - a * hh) / det, (a * e - b * d) / det];
-  }
-  const ease = k => k < 0 ? 0 : k > 1 ? 1 : (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
-  const lerp = (a, b, k) => a + (b - a) * k;
-
-  /* ---------- geometry ---------- */
-  function mk(pos, nor, uv, idx) { return { pos: new Float32Array(pos), nor: new Float32Array(nor), uv: new Float32Array(uv), idx: new Uint16Array(idx) }; }
-  function boxG(sx, sy, sz, inward, noFront) {
-    const P = [], N = [], T = [], X = [], hx = sx / 2, hy = sy / 2, hz = sz / 2;
-    const faces = [[[0,0,1],[-hx,-hy,hz],[hx,-hy,hz],[hx,hy,hz],[-hx,hy,hz]], [[0,0,-1],[hx,-hy,-hz],[-hx,-hy,-hz],[-hx,hy,-hz],[hx,hy,-hz]],
-      [[1,0,0],[hx,-hy,hz],[hx,-hy,-hz],[hx,hy,-hz],[hx,hy,hz]], [[-1,0,0],[-hx,-hy,-hz],[-hx,-hy,hz],[-hx,hy,hz],[-hx,hy,-hz]],
-      [[0,1,0],[-hx,hy,hz],[hx,hy,hz],[hx,hy,-hz],[-hx,hy,-hz]], [[0,-1,0],[-hx,-hy,-hz],[hx,-hy,-hz],[hx,-hy,hz],[-hx,-hy,hz]]];
-    faces.forEach((f, k) => { if (noFront && k === 0) return; const o = P.length / 3; const n = f[0].map(v => inward ? -v : v); for (let i = 1; i <= 4; i++) { P.push(...f[i]); N.push(...n); } T.push(0,0, 1,0, 1,1, 0,1); if (inward) X.push(o, o + 2, o + 1, o, o + 3, o + 2); else X.push(o, o + 1, o + 2, o, o + 2, o + 3); });
-    return mk(P, N, T, X);
-  }
-  function sphG(r, ws, hs) {
-    const P = [], N = [], T = [], X = [];
-    for (let y = 0; y <= hs; y++) for (let x = 0; x <= ws; x++) { const u = x / ws, v = y / hs, th = u * Math.PI * 2, ph = v * Math.PI; const nx = Math.cos(th) * Math.sin(ph), ny = Math.cos(ph), nz = Math.sin(th) * Math.sin(ph); P.push(nx * r, ny * r, nz * r); N.push(nx, ny, nz); T.push(u, v); }
-    for (let y = 0; y < hs; y++) for (let x = 0; x < ws; x++) { const a = y * (ws + 1) + x, b = a + ws + 1; X.push(a, a + 1, b, a + 1, b + 1, b); }
-    return mk(P, N, T, X);
-  }
-  function cylG(rt, rb, hh, seg, caps) {
-    const P = [], N = [], T = [], X = []; const sl = Math.atan2(rb - rt, hh);
-    for (let i = 0; i <= seg; i++) { const a = i / seg * Math.PI * 2, c = Math.cos(a), s = Math.sin(a), nx = c * Math.cos(sl), nz = s * Math.cos(sl), ny = Math.sin(sl); P.push(c * rt, hh / 2, s * rt, c * rb, -hh / 2, s * rb); N.push(nx, ny, nz, nx, ny, nz); T.push(i / seg, 1, i / seg, 0); }
-    for (let i = 0; i < seg; i++) { const a = i * 2; X.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
-    if (caps !== false) [[hh / 2, rt, 1], [-hh / 2, rb, -1]].forEach(cp => { const o = P.length / 3; P.push(0, cp[0], 0); N.push(0, cp[2], 0); T.push(.5, .5); for (let i = 0; i <= seg; i++) { const a = i / seg * Math.PI * 2; P.push(Math.cos(a) * cp[1], cp[0], Math.sin(a) * cp[1]); N.push(0, cp[2], 0); T.push(.5, .5); } for (let i = 0; i < seg; i++) cp[2] > 0 ? X.push(o, o + i + 2, o + i + 1) : X.push(o, o + i + 1, o + i + 2); });
-    return mk(P, N, T, X);
-  }
-  function quadG(sx, sy) { const x = sx / 2, y = sy / 2; return mk([-x,-y,0, x,-y,0, x,y,0, -x,y,0], [0,0,1, 0,0,1, 0,0,1, 0,0,1], [0,0, 1,0, 1,1, 0,1], [0,1,2, 0,2,3]); }
-  function floorG(sx, sz) { const x = sx / 2, z = sz / 2; return mk([-x,0,z, x,0,z, x,0,-z, -x,0,-z], [0,1,0, 0,1,0, 0,1,0, 0,1,0], [0,1, 1,1, 1,0, 0,0], [0,1,2, 0,2,3]); }
-  const upload = g => { const o = { n: g.idx.length }; o.p = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, o.p); gl.bufferData(gl.ARRAY_BUFFER, g.pos, gl.STATIC_DRAW);
-    o.nb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, o.nb); gl.bufferData(gl.ARRAY_BUFFER, g.nor, gl.STATIC_DRAW);
-    o.u = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, o.u); gl.bufferData(gl.ARRAY_BUFFER, g.uv, gl.STATIC_DRAW);
-    o.i = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, o.i); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, g.idx, gl.STATIC_DRAW); return o; };
-
-  /* ---------- shaders ---------- */
-  const VS = `attribute vec3 aP,aN;attribute vec2 aT;uniform mat4 uM,uV,uPj;uniform mat3 uNM;varying vec3 vW,vN,vL;varying vec2 vT;
-void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=normalize(uNM*aN);vL=aP;vT=aT;gl_Position=uPj*uV*w;}`;
-  const FS = `precision highp float;varying vec3 vW,vN,vL;varying vec2 vT;
-uniform vec3 uCam,uCol,uEmis,uPLp,uPLc,uFadeCol;uniform float uMetal,uRough,uAlpha,uInt,uBrush,uMode,uFade,uPL,uPLR;uniform sampler2D uTex;
-vec3 env(vec3 r){
-  float h=r.y*.5+.5;
-  vec3 c=mix(vec3(.10,.11,.14),vec3(.55,.62,.78),smoothstep(.1,1.,h));
-  c+=vec3(1.9,1.85,1.8)*smoothstep(.78,.95,dot(r,normalize(vec3(-.55,.75,.55))));
-  c+=vec3(1.3,1.2,1.1)*smoothstep(.86,.97,dot(r,normalize(vec3(.75,.3,.6))));
-  c+=vec3(.9)*smoothstep(.9,.99,dot(r,normalize(vec3(0.,.15,1.))))*.55;
-  c+=vec3(.55,.2,.28)*smoothstep(.35,1.,dot(r,normalize(vec3(-1.,0.,.25))))*.3;
-  c+=vec3(.2,.25,.5)*smoothstep(.35,1.,dot(r,normalize(vec3(1.,0.,.25))))*.3;
-  return c;}
-void main(){
-  if(uMode>3.5){vec3 t=texture2D(uTex,vT).rgb;vec3 c=vec3(.02,.05,.08)+t*1.7;gl_FragColor=vec4(pow(c,vec3(.45)),1.);return;}
-  if(uMode>2.5){float f=1.-smoothstep(0.,1.,length(vT-.5)*2.);f*=f;gl_FragColor=vec4(uCol,uAlpha*f);return;}
-  if(uMode>1.5){float f=1.-smoothstep(0.,1.,length(vT-.5)*2.);gl_FragColor=vec4(uCol*f,uAlpha*f);return;}
-  if(uMode>.5){float f=1.-smoothstep(.0,1.,length(vT-.5)*2.);gl_FragColor=vec4(0.,0.,0.,uAlpha*f*f);return;}
-  vec3 N=normalize(vN),V=normalize(uCam-vW);if(dot(N,V)<0.)N=-N;
-  vec3 alb=uCol;float rough=uRough;
-  if(uBrush>.5){float b=.5+.5*sin(vL.x*210.+sin(vL.y*3.)*1.5);alb*=.95+.05*b;rough+=.05*b;}
-  vec3 L1=normalize(vec3(-.45,.75,.55)),L2=normalize(vec3(.6,.35,-.7));
-  vec3 amb=mix(vec3(.10,.09,.13),vec3(.30,.36,.52),N.y*.5+.5);
-  vec3 outer=vec3(1.,.96,.9)*max(dot(N,L1),0.)*.85+vec3(.4,.5,.9)*max(dot(N,L2),0.)*.4+amb;
-  vec3 toL=uPLp-vW;float dl=length(toL);vec3 Lp=toL/dl;float att=clamp(1.-dl/uPLR,0.,1.);att*=att;
-  vec3 pl=uPLc*uPL*att;
-  vec3 lit=mix(outer,amb*.5+pl*(max(dot(N,Lp),0.)*.8+.35),uInt)+pl*max(dot(N,Lp),0.)*(1.-uInt)*.45;
-  vec3 R=reflect(-V,N);vec3 e=env(R);
-  float fr=pow(1.-max(dot(N,V),0.),4.);
-  float shin=mix(6.,260.,1.-rough);
-  float rk=(mix(.04,.92,uMetal)*(1.-rough*.7)+fr*.35*(1.-rough))*(1.-.75*uInt);
-  vec3 col=alb*(1.-uMetal*.88)*lit+e*rk*mix(vec3(1.),alb,uMetal);
-  vec3 H=normalize(L1+V);col+=vec3(1.)*pow(max(dot(N,H),0.),shin)*(1.-rough)*.35*(1.-uInt);
-  vec3 Hp=normalize(Lp+V);col+=uPLc*pow(max(dot(N,Hp),0.),shin)*att*uPL*(1.-rough)*.7;
-  col+=uEmis;
-  col=1.-exp(-col*1.15);col=pow(col,vec3(.4545));
-  col=mix(col,uFadeCol,uFade);
-  gl_FragColor=vec4(col,uAlpha);}`;
-  function compile() {
-    const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
-    prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-    gl.useProgram(prog);
-    ['uM','uV','uPj','uNM','uCam','uCol','uEmis','uPLp','uPLc','uFadeCol','uMetal','uRough','uAlpha','uInt','uBrush','uMode','uFade','uPL','uPLR','uTex'].forEach(n => U[n] = gl.getUniformLocation(prog, n));
-    U.aP = gl.getAttribLocation(prog, 'aP'); U.aN = gl.getAttribLocation(prog, 'aN'); U.aT = gl.getAttribLocation(prog, 'aT');
-  }
-
-  /* ---------- scene ---------- */
-  const mat = (c, o) => Object.assign({ c: c, m: 0, r: .6, e: [0,0,0], a: 1, i: 0, b: 0, mode: 0 }, o || {});
-  const hex = h => [((h >> 16) & 255) / 255, ((h >> 8) & 255) / 255, (h & 255) / 255].map(v => Math.pow(v, 2.2));
-  const STEEL = () => mat(hex(0xcfd4db), { m: .92, r: .33, b: 1 });
-  const DARK = () => mat(hex(0x1b1f26), { r: .5 });
-  function add(group, mesh, p, r, s, m) { parts.push({ g: group, mesh: meshes[mesh] || mesh, l: trs(p, r, s), mat: m }); }
-  function addGlass(group, mesh, p, r, s, m) { glass.push({ g: group, mesh: meshes[mesh] || mesh, l: trs(p, r, s), mat: m }); }
-
-  function led(text) {
-    const c = document.createElement('canvas'); c.width = 128; c.height = 64; const x = c.getContext('2d');
-    x.fillStyle = '#000'; x.fillRect(0, 0, 128, 64); x.fillStyle = '#5ee7ff'; x.font = '700 38px ui-monospace,Menlo,monospace'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.shadowColor = '#22d3ee'; x.shadowBlur = 8; x.fillText(text, 64, 34);
-    const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); return t;
-  }
-
-  function build() {
-    meshes.cyl = upload(cylG(1, 1, 1, 28)); meshes.cyl6 = upload(cylG(1, 1, 1, 6)); meshes.cyl3 = upload(cylG(1, 1, 1, 3));
-    meshes.cone = upload(cylG(0, 1, 1, 20)); meshes.sph = upload(sphG(1, 28, 18)); meshes.box = upload(boxG(1, 1, 1)); meshes.boxIn = upload(boxG(1, 1, 1, true, true));
-    meshes.floor = upload(floorG(1, 1)); meshes.quad = upload(quadG(1, 1));
-    tex = led('LIVE');
-    const ix = .44, y0 = .12, y1 = 1.82, zb = -.38, zf = FRONT, cw = ix * 2 - .006, chh = y1 - y0 - .006, cd = zf - zb - .003, cy = (y0 + y1) / 2, cz = (zf + zb + .003) / 2;   /* lining sits a hair inside the shell: no z-fighting */
-    const lin = mat(hex(0xe9f4fb), { r: .55, i: 1 });
-    /* body: steel shell */
-    add('body', 'box', [-.5 + .03, H / 2, 0], 0, [.06, H, D], STEEL());
-    add('body', 'box', [.5 - .03, H / 2, 0], 0, [.06, H, D], STEEL());
-    add('body', 'box', [0, H - .04, 0], 0, [W, .08, D], STEEL());
-    add('body', 'box', [0, .06, 0], 0, [W, .12, D], mat(hex(0x9aa1ab), { m: .85, r: .45, b: 1 }));
-    add('body', 'box', [0, H / 2, zb - .03], 0, [W, H, .06], STEEL());
-    /* lining (inward faces) */
-    add('body', 'boxIn', [0, cy, cz], 0, [cw, chh, cd], lin);
-    /* soft LED strip under the top and light bar */
-    add('body', 'box', [0, y1 - .012, .06], 0, [.5, .01, .05], mat([0,0,0], { e: [1.6, 1.9, 2.1] }));
-    /* glass shelves */
-    [1.40, 1.00, .64].forEach((sy, k) => {
-      addGlass('body', 'box', [0, sy, cz + .01], 0, [cw - .01, .012, cd - .02], mat(hex(0xaee4ff), { a: .30, r: .08, m: .1, i: 1 }));
-      add('body', 'box', [0, sy + .001, zf - .012], 0, [cw - .01, .03, .02], mat(hex(0xf4f8fb), { r: .35, i: 1 }));
-    });
-    /* crisper drawers */
-    [-1, 1].forEach(s => {
-      addGlass('body', 'box', [s * .215, .33, .05], 0, [.41, .34, .66], mat(hex(0x9fe3c4), { a: .38, r: .1, i: 1 }));
-      add('body', 'box', [s * .215, .30, zf - .012], 0, [.41, .1, .03], mat(hex(0xf0f5f8), { r: .4, i: 1 }));
-      add('body', 'cyl', [s * .215, .46, zf + .004], [0, 0, Math.PI / 2], [.012, .26, .012], mat(hex(0xc3c9d1), { m: .9, r: .3, i: .5 }));
-      add('body', 'sph', [s * .215 - .08, .27, .08], 0, [.05, .035, .05], mat(hex(0x2f9e44), { r: .6, i: 1 }));
-      add('body', 'sph', [s * .215 + .06, .26, -.05], 0, [.05, .04, .05], mat(hex(0x37b24d), { r: .6, i: 1 }));
-    });
-    /* the food is data-driven: see setItems() */
-    /* feet */
-    add('body', 'box', [-.4, .02, .32], 0, [.1, .04, .08], DARK());
-    add('body', 'box', [.4, .02, .32], 0, [.1, .04, .08], DARK());
-    /* doors (hinged groups): local x runs from the hinge edge (0) towards the centre line */
-    [-1, 1].forEach(s => {
-      const g = s < 0 ? 'dl' : 'dr', dw = .5, dh = 1.7, yc = dh / 2 + .12, ox = -s;      /* ox: +1 means local +x points to the centre */
-      const X = u => ox * u;                                                          /* u = distance from the hinge edge */
-      add(g, 'box', [X(dw / 2), yc, .0375], 0, [dw, dh, .045], STEEL());
-      add(g, 'box', [X(dw / 2), yc, .008], 0, [dw - .02, dh - .02, .014], mat(hex(0xe8f1f7), { r: .5, i: .6 }));
-      add(g, 'box', [X(dw / 2), yc + dh / 2 - .012, .003], 0, [dw - .01, .02, .022], mat(hex(0x222831), { r: .8, i: .6 }));
-      add(g, 'box', [X(dw / 2), yc - dh / 2 + .012, .003], 0, [dw - .01, .02, .022], mat(hex(0x222831), { r: .8, i: .6 }));
-      add(g, 'box', [X(.01), yc, .003], 0, [.02, dh - .01, .022], mat(hex(0x222831), { r: .8, i: .6 }));
-      add(g, 'box', [X(dw - .01), yc, .003], 0, [.02, dh - .01, .022], mat(hex(0x222831), { r: .8, i: .6 }));
-      /* door bins with bottles */
-      [.55, 1.0, 1.45].forEach((by, k) => {
-        add(g, 'box', [X(dw / 2), by, -.03], 0, [dw - .06, .014, .075], mat(hex(0xd7e9f5), { r: .2, i: .6 }));
-        add(g, 'box', [X(dw / 2), by + .028, -.066], 0, [dw - .06, .056, .008], mat(hex(0xeaf3f9), { r: .3, i: .6 }));
-        for (let n = 0; n < 4; n++) {
-          const px = X(.08 + n * .1), c = hex([0x2f9e44, 0xe8590c, 0xf1c40f, 0x1c7ed6][(n + k + (s > 0 ? 2 : 0)) % 4]);
-          add(g, 'cyl', [px, by + .1, -.03], 0, [.026, .16, .026], mat(c, { r: .25, m: .05, i: .6 }));
-          add(g, 'cone', [px, by + .2, -.03], 0, [.026, .05, .026], mat(c, { r: .25, i: .6 }));
-          add(g, 'cyl', [px, by + .245, -.03], 0, [.012, .04, .012], mat(c, { r: .25, i: .6 }));
-          add(g, 'cyl', [px, by + .268, -.03], 0, [.015, .012, .015], mat(hex(0x222222), { r: .4, i: .6 }));
-        }
-      });
-      /* vertical bar handle near the centre edge, with two standoffs */
-      add(g, 'cyl', [X(dw - .06), 1.02, .095], 0, [.014, .72, .014], mat(hex(0xdfe3e8), { m: .95, r: .22 }));
-      [.74, 1.30].forEach(hy => add(g, 'cyl', [X(dw - .06), hy, .078], [Math.PI / 2, 0, 0], [.009, .032, .009], mat(hex(0xaab1ba), { m: .9, r: .3 })));
-    });
-    /* display panel on the left door and a status LED on the right door */
-    add('dl', 'box', [.25, 1.55, .0615], 0, [.23, .13, .008], mat(hex(0x0b0e13), { r: .15, m: .3 }));
-    add('dl', { led: true, mesh: meshes.quad }, [.25, 1.55, .0662], 0, [.2, .1, 1], mat([0,0,0], { mode: 4 }));
-    add('dr', 'box', [-.25, 1.55, .0615], 0, [.07, .07, .008], mat(hex(0x0b0e13), { r: .2 }));
-    add('dr', 'cyl', [-.25, 1.55, .068], [Math.PI / 2, 0, 0], [.018, .008, .018], mat([0,0,0], { e: [.2, 2.4, .6] }));
-  }
-
-  function food() {
-    const g = 'body', S = [1.40, 1.00, .64];
-    const carton = (x, y, z, c1, lab) => { add(g, 'box', [x, y + .1, z], 0, [.085, .2, .07], mat(hex(0xf6f8fa), { r: .45, i: 1 })); add(g, 'box', [x, y + .215, z], [0, 0, Math.PI / 4], [.05, .05, .07], mat(hex(0xf6f8fa), { r: .45, i: 1 })); add(g, 'box', [x, y + .11, z + .036], 0, [.07, .09, .004], mat(hex(lab), { r: .5, i: 1 })); add(g, 'box', [x, y + .2, z + .037], 0, [.07, .02, .004], mat(hex(c1), { r: .5, i: 1 })); };
-    const bottle = (x, y, z, c, hgt) => { add(g, 'cyl', [x, y + hgt / 2, z], 0, [.032, hgt, .032], mat(hex(c), { r: .12, m: .05, i: 1, a: 1 })); add(g, 'cone', [x, y + hgt + .02, z], 0, [.032, .05, .032], mat(hex(c), { r: .12, i: 1 })); add(g, 'cyl', [x, y + hgt + .06, z], 0, [.014, .06, .014], mat(hex(c), { r: .12, i: 1 })); add(g, 'cyl', [x, y + hgt + .095, z], 0, [.017, .016, .017], mat(hex(0x222222), { r: .4, i: 1 })); add(g, 'cyl', [x, y + hgt * .5, z], 0, [.0335, hgt * .35, .0335], mat(hex(0xfff3d6), { r: .6, i: 1 })); };
-    const jar = (x, y, z, c) => { add(g, 'cyl', [x, y + .045, z], 0, [.038, .09, .038], mat(hex(c), { r: .2, i: 1 })); add(g, 'cyl', [x, y + .095, z], 0, [.04, .016, .04], mat(hex(0xb8bec7), { m: .9, r: .3, i: 1 })); };
-    const can = (x, y, z, c) => { add(g, 'cyl', [x, y + .06, z], 0, [.033, .12, .033], mat(hex(0xd6dbe1), { m: .9, r: .28, i: 1 })); add(g, 'cyl', [x, y + .062, z], 0, [.0335, .05, .0335], mat(hex(c), { r: .4, m: .2, i: 1 })); };
-    const apple = (x, y, z, c) => { add(g, 'sph', [x, y + .036, z], 0, [.038, .035, .038], mat(hex(c), { r: .3, m: .02, i: 1 })); add(g, 'cyl', [x, y + .077, z], 0, [.003, .018, .003], mat(hex(0x5c3a1e), { r: .8, i: 1 })); };
-    const egg = (x, y, z) => add(g, 'sph', [x, y + .027, z], 0, [.021, .028, .021], mat(hex(0xf3e2c2), { r: .55, i: 1 }));
-    const tomato = (x, y, z) => { add(g, 'sph', [x, y + .033, z], 0, [.036, .031, .036], mat(hex(0xd9232b), { r: .25, i: 1 })); add(g, 'sph', [x, y + .064, z], 0, [.014, .006, .014], mat(hex(0x2f9e44), { r: .6, i: 1 })); };
-    const talong = (x, y, z, rot) => { add(g, 'sph', [x, y + .03, z], [0, rot, Math.PI / 2 - .12], [.032, .115, .032], mat(hex(0x4b1d6b), { r: .18, m: .05, i: 1 })); add(g, 'sph', [x + Math.cos(rot) * .105, y + .036, z - Math.sin(rot) * .105], [0, rot, Math.PI / 2], [.02, .02, .02], mat(hex(0x2f9e44), { r: .6, i: 1 })); };
-    const yog = (x, y, z, c) => { add(g, 'cyl', [x, y + .04, z], 0, [.032, .08, .032], mat(hex(0xf5f6fa), { r: .3, i: 1 })); add(g, 'cyl', [x, y + .0405, z], 0, [.0325, .04, .0325], mat(hex(c), { r: .35, i: 1 })); add(g, 'cyl', [x, y + .084, z], 0, [.034, .008, .034], mat(hex(0xdfe3e8), { m: .8, r: .3, i: 1 })); };
-    /* top shelf */
-    carton(-.33, S[0], .06, 0x1c7ed6, 0xdbeafe); carton(-.23, S[0], -.12, 0xe8590c, 0xfff0e0);
-    bottle(-.12, S[0], .1, 0x2f9e44, .2); jar(-.03, S[0], .1, 0xe8590c); jar(.07, S[0], .12, 0xc92a2a);
-    can(.17, S[0], .12, 0xc92a2a); can(.17, S[0], .04, 0x1c7ed6); can(.25, S[0], .1, 0xc92a2a); bottle(.35, S[0], .08, 0xf1c40f, .17); bottle(-.04, S[0], -.14, 0x1c7ed6, .18);
-    /* second shelf */
-    add(g, 'box', [-.3, S[1] + .014, .06], 0, [.2, .028, .13], mat(hex(0xb9ad94), { r: .85, i: 1 }));
-    [[-.37,.03],[-.3,.03],[-.23,.03],[-.37,.09],[-.3,.09],[-.23,.09]].forEach(p => egg(p[0], S[1] + .028, p[1] + .03));
-    apple(-.06, S[1], .08, 0xd6336c); apple(.02, S[1], .12, 0xc92a2a); apple(.0, S[1], .02, 0xe03131); apple(.08, S[1], .06, 0x74b816);
-    add(g, 'cyl3', [.22, S[1] + .035, .08], [Math.PI / 2, .5, 0], [.075, .12, .075], mat(hex(0xf6c445), { r: .45, i: 1 }));
-    add(g, 'box', [.34, S[1] + .02, .1], 0, [.1, .04, .06], mat(hex(0xfdf3b8), { r: .5, i: 1 })); add(g, 'box', [.34, S[1] + .022, .131], 0, [.09, .03, .004], mat(hex(0xe03131), { r: .5, i: 1 }));
-    /* third shelf */
-    talong(-.31, S[2], .04, .3); talong(-.28, S[2], .12, -.2);
-    add(g, 'sph', [-.1, S[2] + .06, .0], 0, [.075, .06, .075], mat(hex(0x8bc34a), { r: .55, i: 1 })); add(g, 'sph', [-.07, S[2] + .075, .01], 0, [.06, .05, .06], mat(hex(0xaed581), { r: .55, i: 1 }));
-    [0, 1, 2].forEach(k => add(g, 'cone', [.04 + k * .03, S[2] + .02, .1 - k * .02], [0, k * .3, Math.PI / 2 - .1], [.016, .16, .016], mat(hex(0xf76707), { r: .45, i: 1 })));
-    yog(.19, S[2], .1, 0xf783ac); yog(.26, S[2], .1, 0x4dabf7); yog(.19, S[2], .02, 0x69db7c); yog(.26, S[2], .02, 0xffa94d);
-    tomato(.35, S[2], .12); tomato(.37, S[2], .03); tomato(.33, S[2], -.06);
-    add(g, 'sph', [.1, S[2] + .035, -.12], 0, [.04, .035, .04], mat(hex(0xf59f00), { r: .55, i: 1 }));
-  }
-
-
-  /* ---------- live items ---------- */
-  const SHELF_Y = [1.40, 1.00, .64], COLX = [-.36, -.24, -.12, 0, .12, .24, .36], ROWZ = [.13, 0, -.13];
-  const PREF = { dairy: 0, eggs: 0, bev: 0, sauce: 0, other: 0, cooked: 1, proc: 1, meat: 1, poultry: 1, seafood: 1, veg: 2, fruit: 2 };
-  const toInt = c => parseInt(String(c || '#94a3b8').replace('#', ''), 16);
-  const mixC = (a, b, k) => { const f = x => [(x >> 16) & 255, (x >> 8) & 255, x & 255]; const A = f(a), B = f(b); return ((A[0] + (B[0] - A[0]) * k) << 16) | ((A[1] + (B[1] - A[1]) * k) << 8) | (A[2] + (B[2] - A[2]) * k) | 0; };
-  function match(it) { if (!filt) return true; return filt === 'ok' ? it.k === 'ok' : filt === 'soon' ? (it.k === 'soon' || it.k === 'today') : it.k === 'exp'; }
-  function itemParts(it) {
-    const P = [], A = (mesh, p, r, s, m) => P.push({ mesh: meshes[mesh], l: trs(p, r, s), mat: m });
-    let c = toInt(it.color); if (it.k === 'exp') c = mixC(c, 0x4a3a20, .55); if (it.frozen) c = mixC(c, 0xcfefff, .4);
-    const M = (col, o) => mat(hex(col), Object.assign({ r: .3, i: 1 }, o || {}));
-    const white = M(0xf6f8fa, { r: .45 });
-    switch (it.cat) {
-      case 'dairy': A('box', [0, .09, 0], 0, [.078, .18, .064], white); A('box', [0, .195, 0], [0, 0, Math.PI / 4], [.045, .045, .064], white); A('box', [0, .1, .033], 0, [.06, .08, .004], M(c, { r: .5 })); break;
-      case 'bev': A('cyl', [0, .09, 0], 0, [.03, .18, .03], M(c, { r: .12 })); A('cone', [0, .2, 0], 0, [.03, .05, .03], M(c, { r: .12 })); A('cyl', [0, .245, 0], 0, [.013, .05, .013], M(c, { r: .12 })); A('cyl', [0, .275, 0], 0, [.016, .014, .016], M(0x222222, { r: .4 })); A('cyl', [0, .09, 0], 0, [.0305, .06, .0305], M(0xfff3d6, { r: .6 })); break;
-      case 'sauce': A('cyl', [0, .045, 0], 0, [.036, .09, .036], M(c, { r: .2 })); A('cyl', [0, .095, 0], 0, [.038, .016, .038], M(0xb8bec7, { m: .9, r: .3 })); break;
-      case 'eggs': A('box', [0, .012, 0], 0, [.14, .024, .07], M(0xb9ad94, { r: .85 })); [-.04, 0, .04].forEach(x => A('sph', [x, .04, 0], 0, [.021, .028, .021], M(0xf3e2c2, { r: .55 }))); break;
-      case 'cooked': A('box', [0, .03, 0], 0, [.12, .06, .09], M(c, { r: .4 })); A('box', [0, .066, 0], 0, [.125, .014, .095], M(0xe8edf2, { r: .3 })); break;
-      case 'proc': A('box', [0, .016, 0], 0, [.12, .032, .07], M(0xf3d4dc, { r: .5 })); A('box', [0, .018, .0], 0, [.06, .034, .072], M(c, { r: .5 })); break;
-      case 'meat': case 'poultry': case 'seafood': A('box', [0, .014, 0], 0, [.12, .028, .08], M(0xf4f6f8, { r: .35 })); A('sph', [0, .03, 0], 0, [.05, .02, .033], M(c, { r: .45 })); A('sph', [.03, .028, .01], 0, [.032, .016, .024], M(mixC(c, 0xffffff, .2), { r: .45 })); break;
-      case 'veg': A('sph', [0, .036, 0], 0, [.04, .036, .04], M(c, { r: .3 })); A('sph', [0, .07, 0], 0, [.015, .007, .015], M(0x2f9e44, { r: .6 })); break;
-      case 'fruit': A('sph', [0, .038, 0], 0, [.04, .037, .04], M(c, { r: .3 })); A('cyl', [0, .08, 0], 0, [.003, .018, .003], M(0x5c3a1e, { r: .8 })); break;
-      default: A('box', [0, .035, 0], 0, [.08, .07, .07], M(c, { r: .4 })); A('box', [0, .072, 0], 0, [.084, .01, .074], M(0xe8edf2, { r: .3 }));
+  /* ---------- the item shapes ---------- */
+  function shapeOf(it, L) {
+    const hx = L.hex, M = (c, o) => L.mat(hx(c), Object.assign({ r: .45, i: 1 }, o || {}));
+    const n = (it.name || '').toLowerCase(), cat = it.cat, col = parseInt((CATS[cat] || CATS.other).color.slice(1), 16), P = [];
+    const push = (m, p, r, s, mt) => P.push({ m: m, l: L.trs(p, r || 0, s), mat: mt });
+    const has = (...k) => k.some(x => n.includes(x));
+    let ctr = [0, .05, 0];
+    if (cat === 'dairy' && has('cheese', 'keso')) { push('cyl3', [0, .03, 0], [Math.PI / 2, .4, 0], [.07, .1, .07], M(0xfacc15)); ctr = [0, .03, 0]; }
+    else if (cat === 'dairy') { push('box', [0, .085, 0], 0, [.07, .17, .06], M(0xf6f8fa)); push('box', [0, .18, 0], [0, 0, Math.PI / 4], [.045, .045, .06], M(0xf6f8fa)); push('box', [0, .075, .031], 0, [.05, .07, .004], M(has('yogurt', 'yoghurt') ? 0xf783ac : 0x3b82f6)); ctr = [0, .1, 0]; }
+    else if (cat === 'eggs') { push('box', [0, .012, 0], 0, [.11, .024, .075], M(0xd6c7a1)); [[-.032, -.02], [.0, -.02], [.032, -.02], [-.032, .02], [0, .02], [.032, .02]].forEach(q => push('sph', [q[0], .036, q[1]], 0, [.021, .028, .021], M(0xf3e2c2))); ctr = [0, .03, 0]; }
+    else if (cat === 'veg') {
+      if (has('carrot')) { [0, 1, 2].forEach(k => push('cone', [(k - 1) * .03, .02, k * .01], [0, k * .3, Math.PI / 2 - .1], [.016, .16, .016], M(0xf76707))); ctr = [0, .025, 0]; }
+      else if (has('tomato', 'kamatis')) { push('sph', [0, .035, 0], 0, [.037, .033, .037], M(0xd9232b, { r: .25 })); push('sph', [0, .066, 0], 0, [.014, .006, .014], M(0x2f9e44)); ctr = [0, .04, 0]; }
+      else if (has('eggplant', 'talong')) { push('sph', [0, .03, 0], [0, .3, Math.PI / 2 - .12], [.032, .115, .032], M(0x4b1d6b, { r: .18 })); ctr = [0, .035, 0]; }
+      else { push('sph', [0, .055, 0], 0, [.07, .058, .07], M(0x6bbf4b, { r: .55 })); push('sph', [.025, .075, .01], 0, [.05, .045, .05], M(0x9ad66f, { r: .55 })); ctr = [0, .06, 0]; }
     }
-    /* status beacon above the item */
-    const hh = { dairy: .24, bev: .31, sauce: .13, eggs: .08, cooked: .1, proc: .07, meat: .07, poultry: .07, seafood: .07, veg: .1, fruit: .11 }[it.cat] || .12;
-    const beacon = mat([0, 0, 0], { e: it.k === 'ok' ? [.15, 1.6, .5] : it.k === 'soon' ? [1.8, 1.1, .1] : [2.4, .25, .25] });
-    A('sph', [0, hh + .035, 0], 0, [.015, .015, .015], beacon);
-    return { parts: P, beacon: beacon, hh: hh };
+    else if (cat === 'fruit') {
+      if (has('banana')) { push('sph', [0, .03, 0], [0, 0, .35], [.085, .024, .026], M(0xf9d423, { r: .4 })); ctr = [0, .035, 0]; }
+      else if (has('grape')) { [[0, .04, 0], [.03, .035, .01], [-.03, .035, -.01], [.012, .065, 0]].forEach(q => push('sph', q, 0, [.022, .022, .022], M(0x7c3aed, { r: .2 }))); ctr = [0, .05, 0]; }
+      else { const cl = has('apple') ? 0xe03131 : has('orange', 'mango', 'papaya') ? 0xf59f00 : has('lemon') ? 0xfde047 : [0xe03131, 0xf59f00, 0xd6336c, 0x74b816][hash(n) % 4]; push('sph', [0, .038, 0], 0, [.04, .037, .04], M(cl, { r: .3 })); push('cyl', [0, .08, 0], 0, [.003, .018, .003], M(0x5c3a1e)); ctr = [0, .045, 0]; }
+    }
+    else if (cat === 'meat') { push('box', [0, .013, 0], 0, [.12, .026, .085], M(0xf1f5f9)); push('box', [0, .035, 0], 0, [.105, .024, .07], M(has('pork', 'baboy', 'liempo') ? 0xee8f9a : 0xb91c1c, { r: .3 })); ctr = [0, .03, 0]; }
+    else if (cat === 'poultry') { push('box', [0, .013, 0], 0, [.12, .026, .085], M(0xf1f5f9)); push('sph', [0, .05, 0], 0, [.05, .032, .04], M(0xf0a35e, { r: .35 })); push('sph', [.045, .045, 0], [0, 0, .8], [.014, .035, .014], M(0xf6c08e)); ctr = [0, .04, 0]; }
+    else if (cat === 'seafood') { push('sph', [0, .03, 0], [0, .3, 0], [.07, .026, .032], M(0x8fb8d8, { m: .5, r: .2 })); push('cone', [-.075, .03, -.02], [0, .3, Math.PI / 2], [.025, .04, .006], M(0x6b9ec7)); ctr = [0, .03, 0]; }
+    else if (cat === 'proc') { push('cyl', [0, .022, -.025], [0, 0, Math.PI / 2], [.022, .1, .022], M(0xd9485f, { r: .35 })); push('cyl', [0, .022, .025], [0, 0, Math.PI / 2], [.022, .1, .022], M(0xe0566b, { r: .35 })); ctr = [0, .03, 0]; }
+    else if (cat === 'cooked') { push('box', [0, .03, 0], 0, [.1, .055, .08], M(0xe9eef3, { a: 1 })); push('box', [0, .064, 0], 0, [.106, .014, .086], M(col)); ctr = [0, .04, 0]; }
+    else if (cat === 'sauce') { const cl = has('ketchup', 'tomato') ? 0xdc2626 : has('mayo') ? 0xfef3c7 : has('soy', 'toyo') ? 0x44281a : 0xb45309; push('cyl', [0, .045, 0], 0, [.034, .09, .034], M(cl, { r: .2 })); push('cyl', [0, .097, 0], 0, [.036, .014, .036], M(0xb8bec7, { m: .9, r: .3 })); ctr = [0, .05, 0]; }
+    else if (cat === 'bev') {
+      if (has('beer', 'soda', 'cola', 'can', 'juice')) { push('cyl', [0, .06, 0], 0, [.033, .12, .033], M(0xd6dbe1, { m: .9, r: .28 })); push('cyl', [0, .062, 0], 0, [.0335, .05, .0335], M(col, { r: .4 })); ctr = [0, .06, 0]; }
+      else { push('cyl', [0, .075, 0], 0, [.03, .15, .03], M(col, { r: .12 })); push('cone', [0, .17, 0], 0, [.03, .05, .03], M(col, { r: .12 })); push('cyl', [0, .205, 0], 0, [.014, .03, .014], M(0x222222)); ctr = [0, .1, 0]; }
+    }
+    else { push('box', [0, .038, 0], 0, [.075, .075, .075], M(0xcbd5e1)); push('box', [0, .038, .0385], 0, [.077, .014, .004], M(0x94a3b8)); ctr = [0, .04, 0]; }
+    return { sub: P, ctr: ctr };
   }
-  function buildItems(list) {
-    const old = {}; items.forEach(x => old[x.id] = x); items = [];
-    const sorted = list.slice().sort((a, b) => a.expiry.localeCompare(b.expiry)); let over = 0;
-    const shelves = [[], [], []], drawers = [[], []];
+
+  /* ---------- slots: shelves, door bins and drawers ---------- */
+  const SHELF_Y = { 'Top shelf': 1.40, 'Middle shelf': 1.00, 'Bottom shelf': .64 };
+  function slotsFor(zone) {
+    const out = [];
+    if (SHELF_Y[zone] !== undefined) { const y = SHELF_Y[zone] + .007; [.14, .02, -.1].forEach(z => { for (let n = 0; n < 7; n++) out.push({ g: 'body', p: [-.375 + n * .125, y, z], k: 1 }); }); }
+    else if (zone === 'Door') { [1.45, 1.0, .55].forEach(by => { for (let n = 0; n < 4; n++) { out.push({ g: 'dl', p: [.08 + n * .1, by + .008, -.03], k: .9 }); out.push({ g: 'dr', p: [-(.08 + n * .1), by + .008, -.03], k: .9 }); } }); }
+    else { const cx = zone === 'Freezer' ? .215 : -.215; [.15, .03, -.09, -.21].forEach(z => { for (let n = 0; n < 4; n++) out.push({ g: 'body', p: [cx - .13 + n * .087, .13, z], k: .8 }); }); }
+    return out;
+  }
+  const FALL = ['Middle shelf', 'Top shelf', 'Bottom shelf', 'Door', 'Crisper drawer'];
+  function allocate(list) {
+    const free = {}; ZONES.forEach(z => free[z] = slotsFor(z));
+    const sorted = list.slice().sort((a, b) => a.expiry.localeCompare(b.expiry)), out = {};
     sorted.forEach(it => {
-      if (it.frozen) { const d = drawers[0].length <= drawers[1].length ? 0 : 1; if (drawers[d].length < 12) drawers[d].push(it); else if (drawers[1 - d].length < 12) drawers[1 - d].push(it); else over++; return; }
-      const p = PREF[it.cat] != null ? PREF[it.cat] : 0, ord = [p, ...[0, 1, 2].filter(x => x !== p)], s = ord.find(x => shelves[x].length < 21);
-      if (s == null) over++; else shelves[s].push(it);
+      const want = locOf(it), order = [want].concat(FALL.filter(z => z !== want));
+      for (const z of order) { if (it.frozen && z !== 'Freezer' && free.Freezer.length) continue; const s = free[z].shift(); if (s) { out[it.id] = s; return; } }
+      const any = ZONES.find(z => free[z].length); if (any) out[it.id] = free[any].shift();
     });
-    const push = (it, x, y, z) => { const o = old[it.id], b = itemParts(it); items.push({ id: it.id, k: it.k, x: x, y: y, z: z, parts: b.parts, beacon: b.beacon, hh: b.hh, born: o ? o.born : 0, hold: o ? o.hold : false, h: o ? o.h : 0, dim: false, frozen: it.frozen, nw: !o }); };
-    shelves.forEach((sh, s) => sh.forEach((it, i) => push(it, COLX[i % 7], SHELF_Y[s] + .006, ROWZ[Math.floor(i / 7)])));
-    drawers.forEach((dr, d) => dr.forEach((it, i) => push(it, (d ? 1 : -1) * .215 + [-.13, -.045, .045, .13][i % 4], .175, [.22, .06, -.1][Math.floor(i / 4)])));
-    items.forEach(it => it.dim = !match(it));
-    return over;
-  }
-  const ndc = (V, P, p) => { const vx = V[0] * p[0] + V[4] * p[1] + V[8] * p[2] + V[12], vy = V[1] * p[0] + V[5] * p[1] + V[9] * p[2] + V[13], vz = V[2] * p[0] + V[6] * p[1] + V[10] * p[2] + V[14];
-    const cx = P[0] * vx + P[4] * vy + P[8] * vz + P[12], cy = P[1] * vx + P[5] * vy + P[9] * vz + P[13], cw = P[3] * vx + P[7] * vy + P[11] * vz + P[15]; return { x: cx / cw, y: cy / cw, z: -vz }; };
-  function drawItems(root, now, tt, V, P) {
-    picks = [];
-    items.forEach(it => {
-      if (it.hold) return; if (!it.born) it.born = now - 9999;
-      const k = Math.max(0, Math.min(1, (now - it.born) / 750)); if (now < it.born) return;
-      const dropY = it.nw && now - it.born < 750 ? (1 - ease(k)) * .9 : 0;
-      it.h += ((hoverId === it.id ? 1 : 0) - it.h) * .25;
-      const sc = 1.2 + .22 * it.h, dimK = it.dim ? .12 : 1;
-      if (it.k === 'exp' || it.k === 'today') { const q = .55 + .45 * Math.sin(tt * 6 + it.x * 9); it.beacon.e = [2.4 * q, .25 * q, .25 * q]; }
-      const base = mul(root, mul(Tm(it.x, it.y + dropY, it.z), Sm(sc, sc, sc)));
-      it.parts.forEach(p => { const m = p.mat; if (it.dim) { if (!m._o) m._o = { c: m.c.slice(), e: m.e.slice() }; m.c = m._o.c.map(v => v * dimK); m.e = [0, 0, 0]; } else if (m._o) { m.c = m._o.c; if (m !== it.beacon) m.e = m._o.e; delete m._o; } drawMesh(p.mesh, mul(base, p.l), m); });
-      const wp = [base[12] + base[4] * (it.hh * .5), base[13] + base[5] * (it.hh * .5), base[14] + base[6] * (it.hh * .5)];
-      const q = ndc(V, P, wp); picks.push({ id: it.id, x: (q.x * .5 + .5) * w, y: (1 - (q.y * .5 + .5)) * h, z: q.z, r: Math.max(12, 70 / q.z * (w / 700)), dim: it.dim });
-    });
-  }
-  function pick(cx, cy) {
-    if (!running || (st.L.a + st.R.a) < 1.2) return null; const r = app.getBoundingClientRect(), x = cx - r.left, y = cy - r.top; let best = null;
-    picks.forEach(p => { if (p.dim) return; const d = Math.hypot(p.x - x, p.y - y); if (d < p.r && (!best || p.z < best.z)) best = p; }); return best ? best.id : null;
+    return out;
   }
 
-  /* ---------- run ---------- */
-  function sizeCanvas() {
-    const r = app.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2); while (r.width * r.height * dpr * dpr > 3.2e6 && dpr > 1) dpr -= .25;
-    w = Math.max(2, Math.round(r.width)); h = Math.max(2, Math.round(r.height)); canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); canvas.style.width = '100%'; canvas.style.height = '100%'; gl.viewport(0, 0, canvas.width, canvas.height);
-  }
-  function setMat(m, M) {
-    gl.uniform3fv(U.uCol, m.c); gl.uniform3fv(U.uEmis, m.e); gl.uniform1f(U.uMetal, m.m); gl.uniform1f(U.uRough, m.r); gl.uniform1f(U.uAlpha, m.a); gl.uniform1f(U.uInt, m.i); gl.uniform1f(U.uBrush, m.b); gl.uniform1f(U.uMode, m.mode);
-  }
-  function drawMesh(o, M, m) {
-    setMat(m); gl.uniformMatrix4fv(U.uM, false, M); gl.uniformMatrix3fv(U.uNM, false, nmat(M));
-    gl.bindBuffer(gl.ARRAY_BUFFER, o.p); gl.enableVertexAttribArray(U.aP); gl.vertexAttribPointer(U.aP, 3, gl.FLOAT, false, 0, 0);
-    gl.bindBuffer(gl.ARRAY_BUFFER, o.nb); gl.enableVertexAttribArray(U.aN); gl.vertexAttribPointer(U.aN, 3, gl.FLOAT, false, 0, 0);
-    gl.bindBuffer(gl.ARRAY_BUFFER, o.u); gl.enableVertexAttribArray(U.aT); gl.vertexAttribPointer(U.aT, 2, gl.FLOAT, false, 0, 0);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, o.i); gl.drawElements(gl.TRIANGLES, o.n, gl.UNSIGNED_SHORT, 0);
-  }
-  function groupM(root) {
-    const hinge = FRONT + .004;
-    return { body: root, dl: mul(root, mul(Tm(-W / 2 + .004, 0, hinge), Ry(-st.L.a))), dr: mul(root, mul(Tm(W / 2 - .004, 0, hinge), Ry(st.R.a))) };
-  }
-  function frame(now) {
-    raf = 0; if (!running) return; if (!canvas.isConnected) { running = false; try { const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); } catch (e) {} return; }
-    const dt = Math.min(.05, (now - last) / 1000 || .016); last = now;
-    /* door physics: a light spring with a little overshoot, right door lags a hair */
-    const maxA = 1.55, tgt = st.dive >= 0 ? 1 : st.target;
-    [['L', 52, 8.5], ['R', 44, 8.0]].forEach(q => { const d = st[q[0]]; d.v += ((tgt * maxA) - d.a) * q[1] * dt; d.v *= Math.exp(-q[2] * dt); d.a += d.v * dt; if (d.a < 0) { d.a = 0; d.v = Math.max(0, d.v * -.2); } });
-    const open = Math.min(1, (st.L.a + st.R.a) / (2 * maxA));
-    /* idle camera motion and mouse parallax */
-    st.yaw += (st.yawT - st.yaw) * (1 - Math.exp(-dt * 4)); st.pitch += (st.pitchT - st.pitch) * (1 - Math.exp(-dt * 4));
-    const tt = (now - t0) / 1000;
-    let yaw = -.3 + st.yaw + Math.sin(tt * .45) * .07, pitch = st.pitch;
-    /* camera */
-    const fov = 32 * Math.PI / 180, asp = w / h, tf = Math.tan(fov / 2);
-    const dist = Math.max(H * 1.0 / (2 * tf * .97), 1.5 / (tf * asp));
-    let dp = 0, fade = 0, plI = lerp(.55, 1.75, open);
-    const eye = [0, 1.12 + pitch * .3, dist], look = [0, .93, 0];
-    const V = lookAt(eye, look, [0, 1, 0]);
-    const P = persp(fov, asp, .02, 30);
-    if (alertOn) { plI *= .8; }
-    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.uniformMatrix4fv(U.uV, false, V); gl.uniformMatrix4fv(U.uPj, false, P); gl.uniform3fv(U.uCam, eye);
-    gl.uniform3fv(U.uPLc, alertOn ? [.95, .72 + .12 * Math.sin(tt * 6), .74 + .1 * Math.sin(tt * 6)] : [.72, .9, 1.0]); gl.uniform1f(U.uPL, plI); gl.uniform1f(U.uPLR, 2.2); gl.uniform1f(U.uFade, fade); gl.uniform3fv(U.uFadeCol, [.027, .11, .157]);
-    const yawK = 1 - dp, shk = alertOn && (tt % 4.5) < .6 ? Math.sin(tt * 60) * .012 * (1 - (tt % 4.5) / .6) : 0, root = mul(Tm(shk, 0, 0), mul(Ry(yaw * yawK + shk), Rx(pitch * .15 * yawK)));
-    const GM = groupM(root); const pl = [0, 1.62, .1, 1]; const plw = [root[0] * pl[0] + root[4] * pl[1] + root[8] * pl[2] + root[12], root[1] * pl[0] + root[5] * pl[1] + root[9] * pl[2] + root[13], root[2] * pl[0] + root[6] * pl[1] + root[10] * pl[2] + root[14]];
-    gl.uniform3fv(U.uPLp, plw);
-    gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE); gl.enable(gl.BLEND);
-    gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    /* contact shadow on the floor */
-    gl.depthMask(false);
-    drawMesh(meshes.floor, mul(Tm(0, .002, .05), Sm(1.55, 1, 1.25)), mat([0,0,0], { mode: 1, a: .55 }));
-    drawMesh(meshes.floor, mul(Tm(0, .003, .02), Sm(1.15, 1, .95)), mat([0,0,0], { mode: 1, a: .55 }));
-    gl.depthMask(true);
-    /* opaque parts */
-    parts.forEach(p => {
-      const M = mul(GM[p.g], p.l);
-      if (p.mesh.led) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(U.uTex, 0); drawMesh(p.mesh.mesh, M, p.mat); } else drawMesh(p.mesh, M, p.mat);
-    });
-    /* data-driven food */
-    drawItems(GM.body, now, tt, V, P);
-    /* glass */
-    gl.depthMask(false);
-    glass.forEach(p => drawMesh(p.mesh, mul(GM[p.g], p.l), p.mat));
-    /* light spill on the floor + mist */
-    if (open > .02) {
-      gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-      drawMesh(meshes.floor, mul(mul(root, Tm(0, .004, .75)), Sm(1.7 + open * 1.1, 1, 1.35 + open * .9)), mat([.28, .6, .9], { mode: 2, a: .55 * open }));
-      gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-      if (!reduced() && Math.random() < dt * 14 * open) mist.push({ x: (Math.random() - .5) * .7, y: 1.2 + Math.random() * .5, z: FRONT + .08, vy: -.08 - Math.random() * .12, vx: (Math.random() - .5) * .05, s: .2 + Math.random() * .2, life: 0, max: 2.2 + Math.random() * 1.6 });
-    }
-    for (let i = mist.length - 1; i >= 0; i--) {
-      const m = mist[i]; m.life += dt; m.y += m.vy * dt - .02 * dt; m.x += m.vx * dt; m.s += dt * .18; if (m.life > m.max || m.y < .05) { mist.splice(i, 1); continue; }
-      const k = m.life / m.max, al = Math.sin(Math.min(1, k) * Math.PI) * .22 * Math.max(open, .15);
-      drawMesh(meshes.quad, mul(root, trs([m.x, m.y, m.z], 0, [m.s * 1.6, m.s * 1.1, 1])), mat([.78, .9, 1], { mode: 3, a: al }));
-    }
-    gl.depthMask(true);
-    raf = requestAnimationFrame(frame);
-  }
-
-  /* ---------- public ---------- */
-  function onMove(e) { const r = app.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; st.yawT = x * .6; st.pitchT = -y * .35; }
-  function cycle() {
-    clearTimeout(cycleT); if (!st.auto || !running || reduced()) return;
-    cycleT = setTimeout(() => { if (!st.auto) return; st.target = st.target ? 0 : 1; cycle(); }, st.target ? 5200 : 2600);
-  }
-  return {
-    get on() { return running; },
-    init(slotEl) {
-      this.stop();
-      try {
-        app = slotEl; slot = slotEl; if (!app) return false;
-        canvas = document.createElement('canvas'); canvas.className = 'dgl-c'; canvas.setAttribute('aria-hidden', 'true');
-        gl = canvas.getContext('webgl', { alpha: true, antialias: true, premultipliedAlpha: true, powerPreference: 'default' });
-        if (!gl) return false;
-        app.insertBefore(canvas, app.firstChild); parts = []; glass = []; mist.length = 0;
-        compile(); build(); sizeCanvas();
-        app.classList.add('gl'); running = true; Object.assign(st, { L: { a: keep ? keep.L : 0, v: 0 }, R: { a: keep ? keep.R : 0, v: 0 }, target: keep ? keep.t : 0, auto: false, dive: -1, yaw: keep ? keep.yaw : 0, pitch: 0, yawT: 0, pitchT: 0 });
-        t0 = last = performance.now();
-        this._rs = () => { if (running) sizeCanvas(); }; window.addEventListener('resize', this._rs);
-        try { this._ro = new ResizeObserver(() => { if (running) sizeCanvas(); }); this._ro.observe(app); } catch (e) {}
-        this._mv = onMove; app.addEventListener('pointermove', this._mv);
-        this._click = e => { const id = pick(e.clientX, e.clientY); if (id && pickCb) pickCb(id, e); else if (pickCb) pickCb(null, e); }; slot.addEventListener('click', this._click);
-        this._vis = () => { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else if (running && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }; document.addEventListener('visibilitychange', this._vis);
-        if (reduced()) { st.target = 1; st.L.a = st.R.a = 1.5; }
-        else if (!keep) { setTimeout(() => { if (running && !window.__lfClosed) st.target = 1; }, 450); }
-        raf = requestAnimationFrame(frame);
-        return true;
-      } catch (e) { try { console.warn('3D fridge unavailable:', e); } catch (x) {} this.stop(); return false; }
-    },
-    stop() {
-      if (running) keep = { L: st.L.a, R: st.R.a, t: st.target, yaw: st.yaw }; running = false; clearTimeout(cycleT); if (raf) cancelAnimationFrame(raf); raf = 0;
-      if (this._rs) window.removeEventListener('resize', this._rs); if (this._vis) document.removeEventListener('visibilitychange', this._vis);
-      if (app && this._mv) app.removeEventListener('pointermove', this._mv); if (slot && this._click) slot.removeEventListener('click', this._click);
-      if (this._ro) { try { this._ro.disconnect(); } catch (e) {} } this._ro = this._rs = this._vis = this._mv = this._click = null;
-      if (canvas) { try { const ext = gl && gl.getExtension('WEBGL_lose_context'); if (ext) ext.loseContext(); } catch (e) {} if (canvas.parentNode) canvas.parentNode.removeChild(canvas); }
-      canvas = null; gl = null; if (app) app.classList.remove('gl');
-    },
-    setItems(list, f) { filt = f || ''; return buildItems(list); },
-    setFilter(f) { filt = f || ''; items.forEach(it => it.dim = !match(it)); },
-    setAlert(v) { alertOn = !!v; },
-    setHover(id) { hoverId = id; },
-    onPick(fn) { pickCb = fn; },
-    hold(id) { const it = items.find(x => x.id === id); if (it) it.hold = true; },
-    release(id) { const it = items.find(x => x.id === id); if (it) { it.hold = false; it.born = performance.now(); } },
-    toggle() { st.target = st.target ? 0 : 1; window.__lfClosed = !st.target; return st.target; },
-    get isOpen() { return st.target > 0; },
-    project(id) { const p = picks.find(x => x.id === id); return p || null; },
-    pickId: pick,
-    dive() { if (!running || reduced()) return false; st.auto = false; clearTimeout(cycleT); st.dive = performance.now(); st.yawT = 0; st.pitchT = 0; return true; },
-    state: st
+  /* ---------- the engine instance ---------- */
+  const penguin = (L, now, root, GMb) => {
+    const t = now / 1000, bob = Math.abs(Math.sin(t * 3)) * .012, turn = Math.sin(t * 1.1) * .35, y0 = 1.007 + bob;
+    const B = mul4(GMb, L.trs([0, y0, .06], [0, turn, 0], [1, 1, 1]));
+    const m = (c, o) => L.mat(L.hex(c), Object.assign({ r: .4, i: 1 }, o || {}));
+    const d = (mesh, p, r, s, mt) => L.draw(mesh, mul4(B, L.trs(p, r || 0, s)), mt);
+    const dark = m(0x1e293b, { r: .35 }), white = m(0xf8fafc), org = m(0xfb923c), red = m(0xef4444);
+    d('sph', [0, .105, 0], 0, [.075, .1, .065], dark); d('sph', [0, .1, .036], 0, [.058, .082, .03], white);
+    d('sph', [0, .225, 0], 0, [.056, .054, .054], dark);
+    d('sph', [-.021, .232, .044], 0, [.013, .015, .008], white); d('sph', [.021, .232, .044], 0, [.013, .015, .008], white);
+    d('sph', [-.021, .232, .051], 0, [.006, .008, .004], m(0x0b1220)); d('sph', [.021, .232, .051], 0, [.006, .008, .004], m(0x0b1220));
+    d('cone', [0, .214, .058], [Math.PI / 2, 0, 0], [.016, .03, .016], org);
+    d('cyl', [0, .172, 0], 0, [.062, .014, .062], red);
+    d('sph', [-.082, .115, 0], [0, 0, .25 + Math.sin(t * 2) * .05], [.014, .052, .03], dark);
+    d('sph', [.082, .125, 0], [0, 0, -(1.0 + Math.sin(t * 9) * .45)], [.014, .052, .03], dark);
+    d('box', [-.03, .006, .035], 0, [.04, .012, .06], org); d('box', [.03, .006, .035], 0, [.04, .012, .06], org);
   };
-})();
-</script>
-<script>
-/* ===== v12: hook the WebGL live fridge into the dashboard ===== */
-const _lfHTML12=lfHTML;
-lfHTML=function(a,d){ window.__lfAll=a; window.__lfDue=d; return _lfHTML12(a,d); };
-function lfShowTip(id,pin){
-  const tip=lfTip(), it=S.items.find(x=>x.id===id), stage=$('#lf'); if(!tip||!it||!stage){ if(tip) tip.classList.remove('show'); return; }
-  const st=status(it), sr=stage.getBoundingClientRect(); let cx,top,bot;
-  if(stage.classList.contains('gl')){ const p=(typeof DGL!=='undefined')&&DGL.project(id); if(!p){ tip.classList.remove('show'); return; } cx=p.x; top=p.y-18; bot=p.y+18; }
-  else { const el=document.querySelector('.lfi[data-lfid="'+id+'"]'); if(!el){ tip.classList.remove('show'); return; } const r=el.getBoundingClientRect(); cx=r.left-sr.left+r.width/2; top=r.top-sr.top; bot=r.bottom-sr.top; }
-  tip.innerHTML=`${it.photo?`<div class="ph2" style="background-image:url(${it.photo})"></div>`:''}<b>${esc(it.name)}${it.qty?' × '+esc(it.qty):''}</b><small>Stored by ${esc(it.by||'staff')} · ${it.frozen?'Freezer':'Chiller'} · expires ${fmtDate(it.expiry)}</small><span class="tb ${st.k}">${esc(st.label)}</span>${pin?actFor(it):''}`;
-  tip.classList.toggle('pin',!!pin); tip.classList.add('show');
-  const tw=tip.offsetWidth, th=tip.offsetHeight; let x=cx-tw/2, y=top-th-10; if(y<8) y=bot+10; x=Math.max(8,Math.min(sr.width-tw-8,x)); tip.style.left=x+'px'; tip.style.top=y+'px';
-}
-const _lfInit12=lfInit;
-lfInit=function(){
-  _lfInit12();
-  const stage=$('#lf'); if(!stage){ try{DGL.stop();}catch(e){} return; }
-  let ok=false; try{ ok=DGL.init(stage); }catch(e){ console.warn(e); }
-  if(!ok) return;
-  stage.classList.add('gl');
-  const over=DGL.setItems(window.__lfAll||[],LFF); DGL.setAlert((window.__lfDue||[]).length>0);
-  if(over>0){ const b=document.createElement('div'); b.className='lf-over'; b.textContent='+'+over+' more items not shown'; stage.appendChild(b); }
-  DGL.onPick((id)=>{
-    if(id){ LF_PIN=id; lfShowTip(id,true); return; }
-    if(Date.now()-(window.__lfDis||0)<80) return;
-    const s=$('#lfSec'); DGL.toggle(); LF_PIN=null; const tp=lfTip(); if(tp) tp.classList.remove('show');
+  const mul4 = (a, b) => LV.lib.mul(a, b);
+  const LV = makeFGL({
+    live: true, yaw0: -.4, fit: 1.3,
+    spill() { return LS.alert ? [.95, .12, .1] : null; },
+    shake(now) {
+      if (!LS.alert || reduced()) return { x: 0, z: 0 };
+      const ph = (now / 1000) % 4.2; if (ph > .8) return { x: 0, z: 0 };
+      const a = Math.sin(ph * 70) * .012 * (1 - ph / .8); return { x: a * .6, z: a * .9 };
+    },
+    light(now, open) {
+      if (!LS.alert) return null; const p = .5 + .5 * Math.sin(now / 1000 * 3.2);
+      return { c: [1, .22 + .18 * p, .18 + .1 * p], k: 1.15 + .35 * p };
+    },
+    onFrame(L, dt, now, GM, root, open) {
+      const V = L.cur.V, P = L.cur.P, th = Math.tan(Math.PI / 12);
+      if (!LS.items.length) { penguin(L, now, root, GM.body); }
+      const dOpen = Math.min(1, (L.st.L.a + L.st.R.a) / 3.1);
+      LS.items.forEach(it => {
+        let off = 0, pop = 1, glow = 0;
+        if (it.drop) { const k = (now - it.drop.t0) / 1000; if (k < 0) { it.hide = true; return; } it.hide = false; if (k > 1.5) it.drop = null; else { const f = Math.min(1, k / .7); off = (1 - L.ease(f)) * .6 + (k > .7 ? Math.abs(Math.sin((k - .7) * 11)) * .025 * Math.max(0, 1 - (k - .7) / .6) : 0); pop = .5 + .5 * L.ease(f); glow = Math.max(0, 1 - k / 1.3); } }
+        const hov = LS.hover === it.id, pin = LS.pin === it.id;
+        let e = [0, 0, 0];
+        if (it.st === 'bad') { const p = .5 + .5 * Math.sin(now / 1000 * 4 + it.ph); e = [.35 + .45 * p, .02, .02]; }
+        else if (it.st === 'soon') e = [.2, .11, 0];
+        if (hov || pin) e = [e[0] + .22, e[1] + .22, e[2] + .28];
+        if (glow) e = [e[0] + .1 * glow, e[1] + .8 * glow, e[2] + .4 * glow];
+        const s = it.k * 1.3 * pop * (hov || pin ? 1.12 : 1);
+        const base = L.mul(GM[it.g], L.trs([it.p[0], it.p[1] + off, it.p[2]], [0, it.rot, 0], [s, s, s]));
+        const em = (e[0] || e[1] || e[2]) ? e : null;
+        it.sub.forEach(sp => { L.draw(sp.m, L.mul(base, sp.l), em ? Object.assign({}, sp.mat, { e: em }) : sp.mat); });
+        const c = it.ctr, wx = base[0] * c[0] + base[4] * c[1] + base[8] * c[2] + base[12], wy = base[1] * c[0] + base[5] * c[1] + base[9] * c[2] + base[13], wz = base[2] * c[0] + base[6] * c[1] + base[10] * c[2] + base[14];
+        const vx = V[0] * wx + V[4] * wy + V[8] * wz + V[12], vy = V[1] * wx + V[5] * wy + V[9] * wz + V[13], vz = V[2] * wx + V[6] * wy + V[10] * wz + V[14];
+        const cx = P[0] * vx + P[4] * vy + P[8] * vz + P[12], cy = P[1] * vx + P[5] * vy + P[9] * vz + P[13], cw = P[3] * vx + P[7] * vy + P[11] * vz + P[15];
+        it.sx = (cx / cw * .5 + .5) * L.w; it.sy = (1 - (cy / cw * .5 + .5)) * L.h; it.sr = Math.max(15, .06 * (L.h / 2) / (th * cw)); it.wp = [wx, wy, wz];
+        it.vis = dOpen > .3 && !it.hide;
+      });
+      /* items that were just removed shrink away */
+      for (let i = LS.ghosts.length - 1; i >= 0; i--) {
+        const g = LS.ghosts[i], k = (now - g.t0) / 650; if (k >= 1) { LS.ghosts.splice(i, 1); continue; }
+        const s = g.k * (1 - L.ease(k)), base = L.mul(GM[g.g], L.trs([g.p[0], g.p[1] + L.ease(k) * .25, g.p[2]], [0, g.rot + k * 3, 0], [s, s, s]));
+        g.sub.forEach(sp => L.draw(sp.m, L.mul(base, sp.l), sp.mat));
+      }
+    },
+    onFrame2(L, dt, now, GM, root) {
+      /* smoke and bubbles rising off spoiled items */
+      if (!reduced()) {
+        LS.items.forEach(it => { if (it.st !== 'bad' || !it.vis || !it.wp) return; if (LS.puffs.length < 70 && Math.random() < dt * 1.6) LS.puffs.push({ x: it.wp[0] + (Math.random() - .5) * .04, y: it.wp[1] + .05, z: it.wp[2] + .04, t: 0, max: 1.7 + Math.random() * .8, s: .05, ph: Math.random() * 6, b: Math.random() < .45 }); });
+        for (let i = LS.puffs.length - 1; i >= 0; i--) {
+          const p = LS.puffs[i]; p.t += dt; if (p.t > p.max) { LS.puffs.splice(i, 1); continue; }
+          const k = p.t / p.max; p.y += (p.b ? .2 : .11) * dt; p.x += Math.sin(p.t * 3 + p.ph) * .012 * dt * 10;
+          const env = Math.sin(k * Math.PI);
+          if (p.b) L.draw('quad', L.trs([p.x, p.y, p.z], 0, [.022, .022, 1]), L.mat([1, .5, .5], { mode: 3, a: .8 * env }));
+          else { const sz = p.s + k * .11; L.draw('quad', L.trs([p.x, p.y, p.z], 0, [sz * 1.5, sz, 1]), L.mat([.55, .75, .4], { mode: 3, a: .26 * env })); }
+        }
+      }
+      /* tooltip follows the item on screen */
+      const tip = LS.tip; if (!tip) return;
+      const id = LS.pin || LS.hover, it = id && LS.items.find(x => x.id === id);
+      if (!it || !it.vis) { if (!tip.hidden) tip.hidden = true; return; }
+      if (tip.dataset.id !== id) { tip.dataset.id = id; tip.innerHTML = tipHTML(it); }
+      tip.hidden = false;
+      const w = tip.offsetWidth, hh = tip.offsetHeight; let x = Math.max(8, Math.min(L.w - w - 8, it.sx - w / 2)), y = it.sy - it.sr - hh - 8; if (y < 6) y = it.sy + it.sr + 8;
+      tip.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(y) + 'px)';
+    },
+    onMove(e, L) {
+      const r = e.currentTarget.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      if (e.pointerType !== 'touch') { L.st.yawT = ((x / r.width) - .5) * .5; L.st.pitchT = -((y / r.height) - .5) * .22; }
+      let best = null, bd = 1e9; LS.items.forEach(it => { if (!it.vis) return; const d = Math.hypot(it.sx - x, it.sy - y); if (d < it.sr && d < bd) { bd = d; best = it; } });
+      const id = best ? best.id : null; if (id !== LS.hover) { LS.hover = id; e.currentTarget.style.cursor = id ? 'pointer' : 'default'; }
+    },
+    onLeave(e, L) { LS.hover = null; L.st.yawT = 0; L.st.pitchT = 0; },
+    onClick(e, L) {
+      const r = e.currentTarget.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      let best = null, bd = 1e9; LS.items.forEach(it => { if (!it.vis) return; const d = Math.hypot(it.sx - x, it.sy - y); if (d < it.sr * 1.15 && d < bd) { bd = d; best = it; } });
+      if (best) { LS.pin = LS.pin === best.id ? null : best.id; LS.hover = null; const t = LS.tip; if (t) t.dataset.id = ''; lvHighlight(LS.pin); return; }
+      LS.pin = null; L.st.target = L.st.target ? 0 : 1; LS.dropOpen = 0; thunk(); lvHighlight(null);
+    }
   });
-  stage.addEventListener('pointermove',e=>{ const id=DGL.pickId(e.clientX,e.clientY); DGL.setHover(id); stage.style.cursor=id?'pointer':'default'; if(LF_PIN||e.pointerType==='touch') return; if(id) lfShowTip(id,false); else { const tp=lfTip(); if(tp) tp.classList.remove('show'); } });
-  stage.addEventListener('pointerleave',()=>{ DGL.setHover(null); if(!LF_PIN){ const tp=lfTip(); if(tp) tp.classList.remove('show'); } });
-};
-document.addEventListener('pointerover',e=>{ const r=e.target.closest&&e.target.closest('[data-lfrow]'); if((typeof DGL!=='undefined')&&DGL.on&&!(e.target.closest&&e.target.closest('.lf-stage'))) DGL.setHover(r?r.dataset.lfrow:null); });
+  function tipHTML(it) {
+    const o = it.o, s = status(o), c = CATS[o.cat] || CATS.other;
+    return `<b>${esc(o.name)}${o.qty ? ' <small>× ' + esc(o.qty) + '</small>' : ''}</b><span>Stored by ${esc(o.by || 'staff')} · ${esc(o.frozen ? 'Freezer' : locOf(o))}</span><em class="${s.k}">${esc(s.label)}</em>`;
+  }
+  function lvHighlight(id) { document.querySelectorAll('.lv-i').forEach(b => b.classList.toggle('on', !!id && b.dataset.id === id)); }
+
+  /* ---------- scene data from the inventory ---------- */
+  function lvData() {
+    const all = S.items, sig = ymd(today()) + '|' + all.map(i => i.id + ':' + i.expiry + ':' + i.cat + ':' + (i.loc || '') + ':' + (i.frozen ? 1 : 0)).join(',');
+    if (sig === LS.sig) return false;
+    const slots = allocate(all), old = {}; LS.items.forEach(x => old[x.id] = x);
+    const next = all.filter(i => slots[i.id]).map(i => {
+      const sl = slots[i.id], sh = shapeOf(i, LV.lib), d = daysLeft(i.expiry), h = hash(i.id);
+      return { id: i.id, o: i, g: sl.g, p: sl.p, k: sl.k, rot: ((h % 100) / 100 - .5) * .7, sub: sh.sub, ctr: sh.ctr, st: d <= 0 ? 'bad' : d <= 2 ? 'soon' : 'ok', ph: (h % 628) / 100, drop: old[i.id] ? old[i.id].drop : null, sx: -99, sy: -99, sr: 0, vis: false };
+    });
+    if (LS.sig) { const ids = new Set(next.map(x => x.id)); LS.items.forEach(x => { if (!ids.has(x.id)) LS.ghosts.push({ g: x.g, p: x.p, k: x.k, rot: x.rot, sub: x.sub, t0: performance.now() }); }); }
+    LS.items = next; LS.sig = sig; LS.alert = all.some(i => daysLeft(i.expiry) <= 0);
+    return true;
+  }
+  window.lvDrop = function (id) {
+    const it = LS.items.find(x => x.id === id); if (!it) return false;
+    it.drop = { t0: performance.now() + 250 }; if (LV.on) { const st = LV.lib.st; if (!st.target) { st.target = 1; LS.autoClosed = true; } LS.closeAt = performance.now() + 3600; } return true;
+  };
+  setInterval(() => { if (LS.closeAt && performance.now() > LS.closeAt) { LS.closeAt = 0; if (LS.autoClosed && LV.on) { LV.lib.st.target = 0; LS.autoClosed = false; thunk(); } } }, 400);
+
+  /* ---------- the dashboard card ---------- */
+  function liveHTML(all) {
+    const cnt = { ok: 0, soon: 0, bad: 0 }; all.forEach(i => { const d = daysLeft(i.expiry); cnt[d <= 0 ? 'bad' : d <= 2 ? 'soon' : 'ok']++; });
+    const first = all.slice().sort((a, b) => a.expiry.localeCompare(b.expiry)).slice(0, 5);
+    const list = first.length ? first.map(i => { const s = status(i), c = CATS[i.cat] || CATS.other; return `<button type="button" class="lv-i ${s.k === 'exp' || s.k === 'today' ? 'bad' : ''}" data-a="lvfocus" data-id="${i.id}"><span class="dot" style="background:${s.k === 'exp' || s.k === 'today' ? '#ef4444' : s.k === 'soon' ? '#f59e0b' : c.color}"></span><span class="nm"><b>${esc(i.name)}</b><small>${esc(i.by || 'staff')}</small></span><span class="st">${esc(s.label)}</span></button>`; }).join('')
+      : `<div class="lv-empty"><b>The fridge is empty</b><span>Frosty is waiting for the first item.</span><button class="btn sm" data-a="add">${I.plus} Add the first item</button></div>`;
+    return `<section class="card lv" id="lvCard"><div class="lv-stage" id="lvStage"><div class="lv-tip" id="lvTip" hidden></div><div class="lv-hint">Tap the doors to open or close &middot; hover or tap an item</div></div>
+      <div class="lv-side"><h3>${I.box} Live fridge</h3><p class="sub">Every item in the fridge, in 3D, exactly as it is right now.</p>
+      <div class="lv-chips"><span class="ok"><i></i>Fresh ${cnt.ok}</span><span class="soon"><i></i>Soon ${cnt.soon}</span><span class="bad"><i></i>Spoiled ${cnt.bad}</span></div>
+      ${first.length ? '<div class="lv-h">Use these first</div>' : ''}<div class="lv-list">${list}</div></div></section>`;
+  }
+  const _vd = viewDash;
+  viewDash = function (due, soon, all, todayN, expN) {
+    const h = _vd(due, soon, all, todayN, expN), card = liveHTML(all);
+    let k = '<div class="cc-g">', i = h.indexOf(k);
+    if (i < 0) { k = '<div class="ins">'; i = h.indexOf(k); }
+    return i < 0 ? h : h.slice(0, i) + card + h.slice(i);
+  };
+  function lvMount() {
+    const st = $('#lvStage');
+    if (!st || !me()) { if (LV.on) { LV.stop(); LS.sig = ''; LS.items = []; } return; }
+    LS.tip = $('#lvTip', st);
+    let ok = true;
+    if (LV.on) LV.retarget(st); else ok = LV.init(st);
+    if (!ok) { st.innerHTML = '<div class="lv-fb"><b>3D view is not available on this device</b><span>Your browser does not support WebGL. The list on the right still shows every item.</span></div>'; return; }
+    lvData();
+    if (ui.lvDrop) { const id = ui.lvDrop; ui.lvDrop = null; setTimeout(() => window.lvDrop(id), 60); }
+  }
+  const _render = render;
+  render = function () { _render(); try { lvMount(); } catch (e) { try { console.warn('live fridge', e); } catch (x) {} } };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-a="lvfocus"]'); if (!b) return; e.stopPropagation();
+    const id = b.dataset.id, it = LS.items.find(x => x.id === id); if (!it) return;
+    const st = LV.lib.st; if (!st.target) { st.target = 1; thunk(); }
+    LS.pin = id; LS.hover = null; if (LS.tip) LS.tip.dataset.id = ''; lvHighlight(id);
+    const card = $('#lvStage'); if (card) card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, true);
+
+  /* ================= effects: photo flight, confetti, trash, door wipe ================= */
+  const fx = document.createElement('div'); fx.id = 'fxLayer'; document.body.appendChild(fx);
+  const rectOf = el => { if (!el) return null; const r = el.getBoundingClientRect(); return r.width ? { x: r.left, y: r.top, w: r.width, h: r.height } : null; };
+  function photoOf(el) { if (!el) return ''; const t = el.querySelector('.th,.ph') || el, bg = getComputedStyle(t).backgroundImage; return bg && bg !== 'none' ? bg : ''; }
+  function fly(bg, from, to, opt, done) {
+    const d = document.createElement('div'); d.className = 'fx-ph'; d.style.cssText = 'left:' + from.x + 'px;top:' + from.y + 'px;width:' + from.w + 'px;height:' + from.h + 'px;' + (bg ? 'background-image:' + bg : '');
+    fx.appendChild(d); const dx = (to.x + to.w / 2) - (from.x + from.w / 2), dy = (to.y + to.h / 2) - (from.y + from.h / 2), sc = Math.max(.12, Math.min(.5, (opt.end || 40) / Math.max(from.w, 1)));
+    const a = d.animate([{ transform: 'translate(0,0) scale(1) rotate(0)', opacity: 1 }, { transform: 'translate(' + dx * .5 + 'px,' + (dy * .5 - (opt.arc || 90)) + 'px) scale(' + (.75) + ') rotate(' + (opt.rot || 8) + 'deg)', opacity: 1, offset: .55 }, { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + sc + ') rotate(' + (opt.rot || 8) * 2 + 'deg)', opacity: opt.fade ? .2 : 1 }], { duration: opt.ms || 850, easing: 'cubic-bezier(.45,.05,.35,1)', fill: 'forwards' });
+    whoosh(); a.onfinish = () => { d.remove(); done && done(); };
+  }
+  function confetti(x, y) {
+    const cols = ['#ef4444', '#f59e0b', '#22c55e', '#38bdf8', '#a855f7', '#fb7185', '#facc15'];
+    const ring = document.createElement('i'); ring.className = 'fx-ring'; ring.style.cssText = 'left:' + x + 'px;top:' + y + 'px'; fx.appendChild(ring); setTimeout(() => ring.remove(), 700);
+    const pop = document.createElement('div'); pop.className = 'fx-pop'; pop.innerHTML = I.check + ' Enjoy!'; pop.style.cssText = 'left:' + x + 'px;top:' + (y - 10) + 'px'; fx.appendChild(pop); setTimeout(() => pop.remove(), 1300);
+    for (let n = 0; n < 44; n++) {
+      const p = document.createElement('i'); p.className = 'fx-cf'; const w = 5 + Math.random() * 7; p.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + (w * (Math.random() < .5 ? 1 : 2.2)) + 'px;background:' + cols[n % cols.length] + ';border-radius:' + (Math.random() < .3 ? '50%' : '2px');
+      fx.appendChild(p); const ang = Math.random() * Math.PI * 2, v = 80 + Math.random() * 220, vx = Math.cos(ang) * v, vy = Math.sin(ang) * v - 140, rot = (Math.random() - .5) * 900;
+      const a = p.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(' + vx * .6 + 'px,' + vy * .6 + 'px) rotate(' + rot * .5 + 'deg)', opacity: 1, offset: .4 }, { transform: 'translate(' + vx + 'px,' + (vy + 360) + 'px) rotate(' + rot + 'deg)', opacity: 0 }], { duration: 1100 + Math.random() * 700, easing: 'cubic-bezier(.2,.6,.4,1)', fill: 'forwards' });
+      a.onfinish = () => p.remove();
+    }
+    snd(chime);
+  }
+  function binFx(bg, from) {
+    const bin = document.createElement('div'); bin.className = 'fx-bin';
+    bin.innerHTML = '<svg viewBox="0 0 64 72"><g class="lid"><rect x="6" y="10" width="52" height="8" rx="3" fill="#475569"/><rect x="24" y="4" width="16" height="8" rx="3" fill="#64748b"/></g><path d="M12 22h40l-3.5 42a5 5 0 0 1-5 4.5H20.500a5 5 0 0 1-5-4.500z" fill="#64748b"/><path d="M24 30v30M32 30v30M40 30v30" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/></svg>';
+    fx.appendChild(bin); requestAnimationFrame(() => bin.classList.add('in'));
+    setTimeout(() => bin.classList.add('open'), 160);
+    const br = bin.getBoundingClientRect(), to = { x: innerWidth / 2 - 8, y: innerHeight - 100, w: 16, h: 16 };
+    setTimeout(() => fly(bg, from, to, { ms: 700, arc: 140, rot: 20, end: 26 }, () => { bin.classList.remove('open'); bin.classList.add('shake'); trashSnd(); for (let n = 0; n < 8; n++) { const q = document.createElement('i'); q.className = 'fx-dust'; q.style.cssText = 'left:' + (innerWidth / 2 + (Math.random() - .5) * 40) + 'px;top:' + (innerHeight - 70) + 'px'; fx.appendChild(q); q.animate([{ transform: 'translate(0,0) scale(.6)', opacity: .7 }, { transform: 'translate(' + (Math.random() - .5) * 70 + 'px,' + (-30 - Math.random() * 40) + 'px) scale(1.6)', opacity: 0 }], { duration: 700, fill: 'forwards' }).onfinish = () => q.remove(); } setTimeout(() => { bin.classList.remove('in'); setTimeout(() => bin.remove(), 400); }, 650); }), 300);
+  }
+  /* hook: removing an item */
+  let pend = null;
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-a="take"]'); if (!b || reduced()) return;
+    const row = b.closest('.row,.item,.lv-i'); const ph = row ? (row.querySelector('.th,.ph') || row) : null;
+    pend = { reason: b.dataset.r, rect: rectOf(ph) || rectOf(b), bg: photoOf(row), id: b.dataset.id };
+  }, true);
+  const _take = take;
+  take = function (id, reason) {
+    const had = S.items.some(x => x.id === id), p = pend; pend = null;
+    const r = _take(id, reason);
+    if (had && p && !S.items.some(x => x.id === id) && !reduced()) {
+      const from = p.rect || { x: innerWidth / 2 - 40, y: innerHeight / 2 - 40, w: 80, h: 80 };
+      if (reason === 'Consumed') confetti(from.x + from.w / 2, from.y + from.h / 2); else binFx(p.bg, from);
+    }
+    if (had && reason === 'Consumed' && !S.items.some(x => x.id === id) && undoStash && undoStash.item) {
+      const nm = undoStash.item.name, k = normN(nm); S = mergeLatest();
+      if (!(S.shop || []).some(x => !x.done && normN(x.name) === k)) {
+        S.shop.push({ id: uid(), name: nm, qty: '', done: false, at: new Date().toISOString(), by: me().name, auto: true });
+        logAct('Added "' + nm + '" to the shopping list'); save(); const u = undoStash; render(); undoStash = u; toast('Marked as consumed. Added to your shopping list.', true);
+      }
+    }
+    return r;
+  };
+  /* hook: adding an item */
+  const _save = saveItem;
+  saveItem = function () {
+    const before = new Set(S.items.map(i => i.id)), photo = ui.draft && ui.draft.photo, rect = rectOf($('#shot'));
+    _save();
+    const it = S.items.find(i => !before.has(i.id)); if (!it || reduced()) return;
+    const target = rectOf($('#lvStage')) || rectOf(document.querySelector('.nv[data-v="inv"],.nv[data-v="mine"]')) || { x: innerWidth / 2, y: 80, w: 20, h: 20 };
+    const from = rect || { x: innerWidth / 2 - 60, y: innerHeight / 2 - 60, w: 120, h: 120 };
+    const live = !!$('#lvStage'); if (live) { const t0 = performance.now(); const hold = LS.items.find(x => x.id === it.id); if (hold) hold.drop = { t0: t0 + 2000 }; }
+    const tgt = live ? { x: target.x + target.w * .42, y: target.y + target.h * .35, w: 40, h: 40 } : target;
+    fly(photo ? 'url(' + photo + ')' : '', from, tgt, { ms: 900, arc: 120, rot: -10, end: live ? 70 : 30, fade: live }, () => {
+      thunk();
+      if (live) { const st = LV.lib.st; if (!st.target) { st.target = 1; LS.autoClosed = true; } LS.closeAt = performance.now() + 3800; const x = LS.items.find(q => q.id === it.id); if (x) x.drop = { t0: performance.now() + 120 }; }
+      else { const nv = document.querySelector('.nv[data-v="inv"],.nv[data-v="mine"]'); if (nv) nv.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)', background: 'rgba(34,197,94,.35)' }, { transform: 'scale(1)' }], { duration: 600 }); }
+    });
+  };
+  /* page changes: the fridge doors slide shut and open on the next page */
+  function doorWipe(cb) {
+    const m = document.querySelector('.main'), r = m ? m.getBoundingClientRect() : { left: 0, top: 0, width: innerWidth, height: innerHeight };
+    const o = document.createElement('div'); o.className = 'dw'; o.style.cssText = 'left:' + r.left + 'px;top:' + Math.max(0, r.top) + 'px;width:' + r.width + 'px;height:' + (innerHeight - Math.max(0, r.top)) + 'px';
+    o.innerHTML = '<i class="dw-l"><b></b></i><i class="dw-r"><b></b></i><u></u>'; document.body.appendChild(o);
+    requestAnimationFrame(() => requestAnimationFrame(() => o.classList.add('shut')));
+    setTimeout(() => { thunk(); cb(); o.classList.add('glow'); setTimeout(() => { o.classList.remove('shut'); o.classList.add('opening'); setTimeout(() => o.remove(), 520); }, 90); }, 250);
+  }
+  const _go = go;
+  go = function (tab) {
+    if (reduced() || tab === ui.tab || !$('#page') || ui.navBusy || !me()) return _go(tab);
+    ui.navBusy = true; ui.menu = false; try { pbar(); } catch (e) {}
+    document.querySelectorAll('.nv').forEach(b => b.setAttribute('aria-current', b.dataset.v === tab ? 'page' : 'false'));
+    const ap = $('.app'); if (ap) ap.classList.remove('menu');
+    doorWipe(() => { ui.tab = tab; ui.fx = true; ui.navBusy = false; render(); window.scrollTo(0, 0); });
+  };
+  if (me() && $('#appRoot') && ui.tab === 'ov') render();
+})();
+
 </script>
 </body>
 </html>
